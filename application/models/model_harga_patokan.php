@@ -38,4 +38,11 @@ class Model_harga_patokan extends CI_Model
         $this->db->insert('invoices', $data);
         $this->db->insert_batch('invoice_details', $invoice_details);
     }
+    private $_table = "invoices";
+    public function getAll()
+    {
+        $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, b.NAMA_PERUSAHAAN from invoices a, m_pbph b where a.id_pbph_pembeli = b.NPWSHUT_NO";
+		$query = $this->db->query($sql);
+		return $query->result();
+    }
 }
