@@ -5,17 +5,14 @@
 		
 		function index()
 		{
-			$quser = 'SELECT COUNT(*) AS hasil FROM tbl_user';
-			$data['user'] = $this->db->query($quser)->row_array();
+			$qbelum = 'SELECT COUNT(*) AS hasil FROM invoices where is_verified = "0"';
+			$data['belum'] = $this->db->query($qbelum)->row_array();
 
-			$qsiswa = 'SELECT COUNT(*) AS hasil FROM tbl_siswa';
-			$data['siswa'] = $this->db->query($qsiswa)->row_array();
+			$qverif = 'SELECT COUNT(*) AS hasil FROM invoices where is_verified = "1"';
+			$data['verif'] = $this->db->query($qverif)->row_array();
 
-			$qguru = 'SELECT COUNT(*) AS hasil FROM tbl_guru';
-			$data['guru'] = $this->db->query($qguru)->row_array();
-
-			$qruangan = 'SELECT COUNT(*) AS hasil FROM tbl_ruangan';
-			$data['ruangan'] = $this->db->query($qruangan)->row_array();
+			$qkembali = 'SELECT COUNT(*) AS hasil FROM invoices where is_verified = "3"';
+			$data['kembali'] = $this->db->query($qkembali)->row_array();
 
 			$this->template->load('template', 'dashboard', $data);
 		}

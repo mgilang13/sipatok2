@@ -1,11 +1,10 @@
 <?php
-class Model_harga_patokan extends CI_Model
+class Model_admin_harga_patokan extends CI_Model
 {
     public function save($data_user) {
         $id_user = $data_user['id'];
         $id_pbph_penjual = $data_user['id_pbph'];
         $id_invoice = $id_user.$id_pbph_penjual.time();
-        $tanggal = date("Y-m-d");
 
 
         $data = array(
@@ -13,7 +12,6 @@ class Model_harga_patokan extends CI_Model
             'id_user'	        => $id_user,
             'id_pbph_penjual'	=> $id_pbph_penjual,
             'id_pbph_pembeli'	=> $this->input->post('id_pbph_pembeli', TRUE),
-            'tgl_input'         => $tanggal,
             'nomor_invoice'	    => $this->input->post('nomor_invoice', TRUE),
             'tgl_invoice'	    => $this->input->post('tgl_invoice', TRUE),
             'tempat_invoice'    => $this->input->post('tempat_invoice', TRUE),
@@ -52,7 +50,7 @@ class Model_harga_patokan extends CI_Model
         $id_menu 	  = $this->uri->segment(4);
         $data_user = $this->session->userdata();
         $id_user = $data_user['id'];
-        $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, a.tempat_invoice, c.NAMA_PERUSAHAAN, c.KOTA, f.KETERANGAN as provinsi, a.is_verified from invoices a, m_pbph c, m_provinsi f where a.id_pbph_pembeli = c.NPWSHUT_NO and f.KODE_PROP=c.KODE_PROP and a.id_user = '".$id_user."' and a.id = '".$id_menu."'";
+        $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, a.tempat_invoice, c.NAMA_PERUSAHAAN, c.KOTA, f.KETERANGAN as provinsi from invoices a, m_pbph c, m_provinsi f where a.id_pbph_pembeli = c.NPWSHUT_NO and f.KODE_PROP=c.KODE_PROP and a.id_user = '".$id_user."' and a.id = '".$id_menu."'";
 		$query = $this->db->query($sql);
 		return $query->row_array();
     }

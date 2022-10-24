@@ -39,25 +39,13 @@
                         </td>
                         <td>
                             <center>
-                                <?php
-                                if($hp->is_verified == '0'){
-                                ?>
-                                <small class="label label-info"><i class="fa fa-clock-o"></i> Belum Verifikasi</small>
-                                <?php
-                                } else if($hp->is_verified == '1'){
-                                ?>
-                                <small class="label label-success"><i class="fa fa-check-circle"></i> Terverifikasi</small>
-                                <?php
-                                } else if($hp->is_verified == '2') {
-                                ?>
                                 <small class="label label-danger"><i class="fa fa-close"></i> Dikembalikan</small>
-                                <?php
-                                }
-                                ?>
+                                <small class="label label-info"><i class="fa fa-clock-o"></i> Belum Verifikasi</small>
+                                <small class="label label-success"><i class="fa fa-check-circle"></i> Terverifikasi</small>
                             </center>    
                         </td>
                         <td width="250">
-                            <a href="<?php echo site_url('harga_patokan/data/detail/'.$hp->id) ?>"
+                            <a href="<?php echo site_url('admin_harga_patokan/data/detail/'.$hp->id) ?>"
                                 class="btn btn-warning"><i class="fa fa-eye"></i> Detail</a>
                         </td>
                     </tr>
