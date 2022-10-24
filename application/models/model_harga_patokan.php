@@ -45,4 +45,26 @@ class Model_harga_patokan extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result();
     }
+    public function detail()
+    {
+        $id_menu 	  = $this->uri->segment(4);
+        $data_user = $this->session->userdata();
+        $id_user = $data_user['id'];
+        $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, a.tempat_invoice, c.NAMA_PERUSAHAAN, c.KOTA, f.KETERANGAN as provinsi from invoices a, m_pbph c, m_provinsi f where a.id_pbph_pembeli = c.NPWSHUT_NO and f.KODE_PROP=c.KODE_PROP and a.id_user = '".$id_user."' and a.id = '".$id_menu."'";
+		$query = $this->db->query($sql);
+		return $query->row_array();
+		//$hasil = $query->row_array();
+        //var_dump($hasil);
+    }
+    public function _detail()
+    {
+        $id_menu 	  = $this->uri->segment(4);
+        $data_user = $this->session->userdata();
+        $id_user = $data_user['id'];
+        $sql = "select d.KETERANGAN as jenis_kayu, g.KETERANGAN as kelompok_kayu, b.harga, b.volume, e.diameter from invoices a, invoice_details b, m_jenis_kayu d, m_diameters e, m_kelompok_jenis_kayu g where a.id=b.id_invoice and b.id_diameter = e.id and d.KAYU_NO = b.id_jenis_kayu and g.KEL_NO = d.KEL_NO and a.id_user = '".$id_user."' and a.id = '".$id_menu."'";
+		$query = $this->db->query($sql);
+		return $query->result_array();
+		//$hasil = $query->row_array();
+        //var_dump($hasil);
+    }
 }

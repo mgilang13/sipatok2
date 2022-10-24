@@ -30,4 +30,12 @@ class Data extends CI_Controller {
         $this->template->load('template', "harga_patokan/data", $data);
 		//$this->template->load('template', 'harga_patokan/data');
 	}
+	function detail()
+	{
+			
+			$data["detail"] = $this->model_harga_patokan->detail();
+			$data["rincian"] = $this->model_harga_patokan->_detail();
+
+			$this->template->load('template', 'harga_patokan/detail', $data);
+	}
 }

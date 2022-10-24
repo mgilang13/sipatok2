@@ -24,7 +24,7 @@ class Input extends CI_Controller {
 		$data_user = $this->session->userdata();
 		if (isset($_POST['submit'])) {
 			$this->model_harga_patokan->save($data_user);
-			redirect('harga_patokan/input');
+			redirect('harga_patokan/data');
 		} else {
 			$this->template->load('template', 'harga_patokan/input');
 		}

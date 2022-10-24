@@ -37,7 +37,7 @@
                             <?php echo $hp->NAMA_PERUSAHAAN ?>
                         </td>
                         <td width="250">
-                            <a href="<?php echo site_url('harga_patokan/detail/'.$hp->id) ?>"
+                            <a href="<?php echo site_url('harga_patokan/data/detail/'.$hp->id) ?>"
                                 class="btn btn-warning"><i class="fa fa-eye"></i> Detail</a>
                         </td>
                     </tr>
