@@ -46,6 +46,12 @@
                                 <span class="text-danger"><?= form_error('id_pbph_pembeli') ?></span>
                             </div>
                         </div>
+                        <div class="form-group col-xs-6">
+                            <label class="col-sm-3 control-label">Total Harga</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" name="total_harga" placeholder="Masukkan Total Harga">
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-6">
@@ -57,7 +63,12 @@
                                 <input type="text" class="form-control kabupaten" placeholder="Kabupaten">
                             </div>
                         </div>
-                        
+                        <div class="form-group col-xs-6">
+                            <label class="col-sm-3 control-label">Total Volume</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" name="total_volume" placeholder="Masukkan Total Volume Kayu">
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-6">

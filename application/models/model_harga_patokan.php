@@ -18,7 +18,10 @@ class Model_harga_patokan extends CI_Model
             'tgl_invoice'	    => $this->input->post('tgl_invoice', TRUE),
             'tempat_invoice'    => $this->input->post('tempat_invoice', TRUE),
             'file_upload'       => $id_invoice,
+            'total_harga'       => $this->input->post('total_harga', TRUE),
+            'total_volume'      => $this->input->post('total_volume', TRUE),
             'is_verified'	    => "0",
+            'tgl_input'         => $tanggal
             
         );
 
@@ -55,8 +58,9 @@ class Model_harga_patokan extends CI_Model
     {
         return $post_string == '0' ? FALSE : TRUE;
     }
-    
+
     private $_table = "invoices";
+
     public function getAll()
     {
         $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, b.NAMA_PERUSAHAAN from invoices a, m_pbph b where a.id_pbph_pembeli = b.NPWSHUT_NO";
