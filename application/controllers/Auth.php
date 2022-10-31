@@ -37,7 +37,7 @@
 					
 					if($loginUser['id_role'] == '5') {
 						redirect('tampilan_operator');
-					} else if ($loginUser['id_level_user'] == '1'){
+					} else if ($loginUser['id_role'] == '1'){
 						redirect('tampilan_utama');
 					}
 

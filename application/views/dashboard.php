@@ -7,7 +7,7 @@
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3><?php echo $user['hasil']; ?></h3>
+                  <h3><?php echo $belum['hasil']; ?></h3>
 
                   <p>Belum Diverifikasi</p>
                 </div>
@@ -23,9 +23,9 @@
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
-                  <h3><?php echo $siswa['hasil']; ?></h3>
+                  <h3><?php echo $kembali['hasil']; ?></h3>
 
-                  <p>Ditolak</p>
+                  <p>Dikembalikan</p>
                 </div>
                 <div class="icon">
                   <i class="fa fa-users"></i>
@@ -39,7 +39,7 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3><?php echo $guru['hasil']; ?></h3>
+                  <h3><?php echo $verif['hasil']; ?></h3>
 
                   <p>Terverifikasi</p>
                 </div>

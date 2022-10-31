@@ -21,20 +21,21 @@ class Data extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
-        $this->load->model("model_harga_patokan");
+        $this->load->model("model_admin_harga_patokan");
         $this->load->library('form_validation');
     }
 	public function index()
 	{
-        $data["hargapatokan"] = $this->model_harga_patokan->getAll();
-        $this->template->load('template', "harga_patokan/data", $data);
+        $data["hargapatokan"] = $this->model_admin_harga_patokan->getAll();
+        $this->template->load('template', "admin_harga_patokan/data", $data);
 		//$this->template->load('template', 'harga_patokan/data');
 	}
 	function detail()
-	{		
-			$data["detail"] = $this->model_harga_patokan->detail();
-			$data["rincian"] = $this->model_harga_patokan->_detail();
+	{
+			
+			$data["detail"] = $this->model_admin_harga_patokan->detail();
+			$data["rincian"] = $this->model_admin_harga_patokan->_detail();
 
-			$this->template->load('template', 'harga_patokan/detail', $data);
+			$this->template->load('template', 'admin_harga_patokan/detail', $data);
 	}
 }
