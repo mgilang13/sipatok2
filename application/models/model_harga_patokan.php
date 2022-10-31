@@ -15,7 +15,7 @@ class Model_harga_patokan extends CI_Model
             'nomor_invoice'	    => $this->input->post('nomor_invoice', TRUE),
             'tgl_invoice'	    => $this->input->post('tgl_invoice', TRUE),
             'tempat_invoice'    => $this->input->post('tempat_invoice', TRUE),
-            // 'file_upload'	    => $this->input->post('file_upload', TRUE),
+            'file_upload'       => $id_invoice,
             'is_verified'	    => "0",
             
         );
@@ -34,8 +34,23 @@ class Model_harga_patokan extends CI_Model
             );        
         }
 
-       
         $this->db->insert('invoices', $data);
         $this->db->insert_batch('invoice_details', $invoice_details);
+    }
+
+    public function rules()
+    {
+        return [
+            [
+                'field' => 'nomor_invoice',
+                'label' => 'Nomor Invoice',
+                'rules' => 'required'
+            ]
+        ];
+    }
+
+    public function check_pbph($post_string)
+    {
+        return $post_string == '0' ? FALSE : TRUE;
     }
 }
