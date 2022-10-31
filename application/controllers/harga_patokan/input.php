@@ -22,9 +22,33 @@ class Input extends CI_Controller {
 	public function add()
 	{
 		$data_user = $this->session->userdata();
+
 		if (isset($_POST['submit'])) {
-			$this->model_harga_patokan->save($data_user);
-			redirect('harga_patokan/data');
+
+			$file_name = $data_user['id'].$data_user['id_pbph'].time();
+			
+			$rules = $this->model_harga_patokan->rules();
+			$this->form_validation->set_rules($rules);
+			$this->form_validation->set_rules('id_pbph_pembeli','Perusahaan Pembeli','required|callback_check_pbph');
+        	$this->form_validation->set_message('check_pbph', 'Perusahaan Pembeli belum dipilih');
+
+			//validasi foto yang di upload
+			$config['upload_path']          = './uploads/invoices/';
+			$config['allowed_types']        = 'pdf';
+			$config['max_size']             = 1024;
+			$config['file_name']			= $file_name;
+			
+			$this->load->library('upload', $config);
+
+			if ($this->form_validation->run() == FALSE && !$this->upload->do_upload('file_upload')) {
+				$error = $this->upload->display_errors();
+				$this->session->set_flashdata('error', $error);
+				$this->index();
+			} else {
+				$this->upload->data();
+				$this->model_harga_patokan->save($data_user);
+				redirect('harga_patokan/input');
+			}
 		} else {
 			$this->template->load('template', 'harga_patokan/input');
 		}

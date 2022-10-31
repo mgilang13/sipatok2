@@ -9,7 +9,7 @@
             <!-- /.box-header -->
             <!-- form start -->
             <?php
-                echo form_open('harga_patokan/input/add', 'role="form" class="form-horizontal"');
+                echo form_open('harga_patokan/input/add', 'role="form" enctype="multipart/form-data" class="form-horizontal"');
             ?>
 
                 <div class="box-body">
@@ -19,6 +19,7 @@
                             <label class="col-sm-3 control-label">No. Invoice</label>
                             <div class="col-sm-9">
                                 <input type="text" name="nomor_invoice" class="form-control" placeholder="Masukkan Nomor Invoice">
+                                <span class="text-danger"><?= form_error('nomor_invoice') ?></span>
                             </div>
                         </div>
                         <div class="form-group col-xs-6">
@@ -34,7 +35,7 @@
                             <label class="col-sm-3 control-label">PBPH (Pembeli)</label>
                             <div class="col-sm-9">
                                 <select name="id_pbph_pembeli" class="form-control pbph-pembeli">    
-                                    <option>Masukkan Nama PBPH Terdaftar</option>
+                                    <option value="0">Masukkan Nama PBPH Terdaftar</option>
                                     <?php
                                         $data_pbph = $this->db->get('m_pbph')->result();
                                         foreach($data_pbph as $row) {
@@ -42,6 +43,7 @@
                                         }
                                     ?>
                                 </select>
+                                <span class="text-danger"><?= form_error('id_pbph_pembeli') ?></span>
                             </div>
                         </div>
                     </div>
@@ -68,6 +70,10 @@
                             <label class="col-sm-3 control-label">File Invoice</label>
                             <div class="col-sm-9">
                                 <input type="file" name="file_upload" class="form-control" placeholder = "Masukkan Tempat Invoice Dibuat" accept="application/pdf">
+                                <span class="text-danger"><?= form_error('file_upload') ?></span>
+                                <?php if ($this->session->flashdata('error')) : ?>
+                                    <span class="text-danger"><?= $this->session->flashdata('error'); ?></span>
+                                <?php endif;?>
                             </div>
                         </div>
                     </div>
@@ -117,9 +123,7 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <div class="input-group-addon">Rp.</div>
-                                            <input type="number" name="harga[]" class="form-control" placeholder="Masukkan Harga Kayu">
-                                            <div class="input-group-addon">.00</div>
+                                            <input type="number" name="harga[]" class="form-control">
                                         </div>
                                     </td>
                                     <td>
@@ -261,9 +265,15 @@
         let data_kab = <?php echo json_encode($this->db->get('m_kabupaten')->result()); ?>;
          
         let provinsi = data_provinsi.find(p => p.KODE_PROP === kode_prov);
-        let kabupaten = data_kab.find(p => p.KODE_CDK === kode_kab);
+        let kabupaten = data_kab.find(p => p.KODE_CDK === kode_kab && p.KODE_PROP === kode_prov);
 
         $('.provinsi').val(provinsi.KETERANGAN);
         $('.kabupaten').val(kabupaten.KETERANGAN);
-    })
+    });
+    // $('input.harga').on('blur', function() {
+    //     const value = this.value.replace(/,/g, '');
+    //     this.value = parseFloat(value).toLocaleString('en-US', {
+    //         style: 'decimal'
+    //     });
+    // });
 </script>
