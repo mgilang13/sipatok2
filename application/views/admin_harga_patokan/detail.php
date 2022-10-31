@@ -1,10 +1,5 @@
 <?php
-    //echo form_open('menu/edit', 'role="form" class="form-horizontal"');
-    $data_user = $this->session->userdata();
-	$id_pbph = $data_user['id_pbph'];
-	$data['pbph']  = $this->db->get_where('m_pbph', array('NPWSHUT_NO' => $id_pbph))->row_array();
-    //var_dump($data['pbph']['NPWSHUT_NO']);
-    // echo form_hidden('id', $result['id']);
+    echo form_open('admin_harga_patokan/data/verifikasi', 'role="form" class="form-horizontal"');
 ?>
 <section class="content">
     <div class="row">
@@ -12,7 +7,7 @@
 
           <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Detail Harga Patokan <b><?= $data['pbph']['NAMA_PERUSAHAAN']; ?></b></h3>
+                <h3 class="box-title">Detail Harga Patokan <b><?php echo $detail['penjual']; ?></b></h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -24,6 +19,7 @@
                         <div class="form-group col-xs-6">
                             <label class="col-sm-3 control-label">No. Invoice</label>
                             <div class="col-sm-9">
+                                <input type="hidden" value="<?php echo $detail['id'];?>" name="id_invoice">
                                 <input type="text" value="<?php echo $detail['nomor_invoice'];?>" class="form-control" disabled>
                             </div>
                         </div>
@@ -39,7 +35,7 @@
                         <div class="form-group col-xs-6">
                             <label class="col-sm-3 control-label">PBPH (Pembeli)</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" disabled value="<?php echo $detail['NAMA_PERUSAHAAN'];?>">
+                                <input type="text" class="form-control" disabled value="<?php echo $detail['pembeli'];?>">
                             </div>
                         </div>
                         <div class="form-group col-xs-6">
@@ -118,6 +114,41 @@
                             </tbody>
                         </table>
                     </div>
+                    
+                    <div class="box-body">
+
+                    <div class="row">
+                        <div class="form-group col-xs-6">
+                            <label class="col-sm-3 control-label">Verifikasi Data</label>
+                            <div class="col-sm-9">
+                                <select name="verifikasi" id="" class="form-control">
+                                    <option value="">--Pilih--</option>
+                                    <option value="1">Verifikasi</option>
+                                    <option value="2">Kembalikan</option>
+                                </select>
+                            </div>
+                        </div>
+                    
+                        <div class="form-group col-xs-6">
+                            <textarea name="alasan" class="form-control" cols="100" row="10" placeholder="Masukkan alasan dikembalikan..."></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                        <label class="col-sm-2 control-label"></label>
+
+                        <div class="col-sm-1">
+                            <button type="submit" name="submit" class="btn btn-primary btn-flat" style="float: right;">Simpan</button>
+                        </div>
+
+                        <div class="col-sm-1">
+                            <?php
+                            echo anchor('admin_harga_patokan/data', 'Kembali', array('class'=>'btn btn-danger btn-flat'));
+                            ?>
+                        </div>
+                        </div>
+                    </div>
+                  
 
                 </div>
                 <!-- /.box-body -->

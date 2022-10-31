@@ -15,6 +15,7 @@
                         <th>NO</th>
                         <th>NOMOR INVOICE</th>
                         <th>TANGGAL INVOICE</th>
+                        <th>NAMA PERUSAHAAN PENJUAL</th>
                         <th>NAMA PERUSAHAAN PEMBELI</th>
                         <th>STATUS</th>
                         <th>AKSI</th>
@@ -35,7 +36,10 @@
                             <?php echo $hp->tgl_invoice ?>
                         </td>
                         <td>
-                            <?php echo $hp->NAMA_PERUSAHAAN ?>
+                            <?php echo $hp->penjual ?>
+                        </td>
+                        <td>
+                            <?php echo $hp->pembeli ?>
                         </td>
                         <td>
                             <center>
