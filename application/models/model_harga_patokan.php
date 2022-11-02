@@ -43,22 +43,6 @@ class Model_harga_patokan extends CI_Model
         $this->db->insert_batch('invoice_details', $invoice_details);
     }
 
-    public function rules()
-    {
-        return [
-            [
-                'field' => 'nomor_invoice',
-                'label' => 'Nomor Invoice',
-                'rules' => 'required'
-            ]
-        ];
-    }
-
-    public function check_pbph($post_string)
-    {
-        return $post_string == '0' ? FALSE : TRUE;
-    }
-
     private $_table = "invoices";
 
     public function getAll()
