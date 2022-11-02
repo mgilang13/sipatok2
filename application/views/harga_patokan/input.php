@@ -2,6 +2,13 @@
     <div class="row">
         <div class="col-xs-12">
 
+        <?php if ($this->session->flashdata('success')) : ?>
+            <div class="alert alert-success" role="alert"><?= $this->session->flashdata('success'); ?></div>
+        <?php endif;?>
+        <?php if ($this->session->flashdata('error')) : ?>
+            <div class="alert alert-danger" role="alert">Data Gagal Disimpan!</div>
+        <?php endif; ?>
+        
           <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">Form Input Harga Patokan <b><?= $pbph['NAMA_PERUSAHAAN']; ?></b></h3>
@@ -16,10 +23,10 @@
 
                     <div class="row">
                         <div class="form-group col-xs-6">
-                            <label class="col-sm-3 control-label">No. Invoice</label>
+                            <label class="col-sm-3 control-label">No. Invoice*</label>
                             <div class="col-sm-9">
-                                <input type="text" name="nomor_invoice" class="form-control" placeholder="Masukkan Nomor Invoice">
-                                <span class="text-danger"><?= form_error('nomor_invoice') ?></span>
+                                <input type="text" name="nomor_invoice" class="form-control" placeholder="Masukkan Nomor Invoice" value="<?= set_value('nomor_invoice'); ?>">
+                                <span class="text-danger text-bold"><?= form_error('nomor_invoice') ?></span>
                             </div>
                         </div>
                         <div class="form-group col-xs-6">
@@ -32,18 +39,25 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-6">
-                            <label class="col-sm-3 control-label">PBPH (Pembeli)</label>
+                            <label class="col-sm-3 control-label"> Pihak Pembeli*</label>
                             <div class="col-sm-9">
                                 <select name="id_pbph_pembeli" class="form-control pbph-pembeli">    
-                                    <option value="0">Masukkan Nama PBPH Terdaftar</option>
+                                    <option value="0">Masukkan Pihak Pembeli Terdaftar</option>
                                     <?php
                                         $data_pbph = $this->db->get('m_pbph')->result();
                                         foreach($data_pbph as $row) {
-                                            echo "<option value=".$row->NPWSHUT_NO.">".$row->NAMA_PERUSAHAAN."</option>";
+                                            echo "<option value=".$row->NPWSHUT_NO." ".set_select('id_pbph_pembeli', $row->NPWSHUT_NO).">".$row->NAMA_PERUSAHAAN."</option>";
                                         }
                                     ?>
                                 </select>
-                                <span class="text-danger"><?= form_error('id_pbph_pembeli') ?></span>
+                                <span class="text-danger text-bold"><?= form_error('id_pbph_pembeli') ?></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-6">
+                            <label class="col-sm-3 control-label">Total Harga*</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" name="total_harga" placeholder="Masukkan Total Harga" value="<?= set_value('total_harga') ?>">
+                                <span class="text-danger text-bold"><?= form_error('total_harga') ?></span>
                             </div>
                         </div>
                     </div>
@@ -51,13 +65,19 @@
                         <div class="form-group col-xs-6">
                             <label class="col-sm-3 control-label"></label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control provinsi" placeholder="Provinsi">
+                                <input type="text" class="form-control provinsi" placeholder="Provinsi" disabled>
                             </div>
                             <div class="col-sm-5">
-                                <input type="text" class="form-control kabupaten" placeholder="Kabupaten">
+                                <input type="text" class="form-control kabupaten" placeholder="Kabupaten" disabled>
                             </div>
                         </div>
-                        
+                        <div class="form-group col-xs-6">
+                            <label class="col-sm-3 control-label">Total Volume*</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" name="total_volume" placeholder="Masukkan Total Volume Kayu" value="<?= set_value('total_volume'); ?>">
+                                <span class="text-danger text-bold"><?= form_error('total_volume') ?></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-6">
@@ -67,12 +87,14 @@
                             </div>
                         </div>
                         <div class="form-group col-xs-6">
-                            <label class="col-sm-3 control-label">File Invoice</label>
+                            <div class="col-sm-3">
+                                <label class="control-label">File Invoice*</label><br>
+                                <small>(Max 1 Mb)</small>
+                            </div>
                             <div class="col-sm-9">
                                 <input type="file" name="file_upload" class="form-control" placeholder = "Masukkan Tempat Invoice Dibuat" accept="application/pdf">
-                                <span class="text-danger"><?= form_error('file_upload') ?></span>
                                 <?php if ($this->session->flashdata('error')) : ?>
-                                    <span class="text-danger"><?= $this->session->flashdata('error'); ?></span>
+                                    <span class="text-danger text-bold"><?= $this->session->flashdata('error'); ?></span>
                                 <?php endif;?>
                             </div>
                         </div>

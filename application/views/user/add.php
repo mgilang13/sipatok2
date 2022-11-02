@@ -18,7 +18,7 @@
                       <label class="col-sm-2 control-label">Nama Lengkap</label>
 
                       <div class="col-sm-9">
-                        <input type="text" name="nama_lengkap" class="form-control" placeholder="Masukkan Nama Lengkap">
+                        <input type="text" name="nama" class="form-control" placeholder="Masukkan Nama Lengkap">
                       </div>
                   </div>
 
@@ -43,18 +43,36 @@
 
                       <div class="col-sm-5">
                         <?php
-                          echo cmb_dinamis('level_user', 'tbl_level_user', 'nama_level', 'id_level_user');
+                          echo cmb_dinamis('level_user', 'm_roles', 'nama_role', 'id');
                         ?>
                       </div>
                   </div>
 
+                  <hr>
+                  
                   <div class="form-group">
-                      <label class="col-sm-2 control-label">Foto</label>
+                      <label class="col-sm-2 control-label">Provinsi</label>
 
                       <div class="col-sm-5">
-                        <input type="file" name="userfile">
+                        <?php
+                          echo cmb_dinamis('id_provinsi', 'm_provinsi', 'KETERANGAN', 'KODE_PROP');
+                        ?>
                       </div>
+                      <p style="font-style:italic">Bisa dikosongkan</p>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">Instansi / PBPH / Perhutani</label>
+                      
+                      <div class="col-sm-5">
+                        <?php
+                          echo cmb_dinamis('id_pbph', 'm_pbph', 'NAMA_PERUSAHAAN', 'NPWSHUT_NO');
+                          ?>
+                      </div>
+                      <p style="font-style:italic">Bisa dikosongkan</p>
                   </div>
+
+
 
                   <div class="form-group">
                       <label class="col-sm-2 control-label"></label>
@@ -80,3 +98,9 @@
     </div>
     <!-- /.row -->
 </section>
+
+<script>
+    $("[name='id_pbph']").select2({
+        width:'100%'
+    });
+</script>

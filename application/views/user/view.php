@@ -15,16 +15,45 @@
                 echo anchor('user/rule', '<button class="btn btn-danger btn-flat margin">Rule User</button>');
             ?>
 
-              <table id="mytable" class="table table-striped table-bordered table-hover table-full-width dataTable" cellspacing="0" width="100%">
+            <table id="mytable" class="table table-striped table-bordered table-hover table-full-width dataTable" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>NO</th>
-                        <th>FOTO</th>
                         <th>NAMA LENGKAP</th>
-                        <th>LEVEL</th>
+                        <th>USERNAME</th>
+                        <th>LEVEL USER</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
+                <tbody>
+                    <?php
+                    $no_urut = 1;
+                    foreach ($users as $user): ?>
+                    <tr>
+                        <td width="150">
+                            <?php echo $no_urut++; ?>
+                        </td>
+                        <td width="150">
+                            <?php echo $user->nama_lengkap ?>
+                        </td>
+                        <td>
+                            <?php echo $user->username ?>
+                        </td>
+                        <td>
+                            <?php echo $user->nama_level ?>
+                        </td>
+                        <td>
+                            <a href="#" class="btn btn-xs btn-primary" data-placement="top" title="Edit">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="#" class="btn btn-xs btn-danger" data-placement="top" title="Edit">
+                                <i class="fa fa-times fa fa-white"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+
+                </tbody>
               </table>
 
             </div>
@@ -52,35 +81,8 @@
 
 <script>
         $(document).ready(function() {
-            var t = $('#mytable').DataTable( {
-                "ajax": '<?php echo site_url('user/data'); ?>',
-                "order": [[ 1, 'asc' ]],
-                "columns": [
-                    {
-                        "data": null,
-                        "width": "50px",
-                        "class": "text-center",
-                        "orderable": false,
-                    },
-                    { 
-                        "data": "foto",
-                        "class": "text-center"
-                    },
-                    {
-                        "data": "nama_lengkap",
-                        "width": "150px",
-                    },
-                    { 
-                        "data": "nama_level",
-                    },
-                    { 
-                        "data": "aksi",
-                        "width": "80px",
-                        "class": "text-center"
-                    },
-                ]
-            } );
-               
+            var t = $('#mytable').DataTable();
+
             t.on( 'order.dt search.dt', function () {
                 t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
                     cell.innerHTML = i+1;

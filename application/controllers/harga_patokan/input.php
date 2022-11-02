@@ -27,10 +27,16 @@ class Input extends CI_Controller {
 
 			$file_name = $data_user['id'].$data_user['id_pbph'].time();
 			
-			$rules = $this->model_harga_patokan->rules();
-			$this->form_validation->set_rules($rules);
+			$this->form_validation->set_rules('nomor_invoice', 'Nomor Invoice', 'required');
+			$this->form_validation->set_rules('total_harga', 'Total Harga', 'required');
+			$this->form_validation->set_rules('total_volume', 'Total Volume', 'required');
+
 			$this->form_validation->set_rules('id_pbph_pembeli','Perusahaan Pembeli','required|callback_check_pbph');
         	$this->form_validation->set_message('check_pbph', 'Perusahaan Pembeli belum dipilih');
+			
+			if(empty($_FILE['file_upload']['name'])) {
+				$this->form_validation->set_rules('file_upload', 'File Invoice', 'required');
+			}
 
 			//validasi foto yang di upload
 			$config['upload_path']          = './uploads/invoices/';
@@ -41,16 +47,27 @@ class Input extends CI_Controller {
 			$this->load->library('upload', $config);
 
 			if ($this->form_validation->run() == FALSE && !$this->upload->do_upload('file_upload')) {
+				
 				$error = $this->upload->display_errors();
 				$this->session->set_flashdata('error', $error);
+				
 				$this->index();
 			} else {
 				$this->upload->data();
 				$this->model_harga_patokan->save($data_user);
+
+				$success = "Data Berhasil disimpan";
+				$this->session->set_flashdata('success', $success);
+				
 				redirect('harga_patokan/input');
 			}
 		} else {
 			$this->template->load('template', 'harga_patokan/input');
 		}
 	}
+
+	public function check_pbph($post_string)
+    {
+        return $post_string == '0' ? FALSE : TRUE;
+    }
 }

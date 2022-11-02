@@ -1,6 +1,8 @@
 <?php
 class Model_admin_harga_patokan extends CI_Model
 {
+    private $_table = "invoices";
+    
     public function save($data_user) {
         $id_user = $data_user['id'];
         $id_pbph_penjual = $data_user['id_pbph'];
@@ -38,7 +40,7 @@ class Model_admin_harga_patokan extends CI_Model
         $this->db->insert('invoices', $data);
         $this->db->insert_batch('invoice_details', $invoice_details);
     }
-    private $_table = "invoices";
+
     public function getAll()
     {
         $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, b.NAMA_PERUSAHAAN as pembeli from invoices a, m_pbph b where a.id_pbph_pembeli = b.NPWSHUT_NO";

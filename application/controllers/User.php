@@ -55,7 +55,8 @@
 
 		function index()
 		{
-			$this->template->load('template', 'user/view');
+			$data['users'] = $this->model_user->getAll();
+			$this->template->load('template', 'user/view', $data);
 		}
 
 		function add()

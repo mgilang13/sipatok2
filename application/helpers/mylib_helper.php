@@ -6,6 +6,7 @@
 		$cmb  = "<select name='$name' class='form-control' $extra>";
 
 		$data = $ci->db->get($table)->result();
+		$cmb .= '<option value=""></option>';
 		foreach ($data as $row) {
 			$cmb .= "<option value='".$row->$pk."'";
 			//Apabila $selected bernilai sama dengan nilai $pk maka akan bernilai selected selain itu akan bernilai null
