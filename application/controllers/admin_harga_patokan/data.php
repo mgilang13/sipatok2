@@ -27,6 +27,8 @@ class Data extends CI_Controller {
 	public function index()
 	{
         $data["hargapatokan"] = $this->model_admin_harga_patokan->getAll();
+		$data["penjual"] = $this->model_admin_harga_patokan->getPenjual();
+		//$data["pembeli"] = $this->model_admin_harga_patokan->getPembeli();
         $this->template->load('template', "admin_harga_patokan/data", $data);
 		//$this->template->load('template', 'harga_patokan/data');
 	}
@@ -34,6 +36,7 @@ class Data extends CI_Controller {
 	{
 			
 			$data["detail"] = $this->model_admin_harga_patokan->detail();
+			
 			$data["rincian"] = $this->model_admin_harga_patokan->_detail();
 
 			$this->template->load('template', 'admin_harga_patokan/detail', $data);

@@ -41,10 +41,20 @@ class Model_admin_harga_patokan extends CI_Model
     private $_table = "invoices";
     public function getAll()
     {
-        $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, b.NAMA_PERUSAHAAN from invoices a, m_pbph b where a.id_pbph_pembeli = b.NPWSHUT_NO";
+        $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, b.NAMA_PERUSAHAAN as pembeli from invoices a, m_pbph b where a.id_pbph_pembeli = b.NPWSHUT_NO";
 		$query = $this->db->query($sql);
 		return $query->result();
     }
+    public function getPenjual(){
+        $sql = "select b.NAMA_PERUSAHAAN as penjual from invoices a, m_pbph b where a.id_pbph_penjual = b.NPWSHUT_NO";
+        $query = $this->db->query($sql);
+		return $query->result();
+    }
+    /* public function getPembeli(){
+        $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, b.NAMA_PERUSAHAAN from invoices a, m_pbph b where a.id_pbph_penjual = b.NPWSHUT_NO";
+        $query = $this->db->query($sql);
+		return $query->result();
+    } */
     public function detail()
     {
         $id_menu = $this->uri->segment(4);
