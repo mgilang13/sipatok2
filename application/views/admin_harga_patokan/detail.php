@@ -56,7 +56,16 @@
                                 <input type="text" class="form-control" disabled value="<?php echo $detail['KOTA'];?>">
                             </div>
                         </div>
-                        
+                        <div class="form-group col-xs-6">
+                            <label for="" class="col-sm-3 control-label">Total Volume</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" disabled value="<?php echo $detail['total_volume'];?>">
+                            </div>
+                            <label for="" class="col-sm-3 control-label">Total Harga</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" disabled value="<?php echo $detail['total_harga'];?>">
+                            </div>
+                        </div>
                     </div>
                     <!-- <div class="row">
                         

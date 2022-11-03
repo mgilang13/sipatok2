@@ -47,7 +47,9 @@ class Model_harga_patokan extends CI_Model
 
     public function getAll()
     {
-        $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, b.NAMA_PERUSAHAAN from invoices a, m_pbph b where a.id_pbph_pembeli = b.NPWSHUT_NO";
+        $data_user = $this->session->userdata();
+        $id_user = $data_user['id'];
+        $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, b.NAMA_PERUSAHAAN from invoices a, m_pbph b where a.id_pbph_pembeli = b.NPWSHUT_NO and a.id_user = '".$id_user."'";
 		$query = $this->db->query($sql);
 		return $query->result();
     }
@@ -56,7 +58,7 @@ class Model_harga_patokan extends CI_Model
         $id_menu 	  = $this->uri->segment(4);
         $data_user = $this->session->userdata();
         $id_user = $data_user['id'];
-        $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, a.tempat_invoice, c.NAMA_PERUSAHAAN, c.KOTA, f.KETERANGAN as provinsi, a.is_verified from invoices a, m_pbph c, m_provinsi f where a.id_pbph_pembeli = c.NPWSHUT_NO and f.KODE_PROP=c.KODE_PROP and a.id_user = '".$id_user."' and a.id = '".$id_menu."'";
+        $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, a.tempat_invoice, c.NAMA_PERUSAHAAN, c.KOTA, f.KETERANGAN as provinsi, a.total_volume, a.total_harga, a.is_verified, a.file_upload from invoices a, m_pbph c, m_provinsi f where a.id_pbph_pembeli = c.NPWSHUT_NO and f.KODE_PROP=c.KODE_PROP and a.id_user = '".$id_user."' and a.id = '".$id_menu."'";
 		$query = $this->db->query($sql);
 		return $query->row_array();
     }
