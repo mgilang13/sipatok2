@@ -124,6 +124,9 @@
                         </table>
                     </div>
                     
+                    <embed src="<?php echo base_url()."uploads/invoices/".$detail['file_upload'].".pdf";?>" width="100%" height="794px" />
+                    
+
                     <div class="box-body">
 
                     <div class="row">
