@@ -49,9 +49,9 @@
                         <td>
                             <?php
                                 if($hp->is_verified == '0') {
-                                    echo '<small class="label label-info"><i class="fa fa-close"></i> Belum diverifikasi</small>';
+                                    echo '<small class="label label-info"><i class="fa fa-clock-o"></i> Belum diverifikasi</small>';
                                 } else if ($hp->is_verified == '1') {
-                                    echo '<small class="label label-success"><i class="fa fa-close"></i>Terverifikasi</small>';
+                                    echo '<small class="label label-success"><i class="fa fa-check-circle"></i>Terverifikasi</small>';
                                 } else if ($hp->is_verified == '2') {
                                     echo '<small class="label label-danger"><i class="fa fa-close"></i> Dikembalikan</small>';
                                 }

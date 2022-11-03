@@ -30,10 +30,10 @@
                     $no_urut = 1;
                     foreach ($users as $user): ?>
                     <tr>
-                        <td width="150">
+                        <td width="20">
                             <?php echo $no_urut++; ?>
                         </td>
-                        <td width="150">
+                        <td width="200">
                             <?php echo $user->nama_lengkap ?>
                         </td>
                         <td>
