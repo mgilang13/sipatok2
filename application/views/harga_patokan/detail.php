@@ -50,6 +50,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="form-group col-xs-6">
                             <label class="col-sm-3 control-label"></label>
@@ -62,6 +63,26 @@
                         </div>
                         
                     </div>
+                    <div class="row">
+                        <div class="form-group col-xs-6">
+                            <label for="" class="col-sm-3 control-label">Total Volume</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" disabled value="<?php echo $detail['total_volume'];?>">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        
+                        <div class="form-group col-xs-6">
+                            <label for="" class="col-sm-3 control-label">Total Harga</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" disabled value="<?php echo $detail['total_harga'];?>">
+                            </div>
+                        </div>
+                    </div>
+
+                    
                     <!-- <div class="row">
                         
                         <div class="form-group col-xs-6">
@@ -118,6 +139,8 @@
                             </tbody>
                         </table>
                     </div>
+                    
+                    <embed src="<?php echo base_url()."uploads/invoices/".$detail['file_upload'].".pdf";?>" width="100%" height="794px" />
 
                 </div>
                 <!-- /.box-body -->

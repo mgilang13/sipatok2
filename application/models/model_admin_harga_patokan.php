@@ -67,12 +67,22 @@ class Model_admin_harga_patokan extends CI_Model
         
 		return $dataSemuaHP;
     }
+    public function getPenjual(){
+        $sql = "select b.NAMA_PERUSAHAAN as penjual from invoices a, m_pbph b where a.id_pbph_penjual = b.NPWSHUT_NO";
+        $query = $this->db->query($sql);
+		return $query->result();
+    }
+    /* public function getPembeli(){
+        $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, b.NAMA_PERUSAHAAN from invoices a, m_pbph b where a.id_pbph_penjual = b.NPWSHUT_NO";
+        $query = $this->db->query($sql);
+		return $query->result();
+    } */
     public function detail()
     {
         $id_menu = $this->uri->segment(4);
         $data_user = $this->session->userdata();
         //$id_user = $data_user['id'];
-        $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, a.tempat_invoice, (SELECT b.NAMA_PERUSAHAAN FROM invoices a, m_pbph b WHERE a.id_pbph_penjual = b.NPWSHUT_NO and a.id = '".$id_menu."') as penjual, c.NAMA_PERUSAHAAN as pembeli, c.KOTA, f.KETERANGAN as provinsi from invoices a, m_pbph c, m_provinsi f where a.id_pbph_pembeli = c.NPWSHUT_NO and f.KODE_PROP=c.KODE_PROP and a.id = '".$id_menu."'";
+        $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, a.tempat_invoice, a.total_volume, a.total_harga, a.file_upload, (SELECT b.NAMA_PERUSAHAAN FROM invoices a, m_pbph b WHERE a.id_pbph_penjual = b.NPWSHUT_NO and a.id = '".$id_menu."') as penjual, c.NAMA_PERUSAHAAN as pembeli, c.KOTA, f.KETERANGAN as provinsi from invoices a, m_pbph c, m_provinsi f where a.id_pbph_pembeli = c.NPWSHUT_NO and f.KODE_PROP=c.KODE_PROP and a.id = '".$id_menu."'";
 		$query = $this->db->query($sql);
 		return $query->row_array();
     }

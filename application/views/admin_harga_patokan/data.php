@@ -24,7 +24,12 @@
                 <tbody>
                     <?php
                     $no_urut = 1;
-                    foreach ($hargapatokan as $hp): ?>
+                    //$penjual['penjual'] = $_penjual;
+                    //echo $_penjual;
+                    
+                    
+                    foreach ($hargapatokan as $hp): 
+                    ?>
                     <tr>
                         <td width="150">
                             <?php echo $no_urut++; ?>
