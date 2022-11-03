@@ -41,10 +41,10 @@
                             <?php echo $hp->tgl_invoice ?>
                         </td>
                         <td>
-                            <?php echo $hp->penjual ?>
+                            <?php echo $hp->id_pbph_penjual ?>
                         </td>
                         <td>
-                            <?php echo $hp->pembeli ?>
+                            <?php echo $hp->id_pbph_pembeli ?>
                         </td>
                         <td>
                             <center>

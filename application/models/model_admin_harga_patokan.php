@@ -43,9 +43,34 @@ class Model_admin_harga_patokan extends CI_Model
 
     public function getAll()
     {
-        $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, b.NAMA_PERUSAHAAN as pembeli from invoices a, m_pbph b where a.id_pbph_pembeli = b.NPWSHUT_NO";
+        $sql = "select 
+                    a.id, 
+                    a.nomor_invoice,
+                    a.id_pbph_penjual,
+                    a.id_pbph_pembeli, 
+                    a.tgl_invoice, 
+                    b.NAMA_PERUSAHAAN 
+                from 
+                    invoices a, 
+                    m_pbph b 
+                where a.id_pbph_pembeli = b.NPWSHUT_NO";
+
 		$query = $this->db->query($sql);
-		return $query->result();
+
+        $dataSemuaHP = $query->result();
+
+        for($i=0; $i < sizeof($dataSemuaHP); $i++) {
+            $dataSemuaHP[$i]->id_pbph_pembeli = $this->getNamaPerusahaan($dataSemuaHP[$i]->id_pbph_pembeli);        
+            $dataSemuaHP[$i]->id_pbph_penjual = $this->getNamaPerusahaan($dataSemuaHP[$i]->id_pbph_penjual);        
+        }
+        
+
+        // foreach($dataSemuaHP as $key => $value) {
+        //     $dataSemuaHP[$key]['id_pbph_penjual'] = "gialng";
+        //     $dataSemuaHP[$key]['id_pbph_pembeli'] =  "khoiri";
+        // }
+        
+		return $dataSemuaHP;
     }
     public function getPenjual(){
         $sql = "select b.NAMA_PERUSAHAAN as penjual from invoices a, m_pbph b where a.id_pbph_penjual = b.NPWSHUT_NO";
@@ -87,5 +112,18 @@ class Model_admin_harga_patokan extends CI_Model
       $id = $this->input->post('id_invoice');
       $this->db->where('id', $id);
       $this->db->update($this->table, $data);
+    }
+
+    public function getNamaPerusahaan($id_pbph)
+    {
+        $sql = "select 
+                    NAMA_PERUSAHAAN 
+                from 
+                    invoices, m_pbph 
+                where 
+                    m_pbph.NPWSHUT_NO = '$id_pbph' ;";
+        $query = $this->db->query($sql);
+    
+        return $query->row()->NAMA_PERUSAHAAN;
     }
 }
