@@ -49,7 +49,8 @@ class Model_admin_harga_patokan extends CI_Model
                     a.id_pbph_penjual,
                     a.id_pbph_pembeli, 
                     a.tgl_invoice, 
-                    b.NAMA_PERUSAHAAN 
+                    b.NAMA_PERUSAHAAN ,
+                    a.is_verified
                 from 
                     invoices a, 
                     m_pbph b 
@@ -63,12 +64,6 @@ class Model_admin_harga_patokan extends CI_Model
             $dataSemuaHP[$i]->id_pbph_pembeli = $this->getNamaPerusahaan($dataSemuaHP[$i]->id_pbph_pembeli);        
             $dataSemuaHP[$i]->id_pbph_penjual = $this->getNamaPerusahaan($dataSemuaHP[$i]->id_pbph_penjual);        
         }
-        
-
-        // foreach($dataSemuaHP as $key => $value) {
-        //     $dataSemuaHP[$key]['id_pbph_penjual'] = "gialng";
-        //     $dataSemuaHP[$key]['id_pbph_pembeli'] =  "khoiri";
-        // }
         
 		return $dataSemuaHP;
     }

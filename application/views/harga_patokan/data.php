@@ -42,15 +42,15 @@
                                 <?php
                                 if(isset($hp->is_verified) == '0'){
                                 ?>
-                                <small class="label label-info"><i class="fa fa-clock-o"></i> Belum Verifikasi</small>
+                                    <small class="label label-info"><i class="fa fa-clock-o"></i> Belum Verifikasi</small>
                                 <?php
                                 } else if(isset($hp->is_verified) == '1'){
                                 ?>
-                                <small class="label label-success"><i class="fa fa-check-circle"></i> Terverifikasi</small>
+                                    <small class="label label-success"><i class="fa fa-check-circle"></i> Terverifikasi</small>
                                 <?php
                                 } else if(isset($hp->is_verified) == '2') {
                                 ?>
-                                <small class="label label-danger"><i class="fa fa-close"></i> Dikembalikan</small>
+                                    <small class="label label-danger"><i class="fa fa-close"></i> Dikembalikan</small>
                                 <?php
                                 }
                                 ?>
