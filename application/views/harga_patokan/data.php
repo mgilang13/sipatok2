@@ -25,7 +25,7 @@
                     $no_urut = 1;
                     foreach ($hargapatokan as $hp): ?>
                     <tr>
-                        <td width="150">
+                        <td width="20">
                             <?php echo $no_urut++; ?>
                         </td>
                         <td width="150">
@@ -40,15 +40,15 @@
                         <td>
                             <center>
                                 <?php
-                                if(isset($hp->is_verified) == '0'){
+                                if(isset($hp->is_verified) == 0){
                                 ?>
                                 <small class="label label-info"><i class="fa fa-clock-o"></i> Belum Verifikasi</small>
                                 <?php
-                                } else if(isset($hp->is_verified) == '1'){
+                                } else if(isset($hp->is_verified) == 1){
                                 ?>
                                 <small class="label label-success"><i class="fa fa-check-circle"></i> Terverifikasi</small>
                                 <?php
-                                } else if(isset($hp->is_verified) == '2') {
+                                } else if(isset($hp->is_verified) == 2) {
                                 ?>
                                 <small class="label label-danger"><i class="fa fa-close"></i> Dikembalikan</small>
                                 <?php

@@ -31,7 +31,7 @@
                     foreach ($hargapatokan as $hp): 
                     ?>
                     <tr>
-                        <td width="150">
+                        <td width="20">
                             <?php echo $no_urut++; ?>
                         </td>
                         <td width="150">
