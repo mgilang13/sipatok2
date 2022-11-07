@@ -43,12 +43,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-<<<<<<< HEAD
     <a href="<?= base_url('/').$home_url; ?>" class="logo">
-=======
-
-    <a href="#" class="logo">
->>>>>>> 5fd229d771f6e8462d5da3cdd012dde00ab41cf1
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>SPTK</b></span>
       <!-- logo for regular state and mobile devices -->
