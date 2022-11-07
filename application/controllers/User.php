@@ -1,6 +1,6 @@
 <?php
 
-	class User extends CI_Controller
+	class User extends MY_Controller
 	{
 		
 		function __construct()
@@ -55,23 +55,26 @@
 
 		function index()
 		{
+			$data['home_url'] = "Tampilan_utama";
 			$data['users'] = $this->model_user->getAll();
 			$this->template->load('template', 'user/view', $data);
 		}
 
 		function add()
 		{
+			$data['home_url'] = "Tampilan_utama";
 			if (isset($_POST['submit'])) {
 				$uploadFoto = $this->upload_foto_user();
 				$this->model_user->save($uploadFoto);
 				redirect('user');
 			} else {
-				$this->template->load('template', 'user/add');
+				$this->template->load('template', 'user/add', $data);
 			}
 		}
 
 		function edit()
 		{
+			$data['home_url'] = "Tampilan_utama";
 			if (isset($_POST['submit'])) {
 				$uploadFoto = $this->upload_foto_user();
 				$this->model_user->update($uploadFoto);
@@ -85,6 +88,7 @@
 
 		function delete()
 		{
+			$data['home_url'] = "Tampilan_utama";
 			$kode_user = $this->uri->segment(3);
 			if (!empty($kode_user)) {
 				$this->db->where('id_user', $kode_user);
@@ -109,7 +113,8 @@
 
 		function rule()
 		{
-			$this->template->load('template', 'user/rule');
+			$data['home_url'] = "Tampilan_utama";
+			$this->template->load('template', 'user/rule', $data);
 		}
 
 		function module()
@@ -148,8 +153,8 @@
 		{
 			$data 		= array(
 					'id_menu' => $id_menu, 
-					'id_level_user' => $level_user );
-			$check 		= $this->db->get_where('tbl_user_rule', $data);
+					'id_role' => $level_user );
+			$check 		= $this->db->get_where('menu_role', $data);
 
 			if ($check->num_rows() > 0) {
 				echo "checked ";

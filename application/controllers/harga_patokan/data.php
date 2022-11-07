@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Data extends CI_Controller {
+class Data extends MY_OperatorController {
 
 	/**
 	 * Index Page for this controller.
@@ -26,6 +26,7 @@ class Data extends CI_Controller {
     }
 	public function index()
 	{
+		$data['home_url'] = "Tampilan_operator";
         $data["hargapatokan"] = $this->model_harga_patokan->getAll();
         $this->template->load('template', "harga_patokan/data", $data);
 		//$this->template->load('template', 'harga_patokan/data');

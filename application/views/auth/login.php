@@ -31,13 +31,11 @@
 
   <div class="login-box">
       <div class="login-logo">
-        <a href="../../index2.html"><b>SI</b>PATOK</a>
-        <h6>Sistem Informasi Harga Patokan</h6>
+        <img src="<?= base_url('/assets/dist/img/logo-sipatok1.png'); ?>" alt="" style="width:200px">
       </div>
       <!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
-
         <?php echo form_open('auth/check_login'); ?>
 
             <div class="form-group has-feedback">

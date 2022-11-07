@@ -19,7 +19,7 @@
                     <tr>
                         <td>Level User</td>
                         <td>
-                            <?php echo cmb_dinamis('level_user', 'tbl_level_user', 'nama_level', 'id_level_user', null, "id='filter_level' onChange='loadData()'") 
+                            <?php echo cmb_dinamis('level_user', 'm_roles', 'nama_role', 'id', null, "id='filter_level' onChange='loadData()'") 
                             ?>        
                         </td>
                     </tr>

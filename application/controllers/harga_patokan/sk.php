@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Sk extends CI_Controller {
+class Sk extends MY_OperatorController {
 
 	/**
 	 * Index Page for this controller.
@@ -20,6 +20,7 @@ class Sk extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->template->load('template', 'harga_patokan/sk');
+		$data['home_url']="Tampilan_operator";
+		$this->template->load('template', 'harga_patokan/sk', $data);
 	}
 }

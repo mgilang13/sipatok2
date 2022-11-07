@@ -49,7 +49,16 @@ class Model_harga_patokan extends CI_Model
     {
         $data_user = $this->session->userdata();
         $id_user = $data_user['id'];
-        $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, b.NAMA_PERUSAHAAN from invoices a, m_pbph b where a.id_pbph_pembeli = b.NPWSHUT_NO and a.id_user = '".$id_user."'";
+        $sql = "select 
+                    a.id, 
+                    a.nomor_invoice, 
+                    a.tgl_invoice, 
+                    b.NAMA_PERUSAHAAN,
+                    a.is_verified 
+                from 
+                    invoices a, 
+                    m_pbph b 
+                where a.id_pbph_pembeli = b.NPWSHUT_NO and a.id_user = '".$id_user."'";
 		$query = $this->db->query($sql);
 		return $query->result();
     }

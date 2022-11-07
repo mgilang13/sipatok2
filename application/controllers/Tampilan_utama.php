@@ -1,10 +1,12 @@
 <?php
 
-	class Tampilan_utama extends CI_Controller
+	class Tampilan_utama extends MY_AdminController
 	{
 		
 		function index()
 		{
+			$data['home_url']="Tampilan_utama";
+
 			$qbelum = 'SELECT COUNT(*) AS hasil FROM invoices where is_verified = "0"';
 			$data['belum'] = $this->db->query($qbelum)->row_array();
 

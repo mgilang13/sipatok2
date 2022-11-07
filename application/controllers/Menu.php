@@ -1,6 +1,6 @@
 <?php
  
-	class Menu extends CI_Controller
+	class Menu extends MY_Controller
 	{
 		
 		function __construct()
@@ -13,7 +13,6 @@
 
 		function data()
 		{
-
 			// nama table
 			$table      = 'tabel_menu';
 			// nama PK
@@ -56,16 +55,18 @@
 
 		function index()
 		{
-			$this->template->load('template', 'menu/view');
+			$data['home_url'] = "Tampilan_utama";
+			$this->template->load('template', 'menu/view', $data);
 		}
 
 		function add()
 		{
+			$data['home_url'] = "Tampilan_utama";
 			if (isset($_POST['submit'])) {
 				$this->model_menu->save();
 				redirect('menu');
 			} else {
-				$this->template->load('template', 'menu/add');
+				$this->template->load('template', 'menu/add', $data);
 			}
 		}
 

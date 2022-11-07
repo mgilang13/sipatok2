@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Data extends CI_Controller {
+class Data extends MY_AdminController {
 
 	/**
 	 * Index Page for this controller.
@@ -26,6 +26,8 @@ class Data extends CI_Controller {
     }
 	public function index()
 	{
+		$data['home_url'] = "Tampilan_utama";
+
         $data["hargapatokan"] = $this->model_admin_harga_patokan->getAll();
 		$data["penjual"] = $this->model_admin_harga_patokan->getPenjual();
 		//$data["pembeli"] = $this->model_admin_harga_patokan->getPembeli();
