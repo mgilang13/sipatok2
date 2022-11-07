@@ -43,7 +43,12 @@
   <header class="main-header">
 
     <!-- Logo -->
+<<<<<<< HEAD
     <a href="<?= base_url('/').$home_url; ?>" class="logo">
+=======
+
+    <a href="#" class="logo">
+>>>>>>> 5fd229d771f6e8462d5da3cdd012dde00ab41cf1
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>SPTK</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -126,7 +131,7 @@
           <img src="<?php echo base_url(); ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><?php echo $this->session->userdata('nama'); ?></p>
+          <p><?php echo wordwrap($this->session->userdata('nama'),25,"<br>\n"); ?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>

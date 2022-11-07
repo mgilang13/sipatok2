@@ -58,7 +58,7 @@
               </div>
               <!-- /.col -->
               <div class="col-xs-4">
-                <button type="submit" name="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                <button type="submit" name="submit" class="btn btn-success btn-block btn-flat">Sign In</button>
               </div>
               <!-- /.col -->
             </div>
