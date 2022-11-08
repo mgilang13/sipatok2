@@ -7,14 +7,30 @@
 		public $table_user_role = 'user_role';
 		
 		// mengambil data $username & $password dari hasil parsing controller Auth function check_login() dan mencocokanya dengan data yang ada di database
-		function login($username, $password)
+		function loginAdmin($username, $password)
 		{
 			$decrypted_password = md5($password);
 			// $this->db->where('username', $username);
 			// $this->db->where('password', md5($password));
 			// $this-	>db->join('user_role', 'user_role.id_role = users.id');
 			// $user = $this->db->get('users')->row_array();
-			$sql = "SELECT * FROM users AS u JOIN user_role AS ur ON u.id = ur.id_user WHERE username = '$username' AND password = '$decrypted_password'";
+			$sql = "SELECT 
+						* FROM users AS u 
+					JOIN user_role AS ur 
+					ON u.id = ur.id_user 
+					WHERE 
+						username = '$username' AND password = '$decrypted_password' AND ur.id_role = '1'";
+			$query = $this->db->query($sql);
+			$user = $query->row_array();
+			
+			return $user;
+		}
+
+		function loginOperator($username, $password)
+		{
+			$decrypted_password = md5($password);
+			
+			$sql = "SELECT * FROM users AS u JOIN user_role AS ur ON u.id = ur.id_user WHERE username = '$username' AND password = '$decrypted_password' AND ur.id_role = '5'";
 			$query = $this->db->query($sql);
 			$user = $query->row_array();
 			

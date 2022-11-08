@@ -38,6 +38,17 @@
                             <?php echo $hp->NAMA_PERUSAHAAN ?>
                         </td>
                         <td>
+<<<<<<< HEAD
+                            <?php
+                                if($hp->is_verified == '0') {
+                                    echo '<small class="label label-info"><i class="fa fa-close"></i> Belum diverifikasi</small>';
+                                } else if ($hp->is_verified == '1') {
+                                    echo '<small class="label label-success"><i class="fa fa-close"></i>Terverifikasi</small>';
+                                } else if ($hp->is_verified == '2') {
+                                    echo '<small class="label label-danger"><i class="fa fa-close"></i> Dikembalikan</small>';
+                                }
+                            ?> 
+=======
                             <center>
                             <?php
                                 if($hp->is_verified == '0') {
@@ -49,6 +60,7 @@
                                 }
                             ?>
                             </center>    
+>>>>>>> 5fd229d771f6e8462d5da3cdd012dde00ab41cf1
                         </td>
                         <td width="250">
                             <a href="<?php echo site_url('harga_patokan/data/detail/'.$hp->id) ?>"

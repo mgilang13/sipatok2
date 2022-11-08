@@ -1,12 +1,13 @@
 <?php
 
-	class Tampilan_operator extends CI_Controller
+	class Tampilan_operator extends MY_OperatorController
 	{
 		
 		function index()
 		{
-			
-			$this->template->load('template', 'dashboard-operator');
+			$data['home_url']="Tampilan_operator";
+
+			$this->template->load('template', 'dashboard-operator',$data);
 		}
 
 	}
