@@ -36,7 +36,7 @@ class Data extends MY_AdminController {
 	}
 	function detail()
 	{
-			
+			$data['home_url'] = "Tampilan_utama";
 			$data["detail"] = $this->model_admin_harga_patokan->detail();
 			
 			$data["rincian"] = $this->model_admin_harga_patokan->_detail();

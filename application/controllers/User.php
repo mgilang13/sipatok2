@@ -169,18 +169,18 @@
 			// $leveluser dan idmenu diambil dari function ajax addRule()
 			$data 		= array(
 					'id_menu' => $id_menu, 
-					'id_level_user' => $level_user );
+					'id_role' => $level_user );
 
 			// $data untuk menampilkan data yang sesuai
-			$check 		= $this->db->get_where('tbl_user_rule', $data);
+			$check 		= $this->db->get_where('menu_role', $data);
 
 			if ($check->num_rows() < 1) {
 				// apabila datanya belum ada (kecil dari 1) maka akan menginsert
-				$this->db->insert('tbl_user_rule', $data);
+				$this->db->insert('menu_role', $data);
 			} else {
 				$this->db->where('id_menu', $id_menu);
-				$this->db->where('id_level_user', $level_user);
-				$this->db->delete('tbl_user_rule');
+				$this->db->where('id_role', $level_user);
+				$this->db->delete('menu_role');
 			}
 		}
 
