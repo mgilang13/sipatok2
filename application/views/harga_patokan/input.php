@@ -69,7 +69,7 @@
                         <div class="form-group col-xs-6">
                             <label class="col-sm-3 control-label">Total Harga*</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" name="total_harga" placeholder="Masukkan Total Harga" value="<?= set_value('total_harga') ?>">
+                                <input type="number" class="form-control" name="total_harga" placeholder="Masukkan Total Harga" value="<?= set_value('total_harga') ?>" step="0.01">
                                 <span class="text-danger text-bold"><?= form_error('total_harga') ?></span>
                             </div>
                         </div>
