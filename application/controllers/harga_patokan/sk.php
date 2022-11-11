@@ -25,6 +25,8 @@ class Sk extends MY_OperatorController {
     }
 	public function index()
 	{
+		$data['home_url'] = 'Tampilan_operator';
+		
         $data["peraturan"] = $this->model_harga_patokan->peraturan();
         $this->template->load('template', "harga_patokan/sk", $data);
 	}
