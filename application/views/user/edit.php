@@ -10,7 +10,7 @@
             <!-- form start -->
             <?php
                 echo form_open_multipart('user/edit', 'role="form" class="form-horizontal"');
-                echo form_hidden('id_user', $user['id_user']);
+                echo form_hidden('id_user', $user['id']);
             ?>
 
                 <div class="box-body">
@@ -19,7 +19,7 @@
                       <label class="col-sm-2 control-label">Nama Lengkap</label>
 
                       <div class="col-sm-9">
-                        <input type="text" value="<?php echo $user['nama_lengkap']; ?>" name="nama_lengkap" class="form-control" placeholder="Masukkan Nama Lengkap">
+                        <input type="text" value="<?php echo $user['nama']; ?>" name="nama_lengkap" class="form-control" placeholder="Masukkan Nama Lengkap">
                       </div>
                   </div>
 
@@ -44,19 +44,19 @@
 
                       <div class="col-sm-5">
                         <?php
-                          echo cmb_dinamis('level_user', 'tbl_level_user', 'nama_level', 'id_level_user', $user['id_level_user']);
+                          echo cmb_dinamis('level_user', 'm_roles', 'nama_role', 'id', $user['id_role']);
                         ?>
                       </div>
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                       <label class="col-sm-2 control-label">Foto</label>
 
                       <div class="col-sm-5">
                         <input type="file" name="userfile">
                         <img src="<?php echo base_url()."/uploads/user/".$user['foto']; ?>" width="150px">
                       </div>
-                  </div>
+                  </div> -->
 
                   <div class="form-group">
                       <label class="col-sm-2 control-label"></label>
