@@ -80,4 +80,10 @@ class Model_harga_patokan extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
     }
+    public function peraturan()
+    {
+        $sql = "select * from peraturan";
+		$query = $this->db->query($sql);
+		return $query->result();
+    }
 }

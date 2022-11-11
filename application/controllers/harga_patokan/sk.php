@@ -18,9 +18,21 @@ class Sk extends MY_OperatorController {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	public function __construct()
+    {
+        parent::__construct();
+        $this->load->model("model_harga_patokan");
+    }
 	public function index()
 	{
-		$data['home_url']="Tampilan_operator";
-		$this->template->load('template', 'harga_patokan/sk', $data);
+        $data["peraturan"] = $this->model_harga_patokan->peraturan();
+        $this->template->load('template', "harga_patokan/sk", $data);
+	}
+	function detail()
+	{		
+			$data["detail"] = $this->model_harga_patokan->detail();
+			$data["rincian"] = $this->model_harga_patokan->_detail();
+
+			$this->template->load('template', 'harga_patokan/detail', $data);
 	}
 }
