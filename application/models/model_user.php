@@ -12,7 +12,7 @@
 			$decrypted_password = md5($password);
 			// $this->db->where('username', $username);
 			// $this->db->where('password', md5($password));
-			// $this-	>db->join('user_role', 'user_role.id_role = users.id');
+			// $this->db->join('user_role', 'user_role.id_role = users.id');
 			// $user = $this->db->get('users')->row_array();
 			$sql = "SELECT 
 						* FROM users AS u 

@@ -43,7 +43,7 @@
                             <?php echo $user->nama_level ?>
                         </td>
                         <td>
-                            <a href="#" class="btn btn-xs btn-primary" data-placement="top" title="Edit">
+                            <a href="<?= base_url().'user/edit/'.$user->id_user; ?>" class="btn btn-xs btn-primary" data-placement="top" title="Edit">
                                 <i class="fa fa-edit"></i>
                             </a>
                             <a href="#" class="btn btn-xs btn-danger" data-placement="top" title="Edit">
