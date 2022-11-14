@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Data extends MY_AdminController {
 
 	/**
@@ -18,31 +17,36 @@ class Data extends MY_AdminController {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
 	public function __construct()
     {
-        parent::__construct();
+		parent::__construct();
         $this->load->model("model_admin_harga_patokan");
         $this->load->library('form_validation');
     }
-	public function index()
-	{
-		$data['home_url'] = "Tampilan_utama";
 
+	public function index()
+	{		
+
+		$data['home_url'] = "Tampilan_utama";
         $data["hargapatokan"] = $this->model_admin_harga_patokan->getAll();
 		$data["penjual"] = $this->model_admin_harga_patokan->getPenjual();
 		//$data["pembeli"] = $this->model_admin_harga_patokan->getPembeli();
         $this->template->load('template', "admin_harga_patokan/data", $data);
 		//$this->template->load('template', 'harga_patokan/data');
 	}
+	
 	function detail()
 	{
 			$data['home_url'] = "Tampilan_utama";
+			
 			$data["detail"] = $this->model_admin_harga_patokan->detail();
 			
 			$data["rincian"] = $this->model_admin_harga_patokan->_detail();
 
 			$this->template->load('template', 'admin_harga_patokan/detail', $data);
 	}
+
 	function verifikasi(){
 		if (isset($_POST['submit'])) {
 			$this->model_admin_harga_patokan->update();

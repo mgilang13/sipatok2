@@ -72,6 +72,8 @@
 
 		function edit()
 		{
+			$data['home_url'] = "Tampilan_utama";
+			
 			if (isset($_POST['submit'])) {
 				$this->model_menu->update();
 				redirect('menu');

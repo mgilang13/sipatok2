@@ -76,13 +76,13 @@
 		{
 			$data['home_url'] = "Tampilan_utama";
 
+			
 			if (isset($_POST['submit'])) {
 				$uploadFoto = $this->upload_foto_user();
 				$this->model_user->update($uploadFoto);
 				redirect('user');
 			} else {
 				$id_user 		= $this->uri->segment(3);
-
 				$sql = "select 
 							* from users u 
 						join user_role ur 
@@ -92,7 +92,7 @@
 				
 				$query = $this->db->query($sql);
 				$data['user'] = $query->row_array();
-				
+
 				$this->template->load('template', 'user/edit', $data);
 			}
 		}
@@ -102,8 +102,9 @@
 			$data['home_url'] = "Tampilan_utama";
 			$kode_user = $this->uri->segment(3);
 			if (!empty($kode_user)) {
-				$this->db->where('id_user', $kode_user);
-				$this->db->delete('tbl_user');
+				$this->db->where('id', $kode_user);
+				$this->db->delete('users');
+				$this->db->delete('user_role');
 			}
 			redirect('user');
 		}

@@ -63,27 +63,35 @@
 
 		function update($foto)
 		{
-			if (empty($foto)) {
+
+			if (empty($this->input->post('username', TRUE))) {
 				$data = array(
 					//tabel di database => name di form
-					'nama_lengkap'            => $this->input->post('nama_lengkap', TRUE),
-					'username'          	  => $this->input->post('username', TRUE),
-					'password'          	  => md5( $this->input->post('password', TRUE) ),
-					'id_level_user'           => $this->input->post('level_user', TRUE),
+					'nama'            => $this->input->post('nama_lengkap', TRUE),
+					'username'        => $this->input->post('username', TRUE)
+				);
+
+				$data_user_role = array(
+					'id_role'		=>	$this->input->post('level_user')
 				);
 			} else {
 				$data = array(
 					//tabel di database => name di form
-					'nama_lengkap'            => $this->input->post('nama_lengkap', TRUE),
-					'username'          	  => $this->input->post('username', TRUE),
-					'password'          	  => md5( $this->input->post('password', TRUE) ),
-					'id_level_user'           => $this->input->post('level_user', TRUE),
-					'foto'					  => $foto
+					'nama'            => $this->input->post('nama_lengkap', TRUE),
+					'username'        => $this->input->post('username', TRUE),
+					'password'        => md5( $this->input->post('password', TRUE) )
+				);
+
+				$data_user_role = array(
+					'id_role'		=>	$this->input->post('level_user')
 				);
 			}		
 			$id_user 	= $this->input->post('id_user', TRUE);
-			$this->db->where('id_user', $id_user);
+			$this->db->where('id', $id_user);
 			$this->db->update($this->table, $data);
+
+			$this->db->where('id_user', $id_user);
+			$this->db->update('user_role', $data_user_role);
 		}
 
 		function getAll()

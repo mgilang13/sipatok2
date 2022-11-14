@@ -32,10 +32,10 @@
                   </div>
 
                   <div class="form-group">
-                      <label class="col-sm-2 control-label">Password</label>
+                      <label class="col-sm-2 control-label">Password Baru</label>
 
                       <div class="col-sm-9">
-                        <input type="password" value="<?php echo $user['password']; ?>" name="password" class="form-control" placeholder="Masukan Password">
+                        <input type="password" name="password" class="form-control" placeholder="Masukan Password Baru">
                       </div>
                   </div>
 
@@ -49,14 +49,49 @@
                       </div>
                   </div>
 
-                  <!-- <div class="form-group">
-                      <label class="col-sm-2 control-label">Foto</label>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Wilayah <br><i>(Verifikator)</i></label>
 
-                      <div class="col-sm-5">
-                        <input type="file" name="userfile">
-                        <img src="<?php echo base_url()."/uploads/user/".$user['foto']; ?>" width="150px">
-                      </div>
-                  </div> -->
+                    <div class="col-sm-5">
+                      <?php
+                        echo cmb_dinamis('id_pulau', 'm_pulau', 'KETERANGAN', 'KODE_PULAU', $user['id_pulau']);
+                      ?>
+                    </div>
+                    <p style="font-style:italic">Bisa dikosongkan</p>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Balai <br><i>(Admin Balai)</i></label>
+
+                    <div class="col-sm-5">
+                      <?php
+                        echo cmb_dinamis('id_balai', 'm_bphp', 'KETERANGAN', 'KODE_BSPHH', $user['id_balai']);
+                      ?>
+                    </div>
+                    <p style="font-style:italic">Bisa dikosongkan</p>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Dinas <br><i>(Admin Dinas)</i></label>
+
+                    <div class="col-sm-5">
+                      <?php
+                        echo cmb_dinamis('id_provinsi', 'm_provinsi', 'KETERANGAN', 'KODE_PROP', $user['id_dinas']);
+                      ?>
+                    </div>
+                    <p style="font-style:italic">Bisa dikosongkan</p>
+                  </div>
+                    
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Instansi / PBPH / Perhutani <br><i>(Operator)</i></label>
+                    
+                    <div class="col-sm-5">
+                      <?php
+                        echo cmb_dinamis('id_pbph', 'm_pbph', 'NAMA_PERUSAHAAN', 'NPWSHUT_NO', $user['id_pbph']);
+                        ?>
+                    </div>
+                    <p style="font-style:italic">Bisa dikosongkan</p>
+                  </div>
 
                   <div class="form-group">
                       <label class="col-sm-2 control-label"></label>

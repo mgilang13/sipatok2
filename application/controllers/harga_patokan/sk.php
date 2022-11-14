@@ -23,6 +23,7 @@ class Sk extends MY_OperatorController {
         parent::__construct();
         $this->load->model("model_harga_patokan");
     }
+	
 	public function index()
 	{
         $data["peraturan"] = $this->model_harga_patokan->peraturan();
@@ -30,6 +31,7 @@ class Sk extends MY_OperatorController {
 	}
 	function detail()
 	{		
+
 			$data["detail"] = $this->model_harga_patokan->detail();
 			$data["rincian"] = $this->model_harga_patokan->_detail();
 

@@ -51,25 +51,47 @@
                   <hr>
                   
                   <div class="form-group">
-                      <label class="col-sm-2 control-label">Provinsi</label>
+                    <label class="col-sm-2 control-label">Wilayah <br><i>(Verifikator)</i></label>
 
-                      <div class="col-sm-5">
-                        <?php
-                          echo cmb_dinamis('id_provinsi', 'm_provinsi', 'KETERANGAN', 'KODE_PROP');
-                        ?>
-                      </div>
-                      <p style="font-style:italic">Bisa dikosongkan</p>
+                    <div class="col-sm-5">
+                      <?php
+                        echo cmb_dinamis('id_pulau', 'm_pulau', 'KETERANGAN', 'KODE_PULAU');
+                      ?>
                     </div>
+                    <p style="font-style:italic">Bisa dikosongkan</p>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Balai <br><i>(Admin Balai)</i></label>
+
+                    <div class="col-sm-5">
+                      <?php
+                        echo cmb_dinamis('id_balai', 'm_bphp', 'KETERANGAN', 'KODE_BSPHH');
+                      ?>
+                    </div>
+                    <p style="font-style:italic">Bisa dikosongkan</p>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Dinas <br><i>(Admin Dinas)</i></label>
+
+                    <div class="col-sm-5">
+                      <?php
+                        echo cmb_dinamis('id_provinsi', 'm_provinsi', 'KETERANGAN', 'KODE_PROP');
+                      ?>
+                    </div>
+                    <p style="font-style:italic">Bisa dikosongkan</p>
+                  </div>
                     
-                    <div class="form-group">
-                      <label class="col-sm-2 control-label">Instansi / PBPH / Perhutani</label>
-                      
-                      <div class="col-sm-5">
-                        <?php
-                          echo cmb_dinamis('id_pbph', 'm_pbph', 'NAMA_PERUSAHAAN', 'NPWSHUT_NO');
-                          ?>
-                      </div>
-                      <p style="font-style:italic">Bisa dikosongkan</p>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Instansi / PBPH / Perhutani <br><i>(Operator)</i></label>
+                    
+                    <div class="col-sm-5">
+                      <?php
+                        echo cmb_dinamis('id_pbph', 'm_pbph', 'NAMA_PERUSAHAAN', 'NPWSHUT_NO');
+                        ?>
+                    </div>
+                    <p style="font-style:italic">Bisa dikosongkan</p>
                   </div>
 
 
