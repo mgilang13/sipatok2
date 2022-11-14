@@ -21,22 +21,20 @@ class Sk extends MY_OperatorController {
 	public function __construct()
     {
         parent::__construct();
-        $this->load->model("model_harga_patokan");
+        $this->load->model("model_admin_harga_patokan");
     }
-	
 	public function index()
 	{
-		$data['home_url'] = 'Tampilan_operator';
+		$data['home_url'] = 'Tampilan_utama';
 		
-        $data["peraturan"] = $this->model_harga_patokan->peraturan();
-        $this->template->load('template', "harga_patokan/sk", $data);
+        $data["peraturan"] = $this->model_admin_harga_patokan->peraturan();
+        $this->template->load('template', "admin_harga_patokan/sk", $data);
 	}
 	function detail()
 	{		
+			$data["detail"] = $this->model_admin_harga_patokan->detail();
+			$data["rincian"] = $this->model_admin_harga_patokan->_detail();
 
-			$data["detail"] = $this->model_harga_patokan->detail();
-			$data["rincian"] = $this->model_harga_patokan->_detail();
-
-			$this->template->load('template', 'harga_patokan/detail', $data);
+			$this->template->load('template', 'admin_harga_patokan/detail', $data);
 	}
 }

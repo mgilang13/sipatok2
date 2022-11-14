@@ -121,4 +121,10 @@ class Model_admin_harga_patokan extends CI_Model
     
         return $query->row()->NAMA_PERUSAHAAN;
     }
+    public function peraturan()
+    {
+        $sql = "select * from peraturan";
+		$query = $this->db->query($sql);
+		return $query->result();
+    }
 }
