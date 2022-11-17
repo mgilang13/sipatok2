@@ -94,6 +94,14 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-6">
+                            <div class="col-sm-3 control-label">
+                                <label class="control-label">Tempat</label><br>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="text" name="tempat_invoice" class="form-control" placeholder= "Masukkan Tempat Invoice Dibuat">
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-6 control-label">
                             <div class="col-sm-3">
                                 <label class="control-label">File Dokumen*</label><br>
                                 <small>(Max 1 Mb)</small>

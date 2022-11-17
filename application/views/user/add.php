@@ -77,7 +77,7 @@
 
                     <div class="col-sm-5">
                       <?php
-                        echo cmb_dinamis('id_provinsi', 'm_provinsi', 'KETERANGAN', 'KODE_PROP');
+                        echo cmb_dinamis('id_dinas', 'm_provinsi', 'KETERANGAN', 'KODE_PROP');
                       ?>
                     </div>
                     <p style="font-style:italic">Bisa dikosongkan</p>

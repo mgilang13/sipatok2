@@ -30,7 +30,7 @@
 		{
 			$decrypted_password = md5($password);
 			
-			$sql = "SELECT * FROM users AS u JOIN user_role AS ur ON u.id = ur.id_user WHERE username = '$username' AND password = '$decrypted_password' AND ur.id_role = '5'";
+			$sql = "SELECT * FROM users AS u JOIN user_role AS ur ON u.id = ur.id_user JOIN m_roles AS mr ON ur.id_role = mr.id WHERE username = '$username' AND password = '$decrypted_password' AND ur.id_role != '1'";
 			$query = $this->db->query($sql);
 			$user = $query->row_array();
 			
@@ -51,9 +51,11 @@
 			
 			$data_user_role = array(
 				'id_user'			=> $id,
-				'id_role'			=> $this->input->post('level_user'),
-				'id_provinsi'		=>  $this->input->post('id_provinsi'),
-				'id_pbph'			=>	$this->input->post('id_pbph')
+				'id_role'			=> $this->input->post('level_user', TRUE),
+				'id_pulau'			=>  $this->input->post('id_pulau', TRUE),
+				'id_dinas'			=>  $this->input->post('id_dinas', TRUE),
+				'id_balai'			=> $this->input->post('id_balai', TRUE),
+				'id_pbph'			=>	$this->input->post('id_pbph', TRUE)
 			);
 
 			$this->db->insert($this->table, $data);
@@ -79,11 +81,15 @@
 					//tabel di database => name di form
 					'nama'            => $this->input->post('nama_lengkap', TRUE),
 					'username'        => $this->input->post('username', TRUE),
-					'password'        => md5( $this->input->post('password', TRUE) )
+					'password'        => md5( $this->input->post('password', TRUE) ),
 				);
 
 				$data_user_role = array(
-					'id_role'		=>	$this->input->post('level_user')
+					'id_role'		=>	$this->input->post('level_user'),
+					'id_dinas'			=> $this->input->post('id_provinsi'),
+					'id_pulau'		=>  $this->input->post('id_pulau'),
+					'id_balai'		=>  $this->input->post('id_balai'),
+					'id_pbph'			=>	$this->input->post('id_pbph')
 				);
 			}		
 			$id_user 	= $this->input->post('id_user', TRUE);

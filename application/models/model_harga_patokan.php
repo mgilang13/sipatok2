@@ -45,23 +45,74 @@ class Model_harga_patokan extends CI_Model
 
     private $_table = "invoices";
 
-    public function getAll()
+    public function getAll($data_user)
     {
-        $data_user = $this->session->userdata();
-        $id_user = $data_user['id'];
-        $sql = "select 
-                    a.id, 
-                    a.nomor_invoice, 
-                    a.tgl_invoice, 
-                    b.NAMA_PERUSAHAAN,
-                    a.is_verified 
-                from 
-                    invoices a, 
-                    m_pbph b 
-                where a.id_pbph_pembeli = b.NPWSHUT_NO and a.id_user = '".$id_user."'";
-		$query = $this->db->query($sql);
-		return $query->result();
+        $nama_role = $data_user['nama_role'];
+        $id_user = $data_user['id_user'];
+
+        if($nama_role == "PBPH / Industri / Perhutani") {
+            //operator perusahaan
+            $invoices_userRole_users = "select i.id, 
+                                            i.nomor_invoice,
+                                            i.id_pbph_penjual,
+                                            i.id_pbph_pembeli, 
+                                            i.tgl_invoice, 
+                                            mp.NAMA_PERUSAHAAN ,
+                                            i.is_verified
+                                        from users u
+                                        join user_role ur 
+                                            on ur.id_user = u.id
+                                        join invoices i 
+                                            on i.id_user = u.id
+                                        join m_pbph mp
+                                            on mp.NPWSHUT_NO = i.id_pbph_pembeli";
+
+            $sql_operator_perusahaan = " where ur.id_user = '$id_user'";
+            $data = $this->db->query($invoices_userRole_users.$sql_operator_perusahaan);
+
+        } else if($nama_role == "Dinas Kehutanan") {
+            $id_dinas = $data_user['id_dinas'];
+
+            $invoices_mPBPH = "	select i.id, 
+                                    i.nomor_invoice,
+                                    i.id_pbph_penjual,
+                                    i.id_pbph_pembeli, 
+                                    i.tgl_invoice, 
+                                    mp.NAMA_PERUSAHAAN ,
+                                    i.is_verified
+                                from invoices i
+                                join m_pbph mp 
+                                    on i.id_pbph_penjual = mp.NPWSHUT_NO";
+            
+            $sql_operator_dinas = " where mp.KODE_PROP = '$id_dinas'";
+            $data = $this->db->query($invoices_mPBPH.$sql_operator_dinas);
+
+        } else if($nama_role == "BPHP") {
+            
+            $id_balai = $data_user['id_balai'];
+
+            $invoices_mBPHP = "	select i.id, 
+                                    i.nomor_invoice,
+                                    i.id_pbph_penjual,
+                                    i.id_pbph_pembeli, 
+                                    i.tgl_invoice, 
+                                    mp.NAMA_PERUSAHAAN ,
+                                    i.is_verified 
+                                from invoices i
+                                join m_pbph mp 
+                                    On i.id_pbph_penjual = mp.NPWSHUT_NO
+                                join m_provinsi mp2
+                                    on mp.KODE_PROP  = mp2.KODE_PROP
+                                join m_bphp mb 
+                                    on mb.KODE_BSPHH = mp2.BSPHH";
+            
+            $sql_operator_balai = " where mb.KODE_BSPHH = '$id_balai'";
+            $data = $this->db->query($invoices_mBPHP.$sql_operator_balai);
+        }
+        
+        return $data->result();
     }
+
     public function detail()
     {
         $id_menu 	  = $this->uri->segment(4);

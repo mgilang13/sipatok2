@@ -37,7 +37,10 @@ class MY_OperatorController extends CI_Controller {
     }
 
     private function _check_auth(){
-        if($this->session->userdata('id') == NULL or $this->session->userdata('id_role') != '5'){
+        $id_role = $this->session->userdata('id_role');
+        $data_roles = ['2', '3', '4', '5'];
+
+        if($this->session->userdata('id') == NULL or !in_array($id_role, $data_roles)){
             $this->session->sess_destroy();
             redirect('auth');
         }

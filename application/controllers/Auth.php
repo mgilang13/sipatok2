@@ -25,10 +25,9 @@
 				$loginOperator	= $this->model_user->loginOperator($username, $password);
 				$loginAdmin		= $this->model_user->loginAdmin($username, $password);
 
-
 				if (!empty($loginOperator)) {					
 					$this->session->set_userdata($loginOperator);
-
+					
 					redirect('tampilan_operator');
 
 				} else if (!empty($loginAdmin)) {
