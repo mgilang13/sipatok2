@@ -14,7 +14,6 @@
             
 
                 <div class="box-body">
-
                     <div class="row">
                         <div class="form-group col-xs-6">
                             <label class="col-sm-3 control-label">No. Invoice</label>
@@ -28,8 +27,7 @@
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" disabled value="<?php echo $detail['tempat_invoice'];?>">
                             </div>
-                        </div>
-                        
+                        </div> 
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-6">
@@ -40,7 +38,6 @@
                         </div>
                         <div class="form-group col-xs-6">
                             <label for="" class="col-sm-3 control-label">Tgl. Invoice</label>
-
                             <div class="col-sm-9">
                                 <input type="date" class="form-control" disabled value="<?php echo $detail['tgl_invoice'];?>">
                             </div>

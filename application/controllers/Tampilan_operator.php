@@ -9,7 +9,6 @@
 
 			$data_user = $this->session->userdata();
 			$nama_role = $data_user['nama_role'];
-
 			
 			//operator perusahaan
 			$invoices_userRole_users = "select count(*) as hasil
@@ -18,13 +17,11 @@
 											on ur.id_user = u.id
 										join invoices i 
 											on i.id_user = u.id";
-
-			//dinas
+	//dinas
 			$invoices_mPBPH = "	select count(*) as hasil
 								from invoices i
 								join m_pbph mp 
 								on i.id_pbph_penjual = mp.NPWSHUT_NO";
-
 			// balai
 			$invoices_mBPHP = "	select count(*) as hasil 
 								from invoices i
@@ -34,6 +31,17 @@
 								on mp.KODE_PROP  = mp2.KODE_PROP
 								join m_bphp mb 
 								on mb.KODE_BSPHH = mp2.BSPHH";
+
+			$invoices_mPulau = " select count(*) as hasil
+								from invoices i 
+								join m_pbph mp 
+								on i.id_pbph_penjual = mp.NPWSHUT_NO 
+								join m_provinsi mp2 
+								on mp.KODE_PROP = mp2.KODE_PROP 
+								join m_bphp mb 
+								on mb.KODE_BSPHH = mp2.BSPHH 
+								join m_pulau mp3 
+								on mp3.KODE_PULAU = mb.PULAU ";
 
 			if($nama_role == "PBPH / Industri / Perhutani") {
 				$id_user = $data_user['id_user'];
@@ -54,6 +62,12 @@
 				$data['belum'] = $this->qbelum(NULL,NULL,$id_balai, $invoices_mBPHP);
 				$data['verif'] = $this->qverif(NULL,NULL,$id_balai, $invoices_mBPHP);
 				$data['kembali'] = $this->qkembali(NULL,NULL,$id_balai, $invoices_mBPHP);
+			} else if ($nama_role == "Verifikator") {
+				$id_pulau = $data_user['id_pulau'];
+
+				$data['belum'] = $this->qbelum(NULL,NULL,$id_pulau, $invoices_mPulau);
+				$data['verif'] = $this->qverif(NULL,NULL,$id_pulau, $invoices_mPulau);
+				$data['kembali'] = $this->qkembali(NULL,NULL,$id_pulau, $invoices_mPulau);
 			}
 
 			$this->template->load('template', 'dashboard-operator',$data);
@@ -71,6 +85,9 @@
 			} else if ($id_balai != NULL) {
 				$sql_operator_balai = " where mb.KODE_BSPHH = '$id_balai' $belum";
 				$data = $this->db->query($sql_awal.$sql_operator_balai)->row_array();
+			} else if ($id_pulau != NULL) {
+				$sql_operator_pulau = " where mp3.KODE_PULAU = '$id_pulau' $belum";
+				$data = $this->db->query($sql_awal.$sql_operator_pulau)->row_array();
 			}
 			
 			return $data;
@@ -88,6 +105,9 @@
 			} else if ($id_balai != NULL) {
 				$sql_operator_balai = " where mb.KODE_BSPHH = '$id_balai' $verif";
 				$data = $this->db->query($sql_awal.$sql_operator_balai)->row_array();
+			} else if ($id_pulau != NULL) {
+				$sql_operator_pulau = " where mp3.KODE_PULAU = '$id_pulau' $verif";
+				$data = $this->db->query($sql_awal.$sql_operator_pulau)->row_array();
 			}
 
 			return $data;
@@ -105,6 +125,9 @@
 			} else if ($id_balai != NULL) {
 				$sql_operator_balai = " where mb.KODE_BSPHH = '$id_balai' $kembali";
 				$data = $this->db->query($sql_awal.$sql_operator_balai)->row_array();
+			} else if ($id_pulau != NULL) {
+				$sql_operator_pulau = " where mp3.KODE_PULAU = '$id_pulau' $kembali";
+				$data = $this->db->query($sql_awal.$sql_operator_pulau)->row_array();
 			}
 
 			return $data;
