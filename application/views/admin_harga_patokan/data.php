@@ -13,10 +13,10 @@
                 <thead>
                     <tr>
                         <th>NO</th>
-                        <th>NOMOR INVOICE</th>
-                        <th>TANGGAL INVOICE</th>
-                        <th>NAMA PERUSAHAAN PENJUAL</th>
-                        <th>NAMA PERUSAHAAN PEMBELI</th>
+                        <th>NO. INVOICE</th>
+                        <th>TGL. INVOICE</th>
+                        <th>PIHAK PENJUAL</th>
+                        <th>PIHAK PEMBELI</th>
                         <th>STATUS</th>
                         <th>AKSI</th>
                     </tr>
@@ -24,8 +24,6 @@
                 <tbody>
                     <?php
                     $no_urut = 1;
-                    //$penjual['penjual'] = $_penjual;
-                    //echo $_penjual;
                     
                     
                     foreach ($hargapatokan as $hp): 

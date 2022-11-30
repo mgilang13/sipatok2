@@ -2,7 +2,7 @@
 class Model_harga_patokan extends CI_Model
 {
     public function save($data_user) {
-        $id_user = $data_user['id'];
+        $id_user = $data_user['id_user'];
         $id_pbph_penjual = $data_user['id_pbph'];
         $id_invoice = $id_user.$id_pbph_penjual.time();
         $tanggal = date("Y-m-d");
@@ -11,6 +11,7 @@ class Model_harga_patokan extends CI_Model
         $data = array(
             'id'                => $id_invoice,
             'id_user'	        => $id_user,
+            'id_jenis_dok'      => $this->input->post('id_jenis_dok'),
             'id_pbph_penjual'	=> $id_pbph_penjual,
             'id_pbph_pembeli'	=> $this->input->post('id_pbph_pembeli', TRUE),
             'tgl_input'         => $tanggal,
@@ -36,6 +37,7 @@ class Model_harga_patokan extends CI_Model
                 'harga'         => $this->input->post('harga', TRUE)[$i],
                 'volume'        => $this->input->post('volume', TRUE)[$i],
                 'id_diameter'   => $this->input->post('id_diameter', TRUE)[$i],
+                'id_satuan'   => $this->input->post('id_satuan', TRUE)[$i],
             );        
         }
 

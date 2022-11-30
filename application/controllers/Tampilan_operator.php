@@ -8,6 +8,7 @@
 			$data['home_url']="Tampilan_operator";
 
 			$data_user = $this->session->userdata();
+			
 			$nama_role = $data_user['nama_role'];
 			
 			//operator perusahaan

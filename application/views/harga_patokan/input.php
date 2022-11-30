@@ -25,14 +25,9 @@
                         <div class="form-group col-xs-6">
                             <label class="col-sm-3 control-label">Sumber Dokumen</label>
                             <div class="col-sm-9">
-                                <select name="jenis_dokumen" id="" class="form-control">
-                                    <option value="">Pilih Jenis Dokumen</option>
-                                    <option value="invoice">Invoice</option>
-                                    <option value="kwitansi">Kwitansi</option>
-                                    <option value="kontrak">Kontrak</option>
-                                    <option value="dok_jual_beli">Dokumen Jual-Beli</option>
-                                    <option value="dok_sah_lain">Dokumen Sah Lainnya</option>
-                                </select>
+                                <?php
+                                    echo cmb_dinamis('id_jenis_dok', 'm_jenis_dok', 'nama', 'id');
+                                ?>
                             </div>
                         </div>
                         <div class="form-group col-xs-6">
@@ -54,15 +49,9 @@
                         <div class="form-group col-xs-6">
                             <label class="col-sm-3 control-label"> Pihak Pembeli*</label>
                             <div class="col-sm-9">
-                                <select name="id_pbph_pembeli" class="form-control pbph-pembeli">    
-                                    <option value="0">Masukkan Pihak Pembeli Terdaftar</option>
-                                    <?php
-                                        $data_pbph = $this->db->get('m_pbph')->result();
-                                        foreach($data_pbph as $row) {
-                                            echo "<option value=".$row->NPWSHUT_NO." ".set_select('id_pbph_pembeli', $row->NPWSHUT_NO).">".$row->NAMA_PERUSAHAAN."</option>";
-                                        }
-                                    ?>
-                                </select>
+                                <?php
+                                    echo cmb_dinamis('id_pbph_pembeli', 'm_pbph', 'NAMA_PERUSAHAAN', 'NPWSHUT_NO', '', '', 'pbph-pembeli', 'PIlih Pihak Pembeli');
+                                ?>
                                 <span class="text-danger text-bold"><?= form_error('id_pbph_pembeli') ?></span>
                             </div>
                         </div>
@@ -130,7 +119,8 @@
                                     <th>Nama Jenis/Spesies</th>
                                     <th>Kelompok Jenis</th>
                                     <th>Harga Kayu</th>
-                                    <th>Volume (m<sup>3</sup>)</th>
+                                    <th>Volume</th>
+                                    <th>Satuan</th>
                                     <th>Diameter</th>
                                     <th>Action</th>
                                 </tr>
@@ -160,13 +150,22 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input type="number" name="harga[]" class="form-control">
+                                            <div class="input-group-addon">Rp.</div>
+                                            <input type="number" name="harga[]" class="form-control" placeholder="Masukkan Harga Kayu">
+                                            <div class="input-group-addon">.00</div>
+
                                         </div>
                                     </td>
                                     <td>
                                         <div class="input-group">
                                             <input type="number" name="volume[]" class="form-control" placeholder="Masukkan Volume Kayu">
-                                            <div class="input-group-addon">m <sup>3</sup></div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="input-group">
+                                            <?php
+                                                echo cmb_dinamis('id_satuan', 'm_satuan', 'nama', 'id', '', '', 'text-uppercase', 'Pilih Satuan');
+                                            ?>
                                         </div>
                                     </td>
                                     <td>
@@ -232,7 +231,7 @@
                                             }
                                             echo '</optgroup>';
                                         } 
-                                    ?>"+
+                                    ?>" +
                                 '</select>'+
                             '</td>'+
                             '<td>'+
@@ -248,9 +247,19 @@
                             '<td>'+
                                 '<div class="input-group">'+
                                     '<input type="number" name="volume[]" class="form-control" placeholder="Masukkan Volume Kayu">'+
-                                    '<div class="input-group-addon">m <sup>3</sup></div>'+
                                 '</div>'+
                             '</td>'+
+                            '<td>' +
+                                '<select name="id_satuan" class="form-control">'+    
+                                    '<option>Pilih Satuan</option>'+
+                                    '<?php
+                                        $data_satuan = $this->db->get('m_satuan');
+                                        foreach($data_satuan->result() as $row) {
+                                            echo "<option value=".$row->id.">".$row->nama."</option>";
+                                        }
+                                    ?>' +
+                                '</select>' +
+                            '</td>' +
                             '<td>'+
                                 '<select name="id_diameter[]" class="form-control">'+    
                                     '<option>Pilih Diameter Kayu</option>'+
