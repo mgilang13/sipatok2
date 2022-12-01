@@ -7,7 +7,6 @@ class Model_harga_patokan extends CI_Model
         $id_invoice = $id_user.$id_pbph_penjual.time();
         $tanggal = date("Y-m-d");
 
-
         $data = array(
             'id'                => $id_invoice,
             'id_user'	        => $id_user,
@@ -38,7 +37,7 @@ class Model_harga_patokan extends CI_Model
                 'volume'        => $this->input->post('volume', TRUE)[$i],
                 'id_diameter'   => $this->input->post('id_diameter', TRUE)[$i],
                 'id_satuan'   => $this->input->post('id_satuan', TRUE)[$i],
-            );        
+            ); 
         }
 
         $this->db->insert('invoices', $data);

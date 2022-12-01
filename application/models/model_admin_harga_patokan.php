@@ -56,7 +56,7 @@ class Model_admin_harga_patokan extends CI_Model
                     m_pbph b 
                 where a.id_pbph_pembeli = b.NPWSHUT_NO";
 
-		$query = $this->db->query($sql);
+        $query = $this->db->query($sql);
 
         $dataSemuaHP = $query->result();
 
@@ -67,6 +67,7 @@ class Model_admin_harga_patokan extends CI_Model
         
 		return $dataSemuaHP;
     }
+
     public function getPenjual(){
         $sql = "select b.NAMA_PERUSAHAAN as penjual from invoices a, m_pbph b where a.id_pbph_penjual = b.NPWSHUT_NO";
         $query = $this->db->query($sql);

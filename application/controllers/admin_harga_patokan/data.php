@@ -29,7 +29,9 @@ class Data extends MY_AdminController {
 	{		
 
 		$data['home_url'] = "Tampilan_utama";
-        $data["hargapatokan"] = $this->model_admin_harga_patokan->getAll();
+
+		$data['hargapatokan'] = $this->model_admin_harga_patokan->getAll();
+		
 		$data["penjual"] = $this->model_admin_harga_patokan->getPenjual();
 		//$data["pembeli"] = $this->model_admin_harga_patokan->getPembeli();
         $this->template->load('template', "admin_harga_patokan/data", $data);
@@ -41,6 +43,7 @@ class Data extends MY_AdminController {
 			$data['home_url'] = "Tampilan_utama";
 			
 			$data["detail"] = $this->model_admin_harga_patokan->detail();
+
 			
 			$data["rincian"] = $this->model_admin_harga_patokan->_detail();
 
