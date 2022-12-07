@@ -154,12 +154,14 @@
         $sql_menu = "SELECT * FROM `tabel_menu` WHERE id IN(SELECT id_menu FROM menu_role WHERE id_role = $id_level_user) AND is_main_menu = 0";
         
         $main_menu  = $this->db->query($sql_menu)->result();
-
+        
         foreach ($main_menu as $main) {
-            // check apakah memiliki submenu?
-            $submenu  = $this->db->get_where('tabel_menu', array('is_main_menu' => $main->id));
+          // check apakah memiliki submenu?
+          // $submenu  = $this->db->get_where('tabel_menu', array('is_main_menu' => $main->id));
+          $sql_sub_menu = "SELECT * FROM `tabel_menu` WHERE id IN(SELECT id_menu FROM menu_role WHERE id_role = $id_level_user) AND is_main_menu = $main->id";
+          $submenu = $this->db->query($sql_sub_menu)->result() ;
 
-            if ($submenu->num_rows()>0) {
+            if (count($submenu) > 0 ) {
               //submenu true
               echo "<li class='treeview'>".anchor($main->link,"<i class='".$main->icon."'></i>".
                    "<span>".$main->nama_menu."</span>".
@@ -170,7 +172,7 @@
               //submenunya disini
               echo "<ul class='treeview-menu'>";
 
-              foreach ($submenu->result() as $sub) {
+              foreach ($submenu as $sub) {
                 echo "<li>" .anchor($sub->link,"<i class='".$sub->icon."'></i>"."<span>".$sub->nama_menu."</span>"). "</li>";
               }
 

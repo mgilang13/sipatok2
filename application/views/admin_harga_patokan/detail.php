@@ -64,15 +64,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="row">
-                        
-                        <div class="form-group col-xs-6">
-                            <label class="col-sm-3 control-label">File Invoice</label>
-                            <div class="col-sm-9">
-                                <input type="file" name="file_upload" class="form-control" placeholder = "Masukkan Tempat Invoice Dibuat" accept="application/pdf">
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="panel panel-default">
                         
                         <!-- Table -->

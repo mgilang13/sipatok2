@@ -16,7 +16,6 @@
                 <div class="icon">
                   <i class="fa fa-id-badge"></i>
                 </div>
-                <a href="<?php echo site_url('admin_harga_patokan/data') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -32,7 +31,6 @@
                 <div class="icon">
                   <i class="fa fa-users"></i>
                 </div>
-                <a href="<?php echo site_url('admin_harga_patokan/data') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -48,7 +46,6 @@
                 <div class="icon">
                   <i class="fa fa-user-circle"></i>
                 </div>
-                <a href="<?php echo site_url('admin_harga_patokan/data') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
