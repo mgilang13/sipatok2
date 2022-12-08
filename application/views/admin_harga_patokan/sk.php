@@ -5,6 +5,7 @@
           <div class="box box-primary">
             <div class="box-header  with-border">
               <h3 class="box-title">Data Harga Patokan</h3>
+              <a class="btn btn-success" style="float:right;" href="<?php echo site_url('admin_harga_patokan/sk/input'); ?>"><i class="fa fa-edit"></i> Tambah SK</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">

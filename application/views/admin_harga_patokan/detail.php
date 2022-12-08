@@ -73,63 +73,32 @@
                             </div>
                         </div>
                     </div> -->
-                    <div class="panel panel-default">
+                    <br>
+                    <div>
+                        <div class="col-sm-6">
+                        <?php  foreach($rincian as $row){ ?>
+                        <div class="info-box bg-green">
+                        <span class="info-box-icon">
+                            <i class="ion ion-leaf"></i>
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text"><?php echo $row['jenis_kayu'];?></span>
+                            <span class="info-box-number"><?php echo $row['volume'].' M3';?><?php echo ' (@Rp'.number_format($row['harga']).')';?></span>
+                            <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                            <span class="progress-description"><?php echo $row['kelompok_kayu'];?>
+                            <span class="progress-description" style="float:right;"><?php echo $row['diameter'];?></span>
+                            </span>
+                        </div>
+                        </div>
+                        <?php } ?>
                         
-                        <!-- Table -->
-                        <table class="table table-striped" id="rincian">
-                            <thead>
-                                <tr>
-                                    <th>Nama Jenis/Spesies</th>
-                                    <th>Kelompok Jenis</th>
-                                    <th>Harga Kayu</th>
-                                    <th>Volume (m<sup>3</sup>)</th>
-                                    <th>Diameter</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php  foreach($rincian as $row){ ?>
-                                <tr>
-                                    <td>
-                                        <div class="col-sm-12">
-                                            <input type="text" disabled value="<?php echo $row['jenis_kayu'];?>" class="form-control">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="col-sm-12">
-                                            <input type="text" disabled value="<?php echo $row['kelompok_kayu'];?>" class="form-control">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="col-sm-12">
-                                            <input type="text" disabled value="<?php echo $row['harga'];?>" class="form-control">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="col-sm-12">
-                                            <input type="text" disabled value="<?php echo $row['volume'];?>" class="form-control">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="col-sm-12">
-                                            <input type="text" disabled value="<?php echo $row['diameter'];?>" class="form-control">
-                                        </div>
-                                    </td>
-                                   
-                                </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <embed src="<?php echo base_url()."uploads/invoices/".$detail['file_upload'].".pdf";?>" width="100%" height="794px" />
-                    
+                        <div class="row">
 
-                    <div class="box-body">
-
-                    <div class="row">
                         <div class="form-group col-xs-6">
-                            <label class="col-sm-3 control-label">Verifikasi Data</label>
-                            <div class="col-sm-9">
+                            <label class="col-sm-4 control-label">Verifikasi Data</label>
+                            <div class="col-sm-2" style="width:50%">
                                 <select name="verifikasi" id="" class="form-control">
                                     <option value="">--Pilih--</option>
                                     <option value="1">Verifikasi</option>
@@ -137,8 +106,9 @@
                                 </select>
                             </div>
                         </div>
-                    
-                        <div class="form-group col-xs-6">
+                            </div>
+                        <div class="row">
+                        <div class="form-group col-xs-12">
                             <textarea name="alasan" class="form-control" cols="100" row="10" placeholder="Masukkan alasan dikembalikan..."></textarea>
                         </div>
                     </div>
@@ -157,6 +127,15 @@
                         </div>
                         </div>
                     </div>
+
+                        </div>
+                        <div class="col-sm-6">
+                            <embed src="<?php echo base_url()."uploads/invoices/".$detail['file_upload'].".pdf";?>" width="100%" height="794px" />
+                        </div>
+                        
+                    </div>
+                    
+                    
                   
 
                 </div>
