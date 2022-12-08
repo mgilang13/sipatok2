@@ -10,8 +10,7 @@
 			$data_user = $this->session->userdata();
 			
 			$nama_role = $data_user['nama_role'];
-			
-			//operator perusahaan
+		
 			$invoices_userRole_users = "select count(*) as hasil
 										from users u
 										join user_role ur 
@@ -33,7 +32,7 @@
 								join m_bphp mb 
 								on mb.KODE_BSPHH = mp2.BSPHH";
 
-			$invoices_mPulau = " select count(*) as hasil
+			$invoices_mPulau = "select count(*) as hasil
 								from invoices i 
 								join m_pbph mp 
 								on i.id_pbph_penjual = mp.NPWSHUT_NO 
@@ -47,34 +46,34 @@
 			if($nama_role == "PBPH / Industri / Perhutani") {
 				$id_user = $data_user['id_user'];
 			
-				$data['belum'] = $this->qbelum($id_user, NULL, NULL, $invoices_userRole_users);
-				$data['verif'] = $this->qverif($id_user, NULL, NULL, $invoices_userRole_users);
-				$data['kembali'] = $this->qkembali($id_user, NULL, NULL, $invoices_userRole_users);
+				$data['belum'] = $this->qbelum($id_user, NULL, NULL, NULL, $invoices_userRole_users);
+				$data['verif'] = $this->qverif($id_user, NULL, NULL, NULL, $invoices_userRole_users);
+				$data['kembali'] = $this->qkembali($id_user, NULL, NULL, NULL, $invoices_userRole_users);
 
 			} else if ($nama_role == "Dinas Kehutanan") {
 				$id_dinas = $data_user['id_dinas'];
 				
-				$data['belum'] = $this->qbelum(NULL, $id_dinas, NULL, $invoices_mPBPH);
-				$data['verif'] = $this->qverif(NULL, $id_dinas, NULL, $invoices_mPBPH);
-				$data['kembali'] = $this->qkembali(NULL, $id_dinas, NULL, $invoices_mPBPH);
+				$data['belum'] = $this->qbelum(NULL, $id_dinas, NULL, NULL, $invoices_mPBPH);
+				$data['verif'] = $this->qverif(NULL, $id_dinas, NULL, NULL, $invoices_mPBPH);
+				$data['kembali'] = $this->qkembali(NULL, $id_dinas, NULL, NULL, $invoices_mPBPH);
 			} else if ($nama_role == "BPHP") {
 				$id_balai = $data_user['id_balai'];
 
-				$data['belum'] = $this->qbelum(NULL,NULL,$id_balai, $invoices_mBPHP);
-				$data['verif'] = $this->qverif(NULL,NULL,$id_balai, $invoices_mBPHP);
-				$data['kembali'] = $this->qkembali(NULL,NULL,$id_balai, $invoices_mBPHP);
+				$data['belum'] = $this->qbelum(NULL,NULL,$id_balai, NULL, $invoices_mBPHP);
+				$data['verif'] = $this->qverif(NULL,NULL,$id_balai, NULL, $invoices_mBPHP);
+				$data['kembali'] = $this->qkembali(NULL,NULL,$id_balai, NULL, $invoices_mBPHP);
 			} else if ($nama_role == "Verifikator") {
 				$id_pulau = $data_user['id_pulau'];
 
-				$data['belum'] = $this->qbelum(NULL,NULL,$id_pulau, $invoices_mPulau);
-				$data['verif'] = $this->qverif(NULL,NULL,$id_pulau, $invoices_mPulau);
-				$data['kembali'] = $this->qkembali(NULL,NULL,$id_pulau, $invoices_mPulau);
+				$data['belum'] = $this->qbelum(NULL,NULL,NULL, $id_pulau, $invoices_mPulau);
+				$data['verif'] = $this->qverif(NULL,NULL,NULL, $id_pulau, $invoices_mPulau);
+				$data['kembali'] = $this->qkembali(NULL,NULL, NULL, $id_pulau, $invoices_mPulau);
 			}
 
 			$this->template->load('template', 'dashboard-operator',$data);
 		}
 
-		public function qbelum($id_user, $id_dinas, $id_balai, $sql_awal) {
+		public function qbelum($id_user, $id_dinas, $id_balai, $id_pulau, $sql_awal) {
 			$belum = " and is_verified = '0'";
 
 			if($id_user != NULL) {
@@ -94,7 +93,7 @@
 			return $data;
 		}
 
-		public function qverif($id_user, $id_dinas, $id_balai, $sql_awal) {
+		public function qverif($id_user, $id_dinas, $id_balai, $id_pulau, $sql_awal) {
 			$verif = " and is_verified = '1'";
 
 			if($id_user != NULL) {
@@ -114,7 +113,7 @@
 			return $data;
 		}
 
-		public function qkembali($id_user, $id_dinas, $id_balai, $sql_awal) {
+		public function qkembali($id_user, $id_dinas, $id_balai, $id_pulau, $sql_awal) {
 			$kembali = " and is_verified = '2'";
 
 			if($id_user != NULL) {

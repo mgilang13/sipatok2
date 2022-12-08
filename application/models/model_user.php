@@ -80,16 +80,21 @@
 				$data = array(
 					//tabel di database => name di form
 					'nama'            => $this->input->post('nama_lengkap', TRUE),
-					'username'        => $this->input->post('username', TRUE),
-					'password'        => md5( $this->input->post('password', TRUE) ),
+					'username'        => $this->input->post('username', TRUE)
 				);
+
+				if ($this->input->post('password') != NULL) {
+					$data = array(
+						'password'	=> md5( $this->input->post('password', TRUE) )
+					);
+				}
 
 				$data_user_role = array(
 					'id_role'		=>	$this->input->post('level_user'),
-					'id_dinas'			=> $this->input->post('id_provinsi'),
+					'id_dinas'		=> $this->input->post('id_provinsi'),
 					'id_pulau'		=>  $this->input->post('id_pulau'),
 					'id_balai'		=>  $this->input->post('id_balai'),
-					'id_pbph'			=>	$this->input->post('id_pbph')
+					'id_pbph'		=>	$this->input->post('id_pbph')
 				);
 			}		
 			$id_user 	= $this->input->post('id_user', TRUE);

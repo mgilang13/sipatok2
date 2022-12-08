@@ -109,8 +109,32 @@ class Model_harga_patokan extends CI_Model
             
             $sql_operator_balai = " where mb.KODE_BSPHH = '$id_balai'";
             $data = $this->db->query($invoices_mBPHP.$sql_operator_balai);
-        }
+
+        } else if($nama_role == "Verifikator") { //Verifikator Pulau
+            
+            $id_pulau = $data_user['id_pulau'];
+
+            $invoices_mPulau = "    select i.id,
+                                        i.nomor_invoice,
+                                        i.id_pbph_penjual,
+                                        i.id_pbph_pembeli, 
+                                        i.tgl_invoice, 
+                                        mp.NAMA_PERUSAHAAN ,
+                                        i.is_verified 
+                                    from invoices i 
+                                    join m_pbph mp 
+                                        on i.id_pbph_penjual = mp.NPWSHUT_NO 
+                                    join m_provinsi mp2 
+                                        on mp.KODE_PROP = mp2.KODE_PROP 
+                                    join m_bphp mb 
+                                        on mb.KODE_BSPHH = mp2.BSPHH 
+                                    join m_pulau mp3 
+                                        on mp3.KODE_PULAU = mb.PULAU ";
         
+            $sql_operator_pulau = " where mp3.KODE_PULAU = '$id_pulau'";
+            $data = $this->db->query($invoices_mPulau.$sql_operator_pulau);
+        }
+
         return $data->result();
     }
 
