@@ -7,7 +7,6 @@
 		{
 			parent::__construct();
 			$this->load->model('model_user');
-			$this->load->model('model_guru');
 		}
 		
 		function index()

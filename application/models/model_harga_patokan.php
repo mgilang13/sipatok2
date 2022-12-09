@@ -140,22 +140,41 @@ class Model_harga_patokan extends CI_Model
 
     public function detail()
     {
-        $id_menu 	  = $this->uri->segment(4);
+        $id_invoice = $this->uri->segment(4);
         $data_user = $this->session->userdata();
-        $id_user = $data_user['id'];
-        $sql = "select a.id, a.nomor_invoice, a.tgl_invoice, a.tempat_invoice, c.NAMA_PERUSAHAAN, c.KOTA, f.KETERANGAN as provinsi, a.total_volume, a.total_harga, a.is_verified, a.file_upload from invoices a, m_pbph c, m_provinsi f where a.id_pbph_pembeli = c.NPWSHUT_NO and f.KODE_PROP=c.KODE_PROP and a.id_user = '".$id_user."' and a.id = '".$id_menu."'";
+        //$id_user = $data_user['id'];
+        $sql = "select a.id, 
+                a.nomor_invoice, 
+                a.tgl_invoice, 
+                a.tempat_invoice, 
+                a.total_volume, 
+                a.total_harga, 
+                a.file_upload, 
+                (SELECT b.NAMA_PERUSAHAAN 
+                        FROM invoices a, 
+                            m_pbph b 
+                        WHERE a.id_pbph_penjual = b.NPWSHUT_NO and a.id = '".$id_invoice."') as penjual, 
+                                c.NAMA_PERUSAHAAN as pembeli, 
+                                c.KOTA, f.KETERANGAN as provinsi 
+                        FROM invoices a, 
+                                m_pbph c, 
+                                m_provinsi f 
+                        WHERE a.id_pbph_pembeli = c.NPWSHUT_NO AND f.KODE_PROP=c.KODE_PROP AND a.id = '".$id_invoice."'";
+        
 		$query = $this->db->query($sql);
-		return $query->row_array();
+		
+        return $query->row_array();
     }
     public function _detail()
     {
         $id_menu 	  = $this->uri->segment(4);
         $data_user = $this->session->userdata();
-        $id_user = $data_user['id'];
-        $sql = "select d.KETERANGAN as jenis_kayu, g.KETERANGAN as kelompok_kayu, b.harga, b.volume, e.diameter from invoices a, invoice_details b, m_jenis_kayu d, m_diameters e, m_kelompok_jenis_kayu g where a.id=b.id_invoice and b.id_diameter = e.id and d.KAYU_NO = b.id_jenis_kayu and g.KEL_NO = d.KEL_NO and a.id_user = '".$id_user."' and a.id = '".$id_menu."'";
+        //$id_user = $data_user['id'];
+        $sql = "select d.KETERANGAN as jenis_kayu, g.KETERANGAN as kelompok_kayu, b.harga, b.volume, e.diameter from invoices a, invoice_details b, m_jenis_kayu d, m_diameters e, m_kelompok_jenis_kayu g where a.id=b.id_invoice and b.id_diameter = e.id and d.KAYU_NO = b.id_jenis_kayu and g.KEL_NO = d.KEL_NO and a.id = '".$id_menu."'";
 		$query = $this->db->query($sql);
 		return $query->result_array();
     }
+    
     public function peraturan()
     {
         $sql = "select * from peraturan";

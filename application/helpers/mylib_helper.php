@@ -18,6 +18,24 @@
 		return $cmb;
 	}
 
+	function cmb_pbphh($name, $table, $field, $pk, $selected=null, $extra=null, $class=null, $first=null)
+	{
+		$ci   = get_instance();
+		$cmb  = "<select name='$name' class='form-control $class' $extra>";
+
+		$data = $ci->db->where("JENIS", '98')->get($table)->result();
+		$cmb .= '<option value="">'.$first.'</option>';
+		foreach ($data as $row) {
+			$cmb .= "<option value='".$row->$pk."'";
+			//Apabila $selected bernilai sama dengan nilai $pk maka akan bernilai selected selain itu akan bernilai null
+			$cmb .= $selected == $row->$pk ? 'selected' : '';
+			$cmb .= ">".$row->$field."</option>";
+		}
+		$cmb .= "</select>";
+
+		return $cmb;
+	}
+
 	// untuk mendapatkan tahun akademik aktif dan biar mudah untuk dipanggil 
 	function get_tahun_akademik($field)
 	{

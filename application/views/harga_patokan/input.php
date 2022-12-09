@@ -50,7 +50,7 @@
                             <label class="col-sm-3 control-label"> Pihak Pembeli*</label>
                             <div class="col-sm-9">
                                 <?php
-                                    echo cmb_dinamis('id_pbph_pembeli', 'm_pbph', 'NAMA_PERUSAHAAN', 'NPWSHUT_NO', '', '', 'pbph-pembeli', 'PIlih Pihak Pembeli');
+                                    echo cmb_pbphh('id_pbph_pembeli', 'm_pbph', 'NAMA_PERUSAHAAN', 'NPWSHUT_NO', '', '', 'pbph-pembeli', 'PIlih Pihak Pembeli');
                                 ?>
                                 <span class="text-danger text-bold"><?= form_error('id_pbph_pembeli') ?></span>
                             </div>
