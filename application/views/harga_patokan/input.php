@@ -76,9 +76,11 @@
                         <div class="form-group col-xs-6">
                             <label class="col-sm-3 control-label">Total Volume*</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" name="total_volume" placeholder="Masukkan Total Volume Kayu" value="<?= set_value('total_volume'); ?>">
+                                <input type="number" class="form-control col-sm-6" name="total_volume" placeholder="Masukkan Total Volume Kayu" value="<?= set_value('total_volume'); ?>">
+                                
                                 <span class="text-danger text-bold"><?= form_error('total_volume') ?></span>
                             </div>
+
                         </div>
                     </div>
                     <div class="row">
@@ -87,13 +89,13 @@
                                 <label class="control-label">Tempat</label><br>
                             </div>
                             <div class="col-sm-9">
-                                <input type="text" name="tempat_invoice" class="form-control" placeholder= "Masukkan Tempat Invoice Dibuat">
+                                <input type="text" name="tempat_invoice" class="form-control" placeholder= "Masukkan Lokasi Penerbitan Dokumen">
                             </div>
                         </div>
                         <div class="form-group col-xs-6 control-label">
                             <div class="col-sm-3">
                                 <label class="control-label">File Dokumen*</label><br>
-                                <small>(Max 1 Mb)</small>
+                                <small>(Max 10 Mb)</small>
                             </div>
                             <div class="col-sm-9">
                                 <input type="file" name="file_upload" class="form-control" placeholder = "Masukkan Tempat Invoice Dibuat" accept="application/pdf">
@@ -121,7 +123,7 @@
                                     <th>Harga Kayu</th>
                                     <th>Volume</th>
                                     <th>Satuan</th>
-                                    <th>Diameter</th>
+                                    <th>Sortimen</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -169,8 +171,8 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <select   select name="id_diameter[]" class="form-control">    
-                                            <option>Pilih Diameter Kayu</option>
+                                        <select select name="id_diameter[]" class="form-control">    
+                                            <option>Pilih Sortiment Kayu</option>
                                             <?php
                                                 $data_diamter = $this->db->get('m_diameters');
                                                 foreach($data_diamter->result() as $row) {
