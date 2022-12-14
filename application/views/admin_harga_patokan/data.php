@@ -11,7 +11,7 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <div class="col-lg-6">
-                    <h6>Filter Tanggal : </h6>
+                    <h6>Filter Tanggal :  </h6>
                     <div class="row">
                         <div class="form-group col-sm-6">
                             <input type="text" class="form-control" id="min" name="min" placeholder="Masukkan Tanggal Awal">

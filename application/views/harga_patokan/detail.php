@@ -94,9 +94,10 @@
                         </div>
                         <?php } ?>
                         
-                        <div class="row">
-
-                        <div class="form-group col-xs-6">
+                    <?php
+                        if ($user['nama_role'] == "Verifikator" || $user['nama_role'] == "Admin") {
+                    ?>
+                    <div class="row">                        <div class="form-group col-xs-6">
                             <label class="col-sm-4 control-label">Verifikasi Data</label>
                             <div class="col-sm-2" style="width:50%">
                                 <select name="verifikasi" id="" class="form-control">
@@ -114,30 +115,38 @@
                     </div>
                     <div class="row">
                         <div class="form-group">
-                        <label class="col-sm-2 control-label"></label>
+                            <label class="col-sm-2 control-label"></label>
 
-                        <div class="col-sm-1">
-                            <button type="submit" name="submit" class="btn btn-primary btn-flat" style="float: right;">Simpan</button>
+                            <div class="col-sm-1">
+                                <button type="submit" name="submit" class="btn btn-primary btn-flat" style="float: right;">Simpan</button>
+                            </div>
+
+                            <div class="col-sm-1">
+                                <?php
+                                echo anchor('admin_harga_patokan/data', 'Kembali', array('class'=>'btn btn-danger btn-flat'));
+                                ?>
+                            </div>
                         </div>
-
-                        <div class="col-sm-1">
+                    </div>
+                    <?php
+                        } else {
+                    ?>
+                        <div class="col-sm-2">
                             <?php
-                            echo anchor('admin_harga_patokan/data', 'Kembali', array('class'=>'btn btn-danger btn-flat'));
+                                echo anchor('admin_harga_patokan/data', 'Kembali', array('class'=>'btn btn-danger btn-flat btn-lg'));
                             ?>
                         </div>
-                        </div>
+                    <?php
+                        }
+                    ?>
+                
                     </div>
-
-                        </div>
-                        <div class="col-sm-6">
-                            <embed src="<?php echo base_url()."uploads/invoices/".$detail['file_upload'].".pdf";?>" width="100%" height="794px" />
-                        </div>
-                        
+                    <div class="col-sm-6">
+                        <embed src="<?php echo base_url()."uploads/invoices/".$detail['file_upload'].".pdf";?>" width="100%" height="794px" />
                     </div>
                     
-                    
-                  
-
+                </div>
+                
                 </div>
                 <!-- /.box-body -->
                 <?php 

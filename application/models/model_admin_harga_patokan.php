@@ -68,6 +68,19 @@ class Model_admin_harga_patokan extends CI_Model
 		return $dataSemuaHP;
     }
 
+    public function getKalkulasiData()
+    {
+        $sql = "select 
+                    *
+                from 
+                    m_jenis_kayu mjk";
+
+        $query = $this->db->query($sql);
+
+        $kalkulasi_data = $query->result();        
+		return $kalkulasi_data;
+    }
+
     public function getPenjual(){
         $sql = "select b.NAMA_PERUSAHAAN as penjual from invoices a, m_pbph b where a.id_pbph_penjual = b.NPWSHUT_NO";
         $query = $this->db->query($sql);

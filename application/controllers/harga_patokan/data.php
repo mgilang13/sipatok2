@@ -9,6 +9,7 @@ class Data extends MY_OperatorController {
         $this->load->model("model_harga_patokan");
         $this->load->library('form_validation');
     }
+
 	public function index()
 	{
 		$data['home_url'] = "Tampilan_operator";
@@ -16,12 +17,17 @@ class Data extends MY_OperatorController {
 		$data_user = $this->session->userdata();
 		
         $data["hargapatokan"] = $this->model_harga_patokan->getAll($data_user);
-		
+		$data['user'] = $data_user;
+				
         $this->template->load('template', "harga_patokan/data", $data);
 		//$this->template->load('template', 'harga_patokan/data');
 	}
+
 	function detail()
 	{		$data['home_url'] = "Tampilan_utama";
+
+			$data['user'] = $this->session->userdata();
+			
 			$data["detail"] = $this->model_harga_patokan->detail();
 			$data["rincian"] = $this->model_harga_patokan->_detail();
 

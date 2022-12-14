@@ -25,7 +25,7 @@
                         <th>NO</th>
                         <th>NOMOR INVOICE</th>
                         <th>TGL INVOICE</th>
-                        <th>PIHAK PEMBELI</th>
+                        <th>PIHAK PENJUAL</th>
                         <th>STATUS</th>
                         <th>AKSI</th>
                     </tr>
