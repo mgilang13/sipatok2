@@ -23,8 +23,8 @@
                 <thead>
                     <tr>
                         <th>NO</th>
-                        <th>NOMOR INVOICE</th>
-                        <th>TGL INVOICE</th>
+                        <th>NOMOR DOKUMEN</th>
+                        <th>TGL DOKUMEN</th>
                         <th>PIHAK PENJUAL</th>
                         <th>STATUS</th>
                         <th>AKSI</th>
@@ -47,18 +47,18 @@
                         <td>
                             <?php echo $hp->NAMA_PERUSAHAAN ?>
                         </td>
-                        <td>
+                        <td width="100">
                             <?php
                                 if($hp->is_verified == '0') {
                                     echo '<small class="label label-info"><i class="fa fa-close"></i> Belum diverifikasi</small>';
-                                } else if ($hp->is_verified == '1') {
+                                } else if ($hp->is_verified == '1' || $hp->is_verified == '3') {
                                     echo '<small class="label label-success"><i class="fa fa-close"></i>Terverifikasi</small>';
                                 } else if ($hp->is_verified == '2') {
                                     echo '<small class="label label-danger"><i class="fa fa-close"></i> Dikembalikan</small>';
                                 }
                             ?> 
                         </td>
-                        <td width="250">
+                        <td width="150">
                             <a href="<?php echo site_url('harga_patokan/data/detail/'.$hp->id) ?>"
                                 class="btn btn-warning"><i class="fa fa-eye"></i> Detail</a>
                         </td>
@@ -115,7 +115,7 @@
             });
 
             var t = $('#mytable').DataTable( {
-                "order": [[ 1, 'asc' ]],
+                "order": [[ 0, 'asc' ]],
             } );
                
             // t.on( 'order.dt search.dt', function () {

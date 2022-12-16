@@ -70,10 +70,24 @@ class Model_admin_harga_patokan extends CI_Model
 
     public function getKalkulasiData()
     {
-        $sql = "select 
-                    *
-                from 
-                    m_jenis_kayu mjk";
+        $sql = "select mp3.KETERANGAN as wilayah, md.diameter as sortimen, mjk.KETERANGAN as jenis_kayu, avg(id.harga/id.volume) as harga_patokan
+        from invoices i
+        join invoice_details id 
+        on id.id_invoice = i.id
+        join m_diameters md 
+        on md.id = id.id_diameter 
+        join m_jenis_kayu mjk 
+        on mjk.KAYU_NO = id.id_jenis_kayu 
+        join m_pbph mp 
+        on i.id_pbph_penjual = mp.NPWSHUT_NO 
+        join m_provinsi mp2 
+        on mp.KODE_PROP = mp2.KODE_PROP 
+        join m_bphp mb 
+        on mb.KODE_BSPHH = mp2.BSPHH 
+        join m_pulau mp3 
+        on mp3.KODE_PULAU = mb.PULAU
+        where i.is_verified = '1'
+        group by mjk.KETERANGAN, mp3.KETERANGAN, md.diameter;";
 
         $query = $this->db->query($sql);
 

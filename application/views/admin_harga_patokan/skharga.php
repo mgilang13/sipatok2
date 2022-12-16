@@ -4,7 +4,7 @@
 
           <div class="box box-primary">
             <div class="box-header  with-border">
-              <h3 class="box-title">Data Harga Patokan</h3>
+              <h3 class="box-title">Daftar Harga Patokan</h3>
             </div>
 
             
@@ -15,9 +15,10 @@
                 <thead>
                     <tr>
                         <th>NO</th>
-                        <th>NAMA JENIS KAYU</th>
-                        <th>HARGA PATOKAN TERPADU</th>
-                        <th>AKSI</th>
+                        <th>WILAYAH</th>
+                        <th>JENIS KAYU</th>
+                        <th>SORTIMEN</th>
+                        <th>HARGA PATOKAN</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,13 +30,17 @@
                         <td width="20">
                             <?php echo $no_urut++; ?>
                         </td>
-                        <td width="500">
-                            <?php echo $kd->KETERANGAN ?>
+                        <td width="150">
+                            <?php echo $kd->wilayah ?>
                         </td>
                         <td>
+                          <?php echo $kd->jenis_kayu ?>
                         </td>
-                        <td>
-
+                        <td width="150">
+                          <?php echo $kd->sortimen ?>
+                        </td>
+                        <td width="150" align="right">
+                          <?php echo str_replace(",",".",number_format($kd->harga_patokan)) ?>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -76,7 +81,7 @@
         
         $(document).ready(function() {
             var t = $('#mytable').DataTable( {
-                "order": [[ 1, 'asc' ]],
+                "order": [[ 0, 'asc' ]],
             } );
         } );
 </script>

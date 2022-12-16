@@ -12,11 +12,10 @@
             <!-- /.box-header -->
             <!-- form start -->
             
-
                 <div class="box-body">
                     <div class="row">
                         <div class="form-group col-xs-6">
-                            <label class="col-sm-3 control-label">No. Invoice</label>
+                            <label class="col-sm-3 control-label">No. Dokumen</label>
                             <div class="col-sm-9">
                                 <input type="hidden" value="<?php echo $detail['id'];?>" name="id_invoice">
                                 <input type="text" value="<?php echo $detail['nomor_invoice'];?>" class="form-control" disabled>
@@ -37,7 +36,7 @@
                             </div>
                         </div>
                         <div class="form-group col-xs-6">
-                            <label for="" class="col-sm-3 control-label">Tgl. Invoice</label>
+                            <label for="" class="col-sm-3 control-label">Tgl. Dokumen</label>
                             <div class="col-sm-9">
                                 <input type="date" class="form-control" disabled value="<?php echo $detail['tgl_invoice'];?>">
                             </div>
@@ -93,16 +92,17 @@
                         </div>
                         </div>
                         <?php } ?>
-                        
                     <?php
-                        if ($user['nama_role'] == "Verifikator" || $user['nama_role'] == "Admin") {
+                        if ($user['nama_role'] == "Verifikator" || $user['nama_role'] == "Admin" || $detail['is_verified'] !== "2") {
                     ?>
-                    <div class="row">                        <div class="form-group col-xs-6">
+                    <div class="row">                        
+                        <div class="form-group col-xs-6">
                             <label class="col-sm-4 control-label">Verifikasi Data</label>
                             <div class="col-sm-2" style="width:50%">
                                 <select name="verifikasi" id="" class="form-control">
                                     <option value="">--Pilih--</option>
-                                    <option value="1">Verifikasi</option>
+                                    <option value="1">Verifikasi (Diproses lebih lanjut)</option>
+                                    <option value="3">Verifikasi (Tidak dapat diproses)</option>
                                     <option value="2">Kembalikan</option>
                                 </select>
                             </div>
