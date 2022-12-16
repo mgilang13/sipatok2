@@ -70,6 +70,8 @@
 				$data['kembali'] = $this->qkembali(NULL,NULL, NULL, $id_pulau, $invoices_mPulau);
 			}
 
+			$data['notifikasi_dikembalikan'] = $this->notifikasi_dikembalikan();
+
 			$this->template->load('template', 'dashboard-operator',$data);
 		}
 
@@ -131,6 +133,22 @@
 			}
 
 			return $data;
+		}
+
+		public function notifikasi_dikembalikan () {
+
+			$sql = "select i.id, mp.NAMA_PERUSAHAAN, i.nomor_invoice
+					from users u
+					join user_role ur 
+						on ur.id_user = u.id
+					join invoices i 
+						on i.id_user = u.id
+					join m_pbph mp 
+						on i.id_pbph_pembeli = mp.NPWSHUT_NO 
+					where ur.id_user = '2' and is_verified = '2'";
+			$data = $this->db->query($sql);
+
+		return $data;
 		}
 
 

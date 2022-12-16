@@ -39,7 +39,7 @@ class Input extends MY_OperatorController {
 			if(empty($_FILE['file_upload']['name'])) {
 				$this->form_validation->set_rules('file_upload', 'File Invoice', 'required');
 			}
-
+			
 			//validasi foto yang di upload
 			$config['upload_path']          = './uploads/invoices/';
 			$config['allowed_types']        = 'pdf';

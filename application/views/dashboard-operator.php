@@ -20,7 +20,7 @@
             </div>
             <!-- ./col -->
 
-            <div class="col-lg-4 col-xs-4">
+            <div class="col-lg-4 col-xs-4 panel">
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
@@ -29,9 +29,20 @@
                   <p>Dikembalikan</p>
                 </div>
                 <div class="icon">
-                  <i class="fa fa-users"></i>
+                  <i class="fa fa-undo"></i>
                 </div>
               </div>
+              <div class="list-group" style="max-height:100px; overflow: auto">
+                <?php
+                foreach($notifikasi_dikembalikan->result() as $nd) {
+                ?>
+                <a href="<?php echo site_url('harga_patokan/data/detail/'.$nd->id) ?>" class="list-group-item">
+                  <h4 class="list-group-item-heading"><?= $nd->NAMA_PERUSAHAAN; ?></h4>
+                  <p class="list-group-item-text">Nomor Invoice: <b><?= $nd->nomor_invoice; ?></b></p>
+                </a>
+                <?php } ?>
+              </div>
+              <!-- <a href="#" class="btn btn-danger btn-lg" style="float:right"><i class="fa fa-list"></i> &nbsp; Detail</a> -->
             </div>
             <!-- ./col -->
 
