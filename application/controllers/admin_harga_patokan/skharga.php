@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Kalkulasi extends MY_AdminController {
+class Skharga extends MY_AdminController {
 
 	/**
 	 * Index Page for this controller.
@@ -30,7 +30,7 @@ class Kalkulasi extends MY_AdminController {
 
 		$data['kalkulasi_data'] = $this->model_admin_harga_patokan->getKalkulasiData();
 		
-        $this->template->load('template', "admin_harga_patokan/kalkulasi", $data);
+        $this->template->load('template', "admin_harga_patokan/skharga", $data);
 	}
 
 	public function input()

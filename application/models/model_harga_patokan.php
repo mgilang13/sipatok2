@@ -144,6 +144,7 @@ class Model_harga_patokan extends CI_Model
         $data_user = $this->session->userdata();
         //$id_user = $data_user['id'];
         $sql = "select a.id, 
+                a.is_verified,
                 a.nomor_invoice, 
                 a.tgl_invoice, 
                 a.tempat_invoice, 

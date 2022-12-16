@@ -101,7 +101,8 @@
                             <div class="col-sm-2" style="width:50%">
                                 <select name="verifikasi" id="" class="form-control">
                                     <option value="">--Pilih--</option>
-                                    <option value="1">Verifikasi</option>
+                                    <option value="1">Verifikasi (Diproses lebih lanjut)</option>
+                                    <option value="3">Verifikasi (Tidak dapat diproses)</option>
                                     <option value="2">Kembalikan</option>
                                 </select>
                             </div>
