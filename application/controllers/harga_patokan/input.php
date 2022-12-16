@@ -27,7 +27,7 @@ class Input extends MY_OperatorController {
 
 		if (isset($_POST['submit'])) {
 
-			$file_name = $data_user['id'].$data_user['id_pbph'].time();
+			$file_name = $data_user['id_user'].$data_user['id_pbph'].time();
 			
 			$this->form_validation->set_rules('nomor_invoice', 'Nomor Invoice', 'required');
 			$this->form_validation->set_rules('total_harga', 'Total Harga', 'required');
@@ -43,7 +43,7 @@ class Input extends MY_OperatorController {
 			//validasi foto yang di upload
 			$config['upload_path']          = './uploads/invoices/';
 			$config['allowed_types']        = 'pdf';
-			$config['max_size']             = 1024;
+			$config['max_size']             = 10240;
 			$config['file_name']			= $file_name;
 			
 			$this->load->library('upload', $config);

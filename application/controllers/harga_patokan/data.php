@@ -14,10 +14,9 @@ class Data extends MY_OperatorController {
 	{
 		$data['home_url'] = "Tampilan_operator";
 		
-		$data_user = $this->session->userdata();
-		
-        $data["hargapatokan"] = $this->model_harga_patokan->getAll($data_user);
-		$data['user'] = $data_user;
+		$data['user'] = $this->session->userdata();
+
+        $data["hargapatokan"] = $this->model_harga_patokan->getAll($data['user']);
 				
         $this->template->load('template', "harga_patokan/data", $data);
 		//$this->template->load('template', 'harga_patokan/data');
