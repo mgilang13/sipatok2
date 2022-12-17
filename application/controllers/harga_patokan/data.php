@@ -32,4 +32,15 @@ class Data extends MY_OperatorController {
 
 			$this->template->load('template', 'harga_patokan/detail', $data);
 	}
+	function verifikasi(){
+		if (isset($_POST['submit'])) {
+			$this->model_harga_patokan->update();
+			redirect('harga_patokan/data');
+		} else {
+			//$id_guru     = $this->uri->segment(3);
+			//$data['guru']  = $this->db->get_where('tbl_guru', array('id_guru' => $id_guru))->row_array();
+			//$this->template->load('template', 'guru/edit', $data);
+			echo 'gagal';
+		}
+	}
 }

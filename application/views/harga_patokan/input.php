@@ -98,7 +98,7 @@
                                 <small>(Max 10 Mb)</small>
                             </div>
                             <div class="col-sm-9">
-                                <input type="file" name="file_upload" class="form-control" placeholder = "Masukkan Tempat Invoice Dibuat" accept="application/pdf">
+                                <input type="file" name="file_upload" class="form-control" placeholder = "Masukkan Tempat Invoice Dibuat" accept="application/pdf" required>
                                 <?php if ($this->session->flashdata('error')) : ?>
                                     <span class="text-danger text-bold"><?= $this->session->flashdata('error'); ?></span>
                                 <?php endif;?>

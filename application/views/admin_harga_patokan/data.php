@@ -25,8 +25,8 @@
                 <thead>
                     <tr>
                         <th>NO</th>
-                        <th>NO. INVOICE</th>
-                        <th>TGL. INVOICE</th>
+                        <th>NO. DOKUMEN</th>
+                        <th>TGL. DOKUMEN</th>
                         <th>PIHAK PENJUAL</th>
                         <th>PIHAK PEMBELI</th>
                         <th>STATUS</th>
@@ -56,18 +56,22 @@
                         <td>
                             <?php echo $hp->id_pbph_pembeli ?>
                         </td>
-                        <td>
+                        <td width="100">
                             <?php
                                 if($hp->is_verified == '0') {
                                     echo '<small class="label label-info"><i class="fa fa-clock-o"></i> Belum diverifikasi</small>';
                                 } else if ($hp->is_verified == '1') {
-                                    echo '<small class="label label-success"><i class="fa fa-check-circle"></i>Terverifikasi</small>';
+                                    echo '<small class="label label-success"><i class="fa fa-check-circle"></i> Terverifikasi</small><br>';
+                                    echo '<small class="label label-success"></i>(diproses)</small>';
+                                } else if ($hp->is_verified == '3') {
+                                    echo '<small class="label label-success"><i class="fa fa-ban"></i> Terverifikasi</small><br>';
+                                    echo '<small class="label label-success"></i>(tidak diproses)</small>';
                                 } else if ($hp->is_verified == '2') {
                                     echo '<small class="label label-danger"><i class="fa fa-close"></i> Dikembalikan</small>';
                                 }
                             ?>
                         </td>
-                        <td width="250">
+                        <td width="100">
                             <a href="<?php echo site_url('admin_harga_patokan/data/detail/'.$hp->id) ?>"
                                 class="btn btn-warning"><i class="fa fa-eye"></i> Detail</a>
                         </td>
@@ -135,7 +139,13 @@
             });
 
             var t = $('#mytable').DataTable( {
-                "order": [[ 1, 'asc' ]],
+                'paging'      : true,
+                'lengthChange': false,
+                'searching'   : false,
+                'ordering'    : true,
+                'info'        : true,
+                'autoWidth'   : false,
+                "order": [[ 0, 'asc' ]]
             } );
                
             // t.on( 'order.dt search.dt', function () {

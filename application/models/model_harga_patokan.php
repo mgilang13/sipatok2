@@ -182,4 +182,17 @@ class Model_harga_patokan extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result();
     }
+    public $table = "invoices";
+    function update()
+    {
+      $data = array(
+        //tabel di database => name di form
+        'is_verified'       => $this->input->post('verifikasi', TRUE),
+        'keterangan'   => $this->input->post('alasan', TRUE),
+        //'semester_aktif'  = $this->input->post('semester_aktif', TRUE)
+      );
+      $id = $this->input->post('id_invoice');
+      $this->db->where('id', $id);
+      $this->db->update($this->table, $data);
+    }
 }

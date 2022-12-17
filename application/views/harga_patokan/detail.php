@@ -1,5 +1,5 @@
 <?php
-    echo form_open('admin_harga_patokan/data/verifikasi', 'role="form" class="form-horizontal"');
+    echo form_open('harga_patokan/data/verifikasi', 'role="form" class="form-horizontal"');
 ?>
 <section class="content">
     <div class="row">
@@ -93,7 +93,7 @@
                         </div>
                         <?php } ?>
                     <?php
-                        if ($user['nama_role'] == "Verifikator" || $user['nama_role'] == "Admin" || $detail['is_verified'] !== "2") {
+                        if ($user['nama_role'] == "Verifikator" || $user['nama_role'] == "Admin") {
                     ?>
                     <div class="row">                        
                         <div class="form-group col-xs-6">

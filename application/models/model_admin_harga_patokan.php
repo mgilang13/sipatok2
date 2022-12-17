@@ -111,22 +111,24 @@ class Model_admin_harga_patokan extends CI_Model
         $data_user = $this->session->userdata();
         //$id_user = $data_user['id'];
         $sql = "select a.id, 
+                z.nama as jenis_dok,
                 a.nomor_invoice, 
                 a.tgl_invoice, 
                 a.tempat_invoice, 
                 a.total_volume, 
                 a.total_harga, 
                 a.file_upload, 
-                (SELECT b.NAMA_PERUSAHAAN 
+                (SELECT b.NAMA_PERUSAHAAN
                         FROM invoices a, 
-                            m_pbph b 
+                            m_pbph b
                         WHERE a.id_pbph_penjual = b.NPWSHUT_NO and a.id = '".$id_invoice."') as penjual, 
                                 c.NAMA_PERUSAHAAN as pembeli, 
-                                c.KOTA, f.KETERANGAN as provinsi 
+                                c.KOTA, f.KETERANGAN as provinsi
                         FROM invoices a, 
                                 m_pbph c, 
-                                m_provinsi f 
-                        WHERE a.id_pbph_pembeli = c.NPWSHUT_NO AND f.KODE_PROP=c.KODE_PROP AND a.id = '".$id_invoice."'";
+                                m_provinsi f,
+                                m_jenis_dok z 
+                        WHERE a.id_pbph_pembeli = c.NPWSHUT_NO AND f.KODE_PROP=c.KODE_PROP AND a.id = '".$id_invoice."' and a.id_jenis_dok = z.id";
         
 		$query = $this->db->query($sql);
 		
@@ -167,10 +169,5 @@ class Model_admin_harga_patokan extends CI_Model
     
         return $query->row()->NAMA_PERUSAHAAN;
     }
-    public function peraturan()
-    {
-        $sql = "select * from peraturan";
-		$query = $this->db->query($sql);
-		return $query->result();
-    }
+    
 }
