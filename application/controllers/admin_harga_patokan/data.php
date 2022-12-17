@@ -51,6 +51,8 @@ class Data extends MY_AdminController {
 	}
 
 	function verifikasi(){
+		$data['home_url'] = "Tampilan_utama";
+
 		if (isset($_POST['submit'])) {
 			$this->model_admin_harga_patokan->update();
 			redirect('admin_harga_patokan/data');

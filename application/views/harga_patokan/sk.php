@@ -4,38 +4,43 @@
 
           <div class="box box-primary">
             <div class="box-header  with-border">
-              <h3 class="box-title">Data Harga Patokan</h3>
+              <h3 class="box-title">Daftar Harga Patokan</h3>
             </div>
+
+            
             <!-- /.box-header -->
             <div class="box-body">
-
+              
               <table id="mytable" class="table table-striped table-bordered table-hover table-full-width dataTable" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>NO</th>
-                        <th>NOMOR SK</th>
-                        <th>KETERANGAN</th>
-                        <th>FILE</th>
-                        <th>AKSI</th>
+                        <th>WILAYAH</th>
+                        <th>JENIS KAYU</th>
+                        <th>SORTIMEN</th>
+                        <th>HARGA PATOKAN</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     $no_urut = 1;
-                    foreach ($peraturan as $sk): ?>
+                    foreach ($kalkulasi_data as $kd): 
+                    ?>
                     <tr>
                         <td width="20">
                             <?php echo $no_urut++; ?>
                         </td>
                         <td width="150">
-                            <?php echo $sk->nomor_sk ?>
+                            <?php echo $kd->wilayah ?>
                         </td>
                         <td>
-                            <?php echo $sk->keterangan ?>
+                          <?php echo $kd->jenis_kayu ?>
                         </td>
-                        <td width="250">
-                            <a href="<?php echo site_url('harga_patokan/data/detail/'.$sk->id) ?>"
-                                class="btn btn-warning"><i class="fa fa-download"></i> Unduh</a>
+                        <td width="150">
+                          <?php echo $kd->sortimen ?>
+                        </td>
+                        <td width="150" align="right">
+                          <?php echo str_replace(",",".",number_format($kd->harga_patokan)) ?>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -62,20 +67,21 @@
 <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"> -->
 
-<script src="<?php echo base_url(); ?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.2.0/css/dataTables.dateTime.min.css">
+
+  <script src="<?php echo base_url(); ?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script> 
+  <script src="https://cdn.datatables.net/datetime/1.2.0/js/dataTables.dateTime.min.js"></script>
+
 
 <script>
+        
         $(document).ready(function() {
             var t = $('#mytable').DataTable( {
-                "order": [[ 1, 'asc' ]],
+                "order": [[ 0, 'asc' ]],
             } );
-               
-            t.on( 'order.dt search.dt', function () {
-                t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-                    cell.innerHTML = i+1;
-                } );
-            } ).draw();
         } );
 </script>

@@ -26,17 +26,10 @@ class Sk extends MY_OperatorController {
 	
 	public function index()
 	{
-		$data['home_url'] = 'Tampilan_operator';
+		$data['home_url'] = "Tampilan_utama";
+
+		$data['kalkulasi_data'] = $this->model_harga_patokan->getKalkulasiData();
 		
-        $data["peraturan"] = $this->model_harga_patokan->peraturan();
         $this->template->load('template', "harga_patokan/sk", $data);
-	}
-	function detail()
-	{		
-
-			$data["detail"] = $this->model_harga_patokan->detail();
-			$data["rincian"] = $this->model_harga_patokan->_detail();
-
-			$this->template->load('template', 'harga_patokan/detail', $data);
 	}
 }
