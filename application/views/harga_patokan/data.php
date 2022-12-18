@@ -48,15 +48,19 @@
                             <?php echo $hp->NAMA_PERUSAHAAN ?>
                         </td>
                         <td width="100">
-                            <?php
+                        <?php
                                 if($hp->is_verified == '0') {
-                                    echo '<small class="label label-info"><i class="fa fa-close"></i> Belum diverifikasi</small>';
-                                } else if ($hp->is_verified == '1' || $hp->is_verified == '3') {
-                                    echo '<small class="label label-success"><i class="fa fa-close"></i>Terverifikasi</small>';
+                                    echo '<small class="label label-info"><i class="fa fa-clock-o"></i> Belum diverifikasi</small>';
+                                } else if ($hp->is_verified == '1') {
+                                    echo '<small class="label label-success"><i class="fa fa-check-circle"></i> Terverifikasi</small><br>';
+                                    echo '<small class="label label-success"></i>(diproses)</small>';
+                                } else if ($hp->is_verified == '3') {
+                                    echo '<small class="label label-success"><i class="fa fa-ban"></i> Terverifikasi</small><br>';
+                                    echo '<small class="label label-success"></i>(tidak diproses)</small>';
                                 } else if ($hp->is_verified == '2') {
                                     echo '<small class="label label-danger"><i class="fa fa-close"></i> Dikembalikan</small>';
                                 }
-                            ?> 
+                            ?>
                         </td>
                         <td width="150">
                             <a href="<?php echo site_url('harga_patokan/data/detail/'.$hp->id) ?>"

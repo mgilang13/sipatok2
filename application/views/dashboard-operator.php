@@ -5,7 +5,7 @@
     </div> -->
     <!-- Small boxes (Stat box) -->
     <div class="row">
-            <div class="col-lg-4 col-xs-4">
+            <div class="col-lg-3 col-xs-3">
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
@@ -20,7 +20,7 @@
             </div>
             <!-- ./col -->
 
-            <div class="col-lg-4 col-xs-4 panel">
+            <div class="col-lg-3 col-xs-3 panel">
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
@@ -46,16 +46,30 @@
             </div>
             <!-- ./col -->
 
-            <div class="col-lg-4 col-xs-4">
+            <div class="col-lg-3 col-xs-3">
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
                   <h3><?php echo $verif['hasil']; ?></h3>
 
-                  <p>Terverifikasi</p>
+                  <p>Terverifikasi (diproses)</p>
                 </div>
                 <div class="icon">
                   <i class="fa fa-user-circle"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-xs-3">
+              <!-- small box -->
+              <div class="small-box bg-green">
+                <div class="inner">
+                  <h3><?php echo $verif2['hasil']; ?></h3>
+
+                  <p>Terverifikasi (tidak diproses)</p>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-ban"></i>
                 </div>
               </div>
             </div>

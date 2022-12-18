@@ -37,7 +37,7 @@
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-purple sidebar-mini">
+<body class="hold-transition skin-purple fixed sidebar-mini">
 <div class="wrapper">
 
   <header class="main-header">
@@ -226,7 +226,6 @@
     <section class="content-header">
       <h1>
         Dashboard
-        <small>Version 2.0</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Home</a></li>

@@ -48,6 +48,7 @@
 			
 				$data['belum'] = $this->qbelum($id_user, NULL, NULL, NULL, $invoices_userRole_users);
 				$data['verif'] = $this->qverif($id_user, NULL, NULL, NULL, $invoices_userRole_users);
+				$data['verif2'] = $this->qverif2($id_user, NULL, NULL, NULL, $invoices_userRole_users);
 				$data['kembali'] = $this->qkembali($id_user, NULL, NULL, NULL, $invoices_userRole_users);
 
 			} else if ($nama_role == "Dinas Kehutanan") {
@@ -55,18 +56,21 @@
 				
 				$data['belum'] = $this->qbelum(NULL, $id_dinas, NULL, NULL, $invoices_mPBPH);
 				$data['verif'] = $this->qverif(NULL, $id_dinas, NULL, NULL, $invoices_mPBPH);
+				$data['verif2'] = $this->qverif2(NULL, $id_dinas, NULL, NULL, $invoices_mPBPH);
 				$data['kembali'] = $this->qkembali(NULL, $id_dinas, NULL, NULL, $invoices_mPBPH);
 			} else if ($nama_role == "BPHP") {
 				$id_balai = $data_user['id_balai'];
 
 				$data['belum'] = $this->qbelum(NULL,NULL,$id_balai, NULL, $invoices_mBPHP);
 				$data['verif'] = $this->qverif(NULL,NULL,$id_balai, NULL, $invoices_mBPHP);
+				$data['verif2'] = $this->qverif2(NULL,NULL,$id_balai, NULL, $invoices_mBPHP);
 				$data['kembali'] = $this->qkembali(NULL,NULL,$id_balai, NULL, $invoices_mBPHP);
 			} else if ($nama_role == "Verifikator") {
 				$id_pulau = $data_user['id_pulau'];
 
 				$data['belum'] = $this->qbelum(NULL,NULL,NULL, $id_pulau, $invoices_mPulau);
 				$data['verif'] = $this->qverif(NULL,NULL,NULL, $id_pulau, $invoices_mPulau);
+				$data['verif2'] = $this->qverif2(NULL,NULL,NULL, $id_pulau, $invoices_mPulau);
 				$data['kembali'] = $this->qkembali(NULL,NULL, NULL, $id_pulau, $invoices_mPulau);
 			}
 
@@ -97,6 +101,26 @@
 
 		public function qverif($id_user, $id_dinas, $id_balai, $id_pulau, $sql_awal) {
 			$verif = " and is_verified = '1'";
+
+			if($id_user != NULL) {
+				$sql_operator_perusahaan = " where ur.id_user = '$id_user' $verif";
+				$data = $this->db->query($sql_awal.$sql_operator_perusahaan)->row_array();
+			} else if ($id_dinas != NULL) {
+				$sql_operator_dinas = " where mp.KODE_PROP = '$id_dinas' $verif";
+				$data = $this->db->query($sql_awal.$sql_operator_dinas)->row_array();
+			} else if ($id_balai != NULL) {
+				$sql_operator_balai = " where mb.KODE_BSPHH = '$id_balai' $verif";
+				$data = $this->db->query($sql_awal.$sql_operator_balai)->row_array();
+			} else if ($id_pulau != NULL) {
+				$sql_operator_pulau = " where mp3.KODE_PULAU = '$id_pulau' $verif";
+				$data = $this->db->query($sql_awal.$sql_operator_pulau)->row_array();
+			}
+
+			return $data;
+		}
+
+		public function qverif2($id_user, $id_dinas, $id_balai, $id_pulau, $sql_awal) {
+			$verif = " and is_verified = '3'";
 
 			if($id_user != NULL) {
 				$sql_operator_perusahaan = " where ur.id_user = '$id_user' $verif";

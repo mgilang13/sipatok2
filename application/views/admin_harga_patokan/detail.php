@@ -55,6 +55,8 @@
                     <div class="row">
 
                         <div class="form-group col-xs-6">
+                        <input type="hidden" value="<?php echo $detail['id'];?>" name="id_invoice">
+
                             <label class="col-sm-4 control-label">Verifikasi Data</label>
                             <div class="col-sm-8" style="width:50%">
                                 <select name="verifikasi" id="" class="form-control">
