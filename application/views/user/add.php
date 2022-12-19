@@ -88,7 +88,7 @@
                     
                     <div class="col-sm-5">
                       <?php
-                        echo cmb_dinamis('id_pbph', 'm_pbph', 'NAMA_PERUSAHAAN', 'NPWSHUT_NO');
+                        echo cmb_pbphh('id_pbph', 'm_pbph', 'NAMA_PERUSAHAAN', 'NPWSHUT_NO');
                         ?>
                     </div>
                     <p style="font-style:italic">Bisa dikosongkan</p>
