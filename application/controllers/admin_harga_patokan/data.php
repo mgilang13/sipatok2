@@ -44,7 +44,6 @@ class Data extends MY_AdminController {
 			
 			$data["detail"] = $this->model_admin_harga_patokan->detail();
 
-			
 			$data["rincian"] = $this->model_admin_harga_patokan->_detail();
 
 			$this->template->load('template', 'admin_harga_patokan/detail', $data);

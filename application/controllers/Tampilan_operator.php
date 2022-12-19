@@ -3,13 +3,25 @@
 	class Tampilan_operator extends MY_OperatorController
 	{
 		
+		public function __construct()
+    	{
+			parent::__construct();
+        	$this->load->model("model_harga_patokan");
+    	}
+
+
+		
 		function index()
 		{
 			$data['home_url']="Tampilan_operator";
 
+			$is_verified = $this->uri->segment(3);
+
 			$data_user = $this->session->userdata();
 			
 			$nama_role = $data_user['nama_role'];
+			$data['nama_role'] = $nama_role;
+
 		
 			$invoices_userRole_users = "select count(*) as hasil
 										from users u
@@ -17,7 +29,7 @@
 											on ur.id_user = u.id
 										join invoices i 
 											on i.id_user = u.id";
-	//dinas
+			//dinas
 			$invoices_mPBPH = "	select count(*) as hasil
 								from invoices i
 								join m_pbph mp 
@@ -74,7 +86,12 @@
 				$data['kembali'] = $this->qkembali(NULL,NULL, NULL, $id_pulau, $invoices_mPulau);
 			}
 
-			$data['notifikasi_dikembalikan'] = $this->notifikasi_dikembalikan();
+			if(isset($is_verified)) {
+				$data['hargapatokan'] = $this->model_harga_patokan->getAllByVerification($data_user, $is_verified);
+			} else {
+				$data["hargapatokan"] = $this->model_harga_patokan->getAll($data_user);
+			}
+			
 
 			$this->template->load('template', 'dashboard-operator',$data);
 		}
@@ -99,7 +116,7 @@
 			return $data;
 		}
 
-		public function qverif($id_user, $id_dinas, $id_balai, $id_pulau, $sql_awal) {
+		public function qverif1($id_user, $id_dinas, $id_balai, $id_pulau, $sql_awal) {
 			$verif = " and is_verified = '1'";
 
 			if($id_user != NULL) {
@@ -158,25 +175,6 @@
 
 			return $data;
 		}
-
-		public function notifikasi_dikembalikan () {
-
-			$sql = "select i.id, mp.NAMA_PERUSAHAAN, i.nomor_invoice
-					from users u
-					join user_role ur 
-						on ur.id_user = u.id
-					join invoices i 
-						on i.id_user = u.id
-					join m_pbph mp 
-						on i.id_pbph_pembeli = mp.NPWSHUT_NO 
-					where ur.id_user = '2' and is_verified = '2'";
-			$data = $this->db->query($sql);
-
-		return $data;
-		}
-
-
-
 	}
 
 ?>

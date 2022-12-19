@@ -1,6 +1,7 @@
 <?php
 class Model_harga_patokan extends CI_Model
 {
+
     public function save($data_user) {
         $id_user = $data_user['id_user'];
         $id_pbph_penjual = $data_user['id_pbph'];
@@ -132,6 +133,118 @@ class Model_harga_patokan extends CI_Model
                                         on mp3.KODE_PULAU = mb.PULAU ";
         
             $sql_operator_pulau = " where mp3.KODE_PULAU = '$id_pulau'";
+            $data = $this->db->query($invoices_mPulau.$sql_operator_pulau);
+        }
+
+        return $data->result();
+    }
+
+    public function getAllByVerification($data_user, $is_verified)
+    {
+        $nama_role = $data_user['nama_role'];
+        $id_user = $data_user['id_user'];
+
+        if($nama_role == "PBPH / Industri / Perhutani") {
+            //operator perusahaan
+            $invoices_userRole_users = "select i.id, 
+                                            i.nomor_invoice,
+                                            i.id_pbph_penjual,
+                                            i.id_pbph_pembeli, 
+                                            i.tgl_invoice, 
+                                            mp.NAMA_PERUSAHAAN ,
+                                            i.is_verified
+                                        from users u
+                                        join user_role ur 
+                                            on ur.id_user = u.id
+                                        join invoices i 
+                                            on i.id_user = u.id
+                                        join m_pbph mp
+                                            on mp.NPWSHUT_NO = i.id_pbph_pembeli";
+
+            $sql_operator_perusahaan = " where ur.id_user = '$id_user'";
+            
+            if(isset($is_verified)) {
+                $sql_operator_perusahaan .= " and i.is_verified = '$is_verified'";
+            }
+
+            $data = $this->db->query($invoices_userRole_users.$sql_operator_perusahaan);
+
+        } else if($nama_role == "Dinas Kehutanan") {
+            $id_dinas = $data_user['id_dinas'];
+
+            $invoices_mPBPH = "	select i.id, 
+                                    i.nomor_invoice,
+                                    i.id_pbph_penjual,
+                                    i.id_pbph_pembeli, 
+                                    i.tgl_invoice, 
+                                    mp.NAMA_PERUSAHAAN ,
+                                    i.is_verified
+                                from invoices i
+                                join m_pbph mp 
+                                    on i.id_pbph_penjual = mp.NPWSHUT_NO";
+            
+            $sql_operator_dinas = " where mp.KODE_PROP = '$id_dinas'";
+            
+            if(isset($is_verified)) {
+                $sql_operator_dinas .= " and i.is_verified = '$is_verified'";
+            }
+
+            $data = $this->db->query($invoices_mPBPH.$sql_operator_dinas);
+
+        } else if($nama_role == "BPHP") {
+            
+            $id_balai = $data_user['id_balai'];
+
+            $invoices_mBPHP = "	select i.id, 
+                                    i.nomor_invoice,
+                                    i.id_pbph_penjual,
+                                    i.id_pbph_pembeli, 
+                                    i.tgl_invoice, 
+                                    mp.NAMA_PERUSAHAAN ,
+                                    i.is_verified 
+                                from invoices i
+                                join m_pbph mp 
+                                    On i.id_pbph_penjual = mp.NPWSHUT_NO
+                                join m_provinsi mp2
+                                    on mp.KODE_PROP  = mp2.KODE_PROP
+                                join m_bphp mb 
+                                    on mb.KODE_BSPHH = mp2.BSPHH";
+            
+            $sql_operator_balai = " where mb.KODE_BSPHH = '$id_balai'";
+            if(isset($is_verified)) {
+                $sql_operator_balai .= " and i.is_verified = '$is_verified'";
+            }
+
+            $data = $this->db->query($invoices_mBPHP.$sql_operator_balai);
+
+        } else if($nama_role == "Verifikator") { //Verifikator Pulau
+            
+            $id_pulau = $data_user['id_pulau'];
+
+            $invoices_mPulau = "    select i.id,
+                                        i.nomor_invoice,
+                                        i.id_pbph_penjual,
+                                        i.id_pbph_pembeli, 
+                                        i.tgl_invoice, 
+                                        mp.NAMA_PERUSAHAAN ,
+                                        i.is_verified 
+                                    from invoices i 
+                                    join m_pbph mp 
+                                        on i.id_pbph_penjual = mp.NPWSHUT_NO 
+                                    join m_provinsi mp2 
+                                        on mp.KODE_PROP = mp2.KODE_PROP 
+                                    join m_bphp mb 
+                                        on mb.KODE_BSPHH = mp2.BSPHH 
+                                    join m_pulau mp3 
+                                        on mp3.KODE_PULAU = mb.PULAU ";
+        
+            $sql_operator_pulau = " where mp3.KODE_PULAU = '$id_pulau'";
+            
+
+            if(isset($is_verified)) {
+                $sql_operator_pulau .= " and i.is_verified = '$is_verified'";
+            }
+
             $data = $this->db->query($invoices_mPulau.$sql_operator_pulau);
         }
 
