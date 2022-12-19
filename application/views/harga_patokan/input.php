@@ -63,7 +63,7 @@
                             <label for="" class="col-sm-3 control-label">Tanggal Dokumen*</label>
 
                             <div class="col-sm-9">
-                                <input required type="date" name="tgl_invoice" class="form-control" placeholder="Masukkan Tanggal Invoice">
+                                <input required type="date" name="tgl_invoice" class="form-control" placeholder="Masukkan Tanggal Dokumen">
                             </div>
                         </div>
                         <div class="form-group col-xs-6 control-label">
@@ -119,7 +119,7 @@
                     <div class="panel panel-default">
                         <!-- Default panel contents -->
                         <div class="panel-heading">
-                            Tabel Invoice
+                            Tabel Rincian
                             <a href="#" style="float:right" id="tambah-baris" class="btn btn-sm btn-success">
                                 <i class="fa fa-plus"></i> 
                                 &nbsp; Baris
