@@ -1,5 +1,5 @@
 <?php
-    echo form_open('admin_harga_patokan/data/verifikasi', 'role="form" class="form-horizontal"');
+    echo form_open('harga_patokan/data/verifikasi', 'role="form" class="form-horizontal"');
 ?>
 
 <section class="content">

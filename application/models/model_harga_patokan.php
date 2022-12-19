@@ -17,7 +17,7 @@ class Model_harga_patokan extends CI_Model
             'tgl_input'         => $tanggal,
             'nomor_invoice'	    => $this->input->post('nomor_invoice', TRUE),
             'tgl_invoice'	    => $this->input->post('tgl_invoice', TRUE),
-            'tempat_invoice'    => $this->input->post('tempat_invoice', TRUE),
+            //'tempat_invoice'    => $this->input->post('tempat_invoice', TRUE),
             'file_upload'       => $id_invoice,
             'total_harga'       => $this->input->post('total_harga', TRUE),
             'total_volume'      => $this->input->post('total_volume', TRUE),
@@ -37,7 +37,7 @@ class Model_harga_patokan extends CI_Model
                 'harga'         => $this->input->post('harga', TRUE)[$i],
                 'volume'        => $this->input->post('volume', TRUE)[$i],
                 'id_diameter'   => $this->input->post('id_diameter', TRUE)[$i],
-                'id_satuan'   => $this->input->post('id_satuan', TRUE)[$i],
+                //'id_satuan'   => $this->input->post('id_satuan', TRUE)[$i],
             ); 
         }
 

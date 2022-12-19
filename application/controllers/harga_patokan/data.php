@@ -32,7 +32,7 @@ class Data extends MY_OperatorController {
 
 			$this->template->load('template', 'harga_patokan/detail', $data);
 	}
-	function verifikasi(){
+	function verifikasi(){	
 		if (isset($_POST['submit'])) {
 			$this->model_harga_patokan->update();
 			redirect('harga_patokan/data');

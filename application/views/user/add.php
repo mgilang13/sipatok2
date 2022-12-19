@@ -84,7 +84,7 @@
                   </div>
                     
                   <div class="form-group">
-                    <label class="col-sm-2 control-label">Instansi / PBPH / Perhutani <br><i>(Operator)</i></label>
+                    <label class="col-sm-2 control-label">PBPH / Perhutani <br><i>(Operator)</i></label>
                     
                     <div class="col-sm-5">
                       <?php

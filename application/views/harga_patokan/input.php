@@ -23,28 +23,63 @@
 
                     <div class="row">
                         <div class="form-group col-xs-6">
-                            <label class="col-sm-3 control-label">Sumber Dokumen</label>
+                            <label class="col-sm-3 control-label">Sumber Dokumen*</label>
                             <div class="col-sm-9">
                                 <?php
-                                    echo cmb_dinamis('id_jenis_dok', 'm_jenis_dok', 'nama', 'id');
+                                    echo cmb_dinamis('id_jenis_dok', 'm_jenis_dok', 'nama', 'id','','','','Pilih Jenis Dokumen');
                                 ?>
                             </div>
-                        </div>
+                            </div>
                         <div class="form-group col-xs-6">
-                            <label class="col-sm-3 control-label">Nomor Dokumen</label>
+                            <label class="col-sm-3 control-label">Total Harga*</label>
                             <div class="col-sm-9">
-                                <input type="text" name="nomor_invoice" class="form-control" placeholder="Masukkan Nomor Invoice" value="<?= set_value('nomor_invoice'); ?>">
+                                <input type="number" required class="form-control" name="total_harga" placeholder="Masukkan Total Harga" value="<?= set_value('total_harga') ?>" step="0.01">
+                                <span class="text-danger text-bold"><?= form_error('total_harga') ?></span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        
+                        <div class="form-group col-xs-6">
+                            <label class="col-sm-3 control-label">Nomor Dokumen*</label>
+                            <div class="col-sm-9">
+                                <input required type="text" name="nomor_invoice" class="form-control" placeholder="Masukkan Nomor Dokumen" value="<?= set_value('nomor_invoice'); ?>">
                                 <span class="text-danger text-bold"><?= form_error('nomor_invoice') ?></span>
                             </div>
                         </div>
                         <div class="form-group col-xs-6">
-                            <label for="" class="col-sm-3 control-label">Tgl. Dokumen</label>
+                            <label class="col-sm-3 control-label">Total Volume*</label>
+                            <div class="col-sm-9">
+                                <input type="number" required class="form-control col-sm-6" name="total_volume" placeholder="Masukkan Total Volume Kayu" value="<?= set_value('total_volume'); ?>">
+                                
+                                <span class="text-danger text-bold"><?= form_error('total_volume') ?></span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-xs-6">
+                            <label for="" class="col-sm-3 control-label">Tanggal Dokumen*</label>
 
                             <div class="col-sm-9">
-                                <input type="date" name="tgl_invoice" class="form-control" placeholder="Masukkan Tanggal Invoice">
+                                <input required type="date" name="tgl_invoice" class="form-control" placeholder="Masukkan Tanggal Dokumen">
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-6 control-label">
+                            <div class="col-sm-3">
+                                <label class="control-label">File Dokumen*</label><br>
+                                <small>(Max 10 Mb)</small>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="file" name="file_upload" class="form-control" placeholder = "Masukkan File" accept="application/pdf" required>
+                                <?php if ($this->session->flashdata('error')) : ?>
+                                    <span class="text-danger text-bold"><?= $this->session->flashdata('error'); ?></span>
+                                <?php endif;?>
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="form-group col-xs-6">
                             <label class="col-sm-3 control-label"> Pihak Pembeli*</label>
@@ -55,13 +90,7 @@
                                 <span class="text-danger text-bold"><?= form_error('id_pbph_pembeli') ?></span>
                             </div>
                         </div>
-                        <div class="form-group col-xs-6">
-                            <label class="col-sm-3 control-label">Total Harga*</label>
-                            <div class="col-sm-9">
-                                <input type="number" class="form-control" name="total_harga" placeholder="Masukkan Total Harga" value="<?= set_value('total_harga') ?>" step="0.01">
-                                <span class="text-danger text-bold"><?= form_error('total_harga') ?></span>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-6">
@@ -73,42 +102,24 @@
                                 <input type="text" class="form-control kabupaten" placeholder="Kabupaten" disabled>
                             </div>
                         </div>
-                        <div class="form-group col-xs-6">
-                            <label class="col-sm-3 control-label">Total Volume*</label>
-                            <div class="col-sm-9">
-                                <input type="number" class="form-control col-sm-6" name="total_volume" placeholder="Masukkan Total Volume Kayu" value="<?= set_value('total_volume'); ?>">
-                                
-                                <span class="text-danger text-bold"><?= form_error('total_volume') ?></span>
-                            </div>
-
-                        </div>
+                        
+                        
                     </div>
                     <div class="row">
-                        <div class="form-group col-xs-6">
+                        <!-- <div class="form-group col-xs-6">
                             <div class="col-sm-3 control-label">
                                 <label class="control-label">Tempat</label><br>
                             </div>
                             <div class="col-sm-9">
                                 <input type="text" name="tempat_invoice" class="form-control" placeholder= "Masukkan Lokasi Penerbitan Dokumen">
                             </div>
-                        </div>
-                        <div class="form-group col-xs-6 control-label">
-                            <div class="col-sm-3">
-                                <label class="control-label">File Dokumen*</label><br>
-                                <small>(Max 10 Mb)</small>
-                            </div>
-                            <div class="col-sm-9">
-                                <input type="file" name="file_upload" class="form-control" placeholder = "Masukkan Tempat Invoice Dibuat" accept="application/pdf" required>
-                                <?php if ($this->session->flashdata('error')) : ?>
-                                    <span class="text-danger text-bold"><?= $this->session->flashdata('error'); ?></span>
-                                <?php endif;?>
-                            </div>
-                        </div>
+                        </div> -->
+                        
                     </div>
                     <div class="panel panel-default">
                         <!-- Default panel contents -->
                         <div class="panel-heading">
-                            Tabel Invoice
+                            Tabel Rincian
                             <a href="#" style="float:right" id="tambah-baris" class="btn btn-sm btn-success">
                                 <i class="fa fa-plus"></i> 
                                 &nbsp; Baris
@@ -121,8 +132,8 @@
                                     <th>Nama Jenis/Spesies</th>
                                     <th>Kelompok Jenis</th>
                                     <th>Harga Kayu</th>
-                                    <th>Volume</th>
-                                    <th>Satuan</th>
+                                    <th>Volume (M3)</th>
+                                    <!-- <th>Satuan</th> -->
                                     <th>Sortimen</th>
                                     <th>Action</th>
                                 </tr>
@@ -130,7 +141,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <select name="id_jenis_kayu[]" class="form-control jenis-kayu">    
+                                        <select required name="id_jenis_kayu[]" class="form-control jenis-kayu">    
                                             <option value="">Masukkan Jenis Kayu</option>
                                             <?php          
                                                 $data_kayu = $this->db->get('m_jenis_kayu');
@@ -153,26 +164,26 @@
                                     <td>
                                         <div class="input-group">
                                             <div class="input-group-addon">Rp.</div>
-                                            <input type="number" name="harga[]" class="form-control" placeholder="Masukkan Harga Kayu">
+                                            <input required type="number" name="harga[]" class="form-control" placeholder="Masukkan Harga Kayu">
                                             <div class="input-group-addon">.00</div>
 
                                         </div>
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input type="number" name="volume[]" class="form-control" placeholder="Masukkan Volume Kayu">
+                                            <input required type="number" name="volume[]" class="form-control" placeholder="Masukkan Volume Kayu">
                                         </div>
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                         <div class="input-group">
                                             <?php
                                                 echo cmb_dinamis('id_satuan', 'm_satuan', 'nama', 'id', '', '', 'text-uppercase', 'Pilih Satuan');
                                             ?>
                                         </div>
-                                    </td>
+                                    </td> -->
                                     <td>
-                                        <select select name="id_diameter[]" class="form-control">    
-                                            <option>Pilih Sortiment Kayu</option>
+                                        <select select name="id_diameter[]" class="form-control" required>    
+                                            <option>Pilih Sortimen Kayu</option>
                                             <?php
                                                 $data_diamter = $this->db->get('m_diameters');
                                                 foreach($data_diamter->result() as $row) {
@@ -251,7 +262,7 @@
                                     '<input type="number" name="volume[]" class="form-control" placeholder="Masukkan Volume Kayu">'+
                                 '</div>'+
                             '</td>'+
-                            '<td>' +
+                            /* '<td>' +
                                 '<select name="id_satuan" class="form-control">'+    
                                     '<option>Pilih Satuan</option>'+
                                     '<?php
@@ -261,7 +272,7 @@
                                         }
                                     ?>' +
                                 '</select>' +
-                            '</td>' +
+                            '</td>' + */
                             '<td>'+
                                 '<select name="id_diameter[]" class="form-control">'+    
                                     '<option>Pilih Diameter Kayu</option>'+
