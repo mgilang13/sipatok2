@@ -172,6 +172,7 @@ class Model_admin_harga_patokan extends CI_Model
 		return $query->result_array();
     }
     
+    public $table = "invoices";
     function update()
     {
       $data = array(
