@@ -132,7 +132,7 @@
                                     <th>Nama Jenis/Spesies</th>
                                     <th>Kelompok Jenis</th>
                                     <th>Harga Kayu</th>
-                                    <th>Volume (M3)</th>
+                                    <th>Volume (M<sup>3</sup>)</th>
                                     <!-- <th>Satuan</th> -->
                                     <th>Sortimen</th>
                                     <th>Action</th>

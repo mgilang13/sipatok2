@@ -178,7 +178,7 @@ class Model_admin_harga_patokan extends CI_Model
       $data = array(
         //tabel di database => name di form
         'is_verified'       => $this->input->post('verifikasi', TRUE),
-        'keterangan'   => $this->input->post('alasan', TRUE),
+        'keterangan'   => $this->input->post('keterangan', TRUE),
         //'semester_aktif'  = $this->input->post('semester_aktif', TRUE)
       );
 

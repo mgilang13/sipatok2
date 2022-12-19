@@ -54,11 +54,11 @@
                         
                     <div class="row">
 
-                        <div class="form-group col-xs-6">
-                        <input type="hidden" value="<?php echo $detail['id'];?>" name="id_invoice">
+                        <div class="form-group">
+                            <input type="hidden" value="<?php echo $detail['id'];?>" name="id_invoice">
 
-                            <label class="col-sm-4 control-label">Verifikasi Data</label>
-                            <div class="col-sm-8" style="width:50%">
+                            <label class="col-sm-3 control-label">Verifikasi Data</label>
+                            <div class="col-sm-9">
                                 <select name="verifikasi" id="" class="form-control">
                                     <option value="">--Pilih--</option>
                                     <option value="1">Verifikasi (Diproses lebih lanjut)</option>
@@ -69,10 +69,34 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-sm-10">
-                            <textarea name="alasan" class="form-control" cols="100" row="10" placeholder="Masukkan alasan dikembalikan..."></textarea>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">Pilih Alasan</label>
+                            <div class="col-sm-9">
+                                <select name="keterangan" class="form-control" id="keterangan">
+                                    <option value="">--Pilih--</option>
+                                    <option value="Detail Tidak Sesuai Invoice">Detail tidak sesuai invoice</option>
+                                    <option value="Data tidak lengkap">Data tidak lengkap</option>
+                                    <option value="Lain-lain" id="lain">Lain-lain</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="form-group col-sm-10">
+                            <textarea id="teks-alasan" disabled name="keterangan" class="form-control" cols="100" row="10" placeholder="Masukkan alasan dikembalikan..."></textarea>
+                        </div>
+                    </div>
+                    <script>
+                        $('#keterangan').on('change', function() {
+                            let keterangan = this.value;
+                            if(keterangan === "Lain-lain") {
+                                $('#teks-alasan').attr("disabled", false)
+                                $('#teks-alasan').value("");
+                            } else {
+                                $('#teks-alasan').attr("disabled", true);
+                            }
+                        });
+                    </script>
                     <div class="row">
                         <div class="form-group">
                         <label class="col-sm-2 control-label"></label>
