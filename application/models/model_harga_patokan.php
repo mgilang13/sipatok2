@@ -258,6 +258,7 @@ class Model_harga_patokan extends CI_Model
         //$id_user = $data_user['id'];
         $sql = "select a.id, 
                 a.is_verified,
+                z.nama as jenis_dok,
                 a.nomor_invoice, 
                 a.tgl_invoice, 
                 a.tempat_invoice, 
@@ -272,8 +273,9 @@ class Model_harga_patokan extends CI_Model
                                 c.KOTA, f.KETERANGAN as provinsi 
                         FROM invoices a, 
                                 m_pbph c, 
-                                m_provinsi f 
-                        WHERE a.id_pbph_pembeli = c.NPWSHUT_NO AND f.KODE_PROP=c.KODE_PROP AND a.id = '".$id_invoice."'";
+                                m_provinsi f,
+                                m_jenis_dok z 
+                        WHERE a.id_pbph_pembeli = c.NPWSHUT_NO AND f.KODE_PROP=c.KODE_PROP AND a.id = '".$id_invoice."' and z.id = a.id_jenis_dok";
         
 		$query = $this->db->query($sql);
 		
@@ -288,13 +290,7 @@ class Model_harga_patokan extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
     }
-    
-    public function peraturan()
-    {
-        $sql = "select * from peraturan";
-		$query = $this->db->query($sql);
-		return $query->result();
-    }
+
     public $table = "invoices";
     function update()
     {

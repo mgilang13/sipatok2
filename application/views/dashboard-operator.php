@@ -21,7 +21,7 @@
             </div>
             <!-- ./col -->
 
-            <div class="col-lg-3 col-xs-3 panel">
+            <div class="col-lg-3 col-xs-3">
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
@@ -42,7 +42,7 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3><?php echo $verif1['hasil']; ?></h3>
+                  <h3><?php echo $verif['hasil']; ?></h3>
 
                   <p>Terverifikasi (diproses)</p>
                 </div>
@@ -52,30 +52,11 @@
                 <a href="<?php echo site_url('Tampilan_operator/index/1') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
-
-            <div class="col-lg-3 col-xs-3">
-              <!-- small box -->
-              <div class="small-box bg-green">
-                <div class="inner">
-                  <h3><?php echo $verif2['hasil']; ?></h3>
-
-                  <p>Terverifikasi (tidak diproses)</p>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-ban"></i>
-                </div>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-6">
-        <!-- <a href="<?= base_url('harga_patokan/input')?>" class="btn btn-success btn-lg">Input Data</a> -->
-    </div>
-      </div>
       <!-- /.row -->
 
             <div class="col-lg-3 col-xs-3">
               <!-- small box -->
-              <div class="small-box bg-black">
+              <div class="small-box bg-green">
                 <div class="inner">
                   <h3><?php echo $verif2['hasil']; ?></h3>
                   
@@ -95,7 +76,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <div class="col-lg-6">
+                <!-- <div class="col-lg-6">
                     <h6>Filter Tanggal :  </h6>
                     <div class="row">
                         <div class="form-group col-sm-6">
@@ -105,7 +86,7 @@
                             <input type="text" class="form-control" id="max" name="max" placeholder="Masukkan Tanggal Akhir">
                         </div>
                     </div>
-                </div>
+                </div> -->
               <table id="mytable" class="table table-striped table-bordered table-hover table-full-width dataTable" cellspacing="0" width="100%">
                 <thead>
                     <tr>
@@ -135,15 +116,19 @@
                             <?php echo $hp->NAMA_PERUSAHAAN ?>
                         </td>
                         <td width="100">
-                            <?php
+                        <?php
                                 if($hp->is_verified == '0') {
-                                    echo '<small class="label label-info"><i class="fa fa-close"></i> Belum diverifikasi</small>';
-                                } else if ($hp->is_verified == '1' || $hp->is_verified == '3') {
-                                    echo '<small class="label label-success"><i class="fa fa-close"></i>Terverifikasi</small>';
+                                    echo '<small class="label label-info"><i class="fa fa-clock-o"></i> Belum diverifikasi</small>';
+                                } else if ($hp->is_verified == '1') {
+                                    echo '<small class="label label-success"><i class="fa fa-check-circle"></i> Terverifikasi</small><br>';
+                                    echo '<small class="label label-success"></i>(diproses)</small>';
+                                } else if ($hp->is_verified == '3') {
+                                    echo '<small class="label label-success"><i class="fa fa-ban"></i> Terverifikasi</small><br>';
+                                    echo '<small class="label label-success"></i>(tidak diproses)</small>';
                                 } else if ($hp->is_verified == '2') {
                                     echo '<small class="label label-danger"><i class="fa fa-close"></i> Dikembalikan</small>';
                                 }
-                            ?> 
+                            ?>
                         </td>
                         <td width="150">
                             <a href="<?php echo site_url('harga_patokan/data/detail/'.$hp->id) ?>"

@@ -116,7 +116,7 @@
 			return $data;
 		}
 
-		public function qverif1($id_user, $id_dinas, $id_balai, $id_pulau, $sql_awal) {
+		public function qverif($id_user, $id_dinas, $id_balai, $id_pulau, $sql_awal) {
 			$verif = " and is_verified = '1'";
 
 			if($id_user != NULL) {

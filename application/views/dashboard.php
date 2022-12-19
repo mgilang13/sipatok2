@@ -52,7 +52,7 @@
             
             <div class="col-lg-3 col-xs-3">
               <!-- small box -->
-              <div class="small-box bg-black">
+              <div class="small-box bg-green">
                 <div class="inner">
                   <h3><?php echo $verif2['hasil']; ?></h3>
                   
@@ -75,7 +75,7 @@
           
               <!-- /.box-header -->
               <div class="box-body">
-                  <div class="col-lg-6">
+                  <!-- <div class="col-lg-6">
                       <h6>Filter Tanggal :  </h6>
                       <div class="row">
                           <div class="form-group col-sm-6">
@@ -85,7 +85,7 @@
                               <input type="text" class="form-control" id="max" name="max" placeholder="Masukkan Tanggal Akhir">
                           </div>
                       </div>
-                  </div>
+                  </div> -->
                 <table id="mytable" class="table table-striped table-bordered table-hover table-full-width dataTable" cellspacing="0" width="100%">
                   <thead>
                       <tr>
