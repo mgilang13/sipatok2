@@ -3,13 +3,25 @@
 	class Tampilan_operator extends MY_OperatorController
 	{
 		
+		public function __construct()
+    	{
+			parent::__construct();
+        	$this->load->model("model_harga_patokan");
+    	}
+
+
+		
 		function index()
 		{
 			$data['home_url']="Tampilan_operator";
 
+			$is_verified = $this->uri->segment(3);
+
 			$data_user = $this->session->userdata();
 			
 			$nama_role = $data_user['nama_role'];
+			$data['nama_role'] = $nama_role;
+
 		
 			$invoices_userRole_users = "select count(*) as hasil
 										from users u
@@ -17,7 +29,7 @@
 											on ur.id_user = u.id
 										join invoices i 
 											on i.id_user = u.id";
-	//dinas
+			//dinas
 			$invoices_mPBPH = "	select count(*) as hasil
 								from invoices i
 								join m_pbph mp 
@@ -47,14 +59,16 @@
 				$id_user = $data_user['id_user'];
 			
 				$data['belum'] = $this->qbelum($id_user, NULL, NULL, NULL, $invoices_userRole_users);
-				$data['verif'] = $this->qverif($id_user, NULL, NULL, NULL, $invoices_userRole_users);
+				$data['verif1'] = $this->qverif1($id_user, NULL, NULL, NULL, $invoices_userRole_users);
+				$data['verif2'] = $this->qverif2($id_user, NULL, NULL, NULL, $invoices_userRole_users);
 				$data['kembali'] = $this->qkembali($id_user, NULL, NULL, NULL, $invoices_userRole_users);
 
 			} else if ($nama_role == "Dinas Kehutanan") {
 				$id_dinas = $data_user['id_dinas'];
 				
 				$data['belum'] = $this->qbelum(NULL, $id_dinas, NULL, NULL, $invoices_mPBPH);
-				$data['verif'] = $this->qverif(NULL, $id_dinas, NULL, NULL, $invoices_mPBPH);
+				$data['verif1'] = $this->qverif1(NULL, $id_dinas, NULL, NULL, $invoices_mPBPH);
+				$data['verif2'] = $this->qverif2(NULL, $id_dinas, NULL, NULL, $invoices_mPBPH);
 				$data['kembali'] = $this->qkembali(NULL, $id_dinas, NULL, NULL, $invoices_mPBPH);
 			} else if ($nama_role == "BPHP") {
 				$id_balai = $data_user['id_balai'];
@@ -66,11 +80,17 @@
 				$id_pulau = $data_user['id_pulau'];
 
 				$data['belum'] = $this->qbelum(NULL,NULL,NULL, $id_pulau, $invoices_mPulau);
-				$data['verif'] = $this->qverif(NULL,NULL,NULL, $id_pulau, $invoices_mPulau);
+				$data['verif1'] = $this->qverif1(NULL,NULL,NULL, $id_pulau, $invoices_mPulau);
+				$data['verif2'] = $this->qverif2(NULL,NULL,NULL, $id_pulau, $invoices_mPulau);
 				$data['kembali'] = $this->qkembali(NULL,NULL, NULL, $id_pulau, $invoices_mPulau);
 			}
 
-			$data['notifikasi_dikembalikan'] = $this->notifikasi_dikembalikan();
+			if(isset($is_verified)) {
+				$data['hargapatokan'] = $this->model_harga_patokan->getAllByVerification($data_user, $is_verified);
+			} else {
+				$data["hargapatokan"] = $this->model_harga_patokan->getAll($data_user);
+			}
+			
 
 			$this->template->load('template', 'dashboard-operator',$data);
 		}
@@ -95,8 +115,28 @@
 			return $data;
 		}
 
-		public function qverif($id_user, $id_dinas, $id_balai, $id_pulau, $sql_awal) {
+		public function qverif1($id_user, $id_dinas, $id_balai, $id_pulau, $sql_awal) {
 			$verif = " and is_verified = '1'";
+
+			if($id_user != NULL) {
+				$sql_operator_perusahaan = " where ur.id_user = '$id_user' $verif";
+				$data = $this->db->query($sql_awal.$sql_operator_perusahaan)->row_array();
+			} else if ($id_dinas != NULL) {
+				$sql_operator_dinas = " where mp.KODE_PROP = '$id_dinas' $verif";
+				$data = $this->db->query($sql_awal.$sql_operator_dinas)->row_array();
+			} else if ($id_balai != NULL) {
+				$sql_operator_balai = " where mb.KODE_BSPHH = '$id_balai' $verif";
+				$data = $this->db->query($sql_awal.$sql_operator_balai)->row_array();
+			} else if ($id_pulau != NULL) {
+				$sql_operator_pulau = " where mp3.KODE_PULAU = '$id_pulau' $verif";
+				$data = $this->db->query($sql_awal.$sql_operator_pulau)->row_array();
+			}
+
+			return $data;
+		}
+
+		public function qverif2($id_user, $id_dinas, $id_balai, $id_pulau, $sql_awal) {
+			$verif = " and is_verified = '3'";
 
 			if($id_user != NULL) {
 				$sql_operator_perusahaan = " where ur.id_user = '$id_user' $verif";
@@ -134,25 +174,6 @@
 
 			return $data;
 		}
-
-		public function notifikasi_dikembalikan () {
-
-			$sql = "select i.id, mp.NAMA_PERUSAHAAN, i.nomor_invoice
-					from users u
-					join user_role ur 
-						on ur.id_user = u.id
-					join invoices i 
-						on i.id_user = u.id
-					join m_pbph mp 
-						on i.id_pbph_pembeli = mp.NPWSHUT_NO 
-					where ur.id_user = '2' and is_verified = '2'";
-			$data = $this->db->query($sql);
-
-		return $data;
-		}
-
-
-
 	}
 
 ?>

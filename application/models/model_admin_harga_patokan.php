@@ -3,6 +3,33 @@ class Model_admin_harga_patokan extends CI_Model
 {
     private $_table = "invoices";
     
+   public function getAllByVerification($is_verified) {
+
+        $sql = "select 
+                a.id, 
+                a.nomor_invoice,
+                a.id_pbph_penjual,
+                a.id_pbph_pembeli, 
+                a.tgl_invoice, 
+                b.NAMA_PERUSAHAAN ,
+                a.is_verified
+                from 
+                invoices a, 
+                m_pbph b 
+                where a.id_pbph_pembeli = b.NPWSHUT_NO and a.is_verified='$is_verified'";
+       
+        $query = $this->db->query($sql);
+        
+        $dataSemuaHP = $query->result();
+        
+        for($i=0; $i < sizeof($dataSemuaHP); $i++) {
+            $dataSemuaHP[$i]->id_pbph_pembeli = $this->getNamaPerusahaan($dataSemuaHP[$i]->id_pbph_pembeli);        
+            $dataSemuaHP[$i]->id_pbph_penjual = $this->getNamaPerusahaan($dataSemuaHP[$i]->id_pbph_penjual);        
+            }
+
+        return $dataSemuaHP;
+    }
+    
     public function save($data_user) {
         $id_user = $data_user['id'];
         $id_pbph_penjual = $data_user['id_pbph'];
@@ -134,6 +161,7 @@ class Model_admin_harga_patokan extends CI_Model
 		
         return $query->row_array();
     }
+
     public function _detail()
     {
         $id_menu 	  = $this->uri->segment(4);
@@ -143,7 +171,7 @@ class Model_admin_harga_patokan extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
     }
-    public $table = "invoices";
+    
     function update()
     {
       $data = array(
@@ -152,8 +180,10 @@ class Model_admin_harga_patokan extends CI_Model
         'keterangan'   => $this->input->post('alasan', TRUE),
         //'semester_aktif'  = $this->input->post('semester_aktif', TRUE)
       );
+
       $id = $this->input->post('id_invoice');
       $this->db->where('id', $id);
+
       $this->db->update($this->table, $data);
     }
 
