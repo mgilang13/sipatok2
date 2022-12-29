@@ -93,7 +93,13 @@
                         <th>NO</th>
                         <th>NOMOR DOKUMEN</th>
                         <th>TGL DOKUMEN</th>
-                        <th>PIHAK PENJUAL</th>
+                        <?php 
+                          if ($id_role == '5') {
+                            echo "<th>PIHAK PEMBELI</th>";
+                          } else {
+                            echo "<th>PIHAK PENJUAL</th>";
+                          }
+                        ?>
                         <th>STATUS</th>
                         <th>AKSI</th>
                     </tr>

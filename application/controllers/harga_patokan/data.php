@@ -23,7 +23,8 @@ class Data extends MY_OperatorController {
 	}
 
 	function detail()
-	{		$data['home_url'] = "Tampilan_utama";
+	{		
+			$data['home_url'] = "Tampilan_operator";
 
 			$data['user'] = $this->session->userdata();
 			
@@ -33,6 +34,8 @@ class Data extends MY_OperatorController {
 			$this->template->load('template', 'harga_patokan/detail', $data);
 	}
 	function verifikasi(){	
+		$data['home_url'] = "Tampilan_operator";
+		
 		if (isset($_POST['submit'])) {
 			$this->model_harga_patokan->update();
 			redirect('harga_patokan/data');
@@ -42,5 +45,19 @@ class Data extends MY_OperatorController {
 			//$this->template->load('template', 'guru/edit', $data);
 			echo 'gagal';
 		}
+	}
+
+	function edit () {
+			$data['user'] = $this->session->userdata();
+			
+			$data["detail"] = $this->model_harga_patokan->detail();
+			$data["rincian"] = $this->model_harga_patokan->_detail();
+
+			if (isset($_POST['submit'])) { 
+				$this->model_harga_patokan->edit_dikembalikan();
+				redirect('harga_patokan/data');
+			}
+
+			$this->load->view('harga_patokan/edit', $data);
 	}
 }

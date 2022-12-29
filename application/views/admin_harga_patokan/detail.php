@@ -23,7 +23,7 @@
                 <?php echo 'No. '.$detail['jenis_dok'].' : '.$detail['nomor_invoice'].'<br>'; ?>
                 <?php echo 'Tanggal : '.$detail['tgl_invoice'].'<br>'; ?>
                 <?php echo '<br><b>Total Harga</b><br><h4>Rp'.number_format($detail['total_harga']).'</h4>'; ?>
-                <?php echo '<b>Total Volume</b><br><h4>'.$detail['total_volume'].' M3</h4>'; ?>
+                <?php echo '<b>Total Volume</b><br><h4>'.$detail['total_volume'].' M<sup>3</sup></h4>'; ?>
             </div>
         </div>
     </div>
@@ -38,7 +38,7 @@
         <div class="box box-primary">
             <div class="box-body">
                 <span class="info-box-text"><?php echo $row['jenis_kayu'];?></span>
-                <span class="info-box-number"><?php echo $row['volume'].' M3';?><?php echo ' (@Rp'.number_format($row['harga']).')';?></span>
+                <span class="info-box-number"><?php echo $row['volume'].' M<sup>3</sup>';?><?php echo ' (@Rp'.number_format($row['harga']).')';?></span>
                 
                 <span class="progress-description"><?php echo $row['kelompok_kayu'];?>
                 <span class="progress-description" style="float:right;"><?php echo $row['diameter'];?></span>

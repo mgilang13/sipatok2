@@ -30,7 +30,17 @@
 		{
 			$decrypted_password = md5($password);
 			
-			$sql = "SELECT * FROM users AS u JOIN user_role AS ur ON u.id = ur.id_user JOIN m_roles AS mr ON ur.id_role = mr.id WHERE username = '$username' AND password = '$decrypted_password' AND ur.id_role != '1'";
+			// $sql = "SELECT * FROM users AS u JOIN user_role AS ur ON u.id = ur.id_user JOIN m_roles AS mr ON ur.id_role = mr.id WHERE username = '$username' AND password = '$decrypted_password' AND ur.id_role != '1'";
+			$sql = "SELECT * 
+					FROM users AS u 
+					JOIN user_role AS ur 
+					ON u.id = ur.id_user 
+					LEFT OUTER JOIN m_pulau mp 
+					ON mp.KODE_PULAU = ur.id_pulau 
+					JOIN m_roles AS mr 
+					ON ur.id_role = mr.id 
+					WHERE username = '$username' AND password = '$decrypted_password' AND ur.id_role != '1'";
+
 			$query = $this->db->query($sql);
 			$user = $query->row_array();
 			

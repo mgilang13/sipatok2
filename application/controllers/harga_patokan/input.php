@@ -27,7 +27,7 @@ class Input extends MY_OperatorController {
 
 		if (isset($_POST['submit'])) {
 
-			$file_name = $data_user['id_user'].$data_user['id_pbph'].time();
+			$file_name = uniqid().'_'.$data_user['id_user'].$data_user['id_pbph'];
 			
 			$this->form_validation->set_rules('nomor_invoice', 'Nomor Invoice', 'required');
 			$this->form_validation->set_rules('total_harga', 'Total Harga', 'required');
@@ -56,7 +56,7 @@ class Input extends MY_OperatorController {
 				$this->index();
 			} else {
 				$this->upload->data();
-				$this->model_harga_patokan->save($data_user);
+				$this->model_harga_patokan->save($data_user, $file_name);
 
 				$success = "Data Berhasil disimpan";
 				$this->session->set_flashdata('success', $success);

@@ -106,15 +106,7 @@
                         
                     </div>
                     <div class="row">
-                        <!-- <div class="form-group col-xs-6">
-                            <div class="col-sm-3 control-label">
-                                <label class="control-label">Tempat</label><br>
-                            </div>
-                            <div class="col-sm-9">
-                                <input type="text" name="tempat_invoice" class="form-control" placeholder= "Masukkan Lokasi Penerbitan Dokumen">
-                            </div>
-                        </div> -->
-                        
+                       
                     </div>
                     <div class="panel panel-default">
                         <!-- Default panel contents -->
@@ -139,64 +131,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <select required name="id_jenis_kayu[]" class="form-control jenis-kayu">    
-                                            <option value="">Masukkan Jenis Kayu</option>
-                                            <?php          
-                                                $data_kayu = $this->db->get('m_jenis_kayu');
-                                                $data_kel_kayu = $this->db->get('m_kelompok_jenis_kayu');
-                                                foreach ($data_kel_kayu->result() as $row) {
-                                                    echo "<optgroup label= '$row->KETERANGAN' data-ket= '$row->KETERANGAN'>";
-                                                    foreach($data_kayu->result() as $kayu) {
-                                                        if($kayu->KEL_NO == $row->KEL_NO) {
-                                                            echo "<option value=".$kayu->KAYU_NO.">".$kayu->KETERANGAN."</option>";
-                                                        }
-                                                    }
-                                                    echo '</optgroup>';
-                                                }  
-                                            ?>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <p class="kel-jenis-kayu">-</p>
-                                    </td>
-                                    <td>
-                                        <div class="input-group">
-                                            <div class="input-group-addon">Rp.</div>
-                                            <input required type="number" name="harga[]" class="form-control" placeholder="Masukkan Harga Kayu">
-                                            <div class="input-group-addon">.00</div>
-
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="input-group">
-                                            <input required type="number" name="volume[]" class="form-control" placeholder="Masukkan Volume Kayu">
-                                        </div>
-                                    </td>
-                                    <!-- <td>
-                                        <div class="input-group">
-                                            <?php
-                                                echo cmb_dinamis('id_satuan', 'm_satuan', 'nama', 'id', '', '', 'text-uppercase', 'Pilih Satuan');
-                                            ?>
-                                        </div>
-                                    </td> -->
-                                    <td>
-                                        <select select name="id_diameter[]" class="form-control" required>    
-                                            <option>Pilih Sortimen Kayu</option>
-                                            <?php
-                                                $data_diamter = $this->db->get('m_diameters');
-                                                foreach($data_diamter->result() as $row) {
-                                                    echo "<option value=".$row->id.">".$row->diameter."</option>";
-                                                }
-                                            ?>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-sm btn-danger">
-                                            <i class="fa fa-trash"></i>                                        </a>
-                                    </td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>
@@ -227,7 +162,14 @@
     <!-- /.row -->
 </section>
 <script>
+    $(document).ready(function() {
+        if ( $('#rincian > tbody').children().length == 0) {
+            $('#rincian > tbody').append('<tr><td colspan="6" class="text-center empty-flag">Data Kosong</td></tr>')
+        }
+    })
+
     $('#tambah-baris').click(function() {
+        $('.empty-flag').remove();
         let rincian_html = '<tr>'+
                             '<td>'+
                                 '<select name="id_jenis_kayu[]" class="form-control jenis-kayu">'+    
