@@ -6,7 +6,8 @@ class Model_harga_patokan extends CI_Model
         $id_user = $data_user['id_user'];
         $id_pbph_penjual = $data_user['id_pbph'];
         $id_invoice = uniqid().'_'.$id_user.$id_pbph_penjual;
-        $tanggal = date("Y-m-d");
+        $tgl_input = date("Y-m-d H:i:s");
+        $tgl_update = $tgl_input;
 
         $data = array(
             'id'                => $id_invoice,
@@ -14,7 +15,8 @@ class Model_harga_patokan extends CI_Model
             'id_jenis_dok'      => $this->input->post('id_jenis_dok'),
             'id_pbph_penjual'	=> $id_pbph_penjual,
             'id_pbph_pembeli'	=> $this->input->post('id_pbph_pembeli', TRUE),
-            'tgl_input'         => $tanggal,
+            'tgl_input'         => $tgl_input,
+            'tgl_update'        => $tgl_update,
             'nomor_invoice'	    => $this->input->post('nomor_invoice', TRUE),
             'tgl_invoice'	    => $this->input->post('tgl_invoice', TRUE),
             //'tempat_invoice'    => $this->input->post('tempat_invoice', TRUE),
@@ -303,8 +305,9 @@ class Model_harga_patokan extends CI_Model
       $this->db->update($this->table, $data);
     }
 
-    public function edit_dikembalikan()
+    public function edit_dikembalikan($file_name)
     {
+        $tgl_update = date("Y-m-d H:i:s");
 
         $data = array(
             'id_jenis_dok'  => $this->input->post('id_jenis_dok'),
@@ -313,11 +316,19 @@ class Model_harga_patokan extends CI_Model
             'tgl_invoice'	    => $this->input->post('tgl_invoice', TRUE),
             'total_harga'       => $this->input->post('total_harga', TRUE),
             'total_volume'      => $this->input->post('total_volume', TRUE),
+            'file_upload'       => $file_name,
             'is_verified'	    => "0",
         );
 
         $id_invoice = $this->input->post('id_invoice');
 
+        $invoice = $this->db->get_where('invoices', array('id' => $id_invoice))->row();
+
+        if(isset($_FILES['file_upload'])) {
+            $file_name_old = $invoice->file_upload.".pdf";
+    
+            unlink(FCPATH."uploads/invoices/".$file_name_old);
+        } 
 
         $invoice_details = [];
         
@@ -338,7 +349,25 @@ class Model_harga_patokan extends CI_Model
         $this->db->where('id_invoice', $id_invoice);
         $this->db->delete('invoice_details');
 
-        //update data invoice
+
+        // upload gambar
+        $config['upload_path']          = './uploads/invoices/';
+			$config['allowed_types']        = 'pdf';
+			$config['max_size']             = 10240;
+			$config['file_name']			= $file_name;
+			
+			$this->load->library('upload', $config);
+
+			if ($this->form_validation->run() == FALSE && !$this->upload->do_upload('file_upload')) {
+				
+				$error = $this->upload->display_errors();
+				$this->session->set_flashdata('error', $error);
+				
+				$this->index();
+			} else {
+				$this->upload->data();
+            }
+            //update data invoice
         $this->db->where('id', $id_invoice);
         $this->db->update('invoices', $data);
         //masukkan data baru

@@ -26,10 +26,21 @@ class Data extends MY_OperatorController {
 	{		
 			$data['home_url'] = "Tampilan_operator";
 
+			$id_invoice = $this->uri->segment(4);
+
 			$data['user'] = $this->session->userdata();
+			$data_user = $data['user'];
 			
 			$data["detail"] = $this->model_harga_patokan->detail();
 			$data["rincian"] = $this->model_harga_patokan->_detail();
+			
+			$file_name = uniqid().'_'.$data_user['id_user'].$data_user['id_pbph'];
+			
+			if (isset($_POST['submit'])) { 
+
+				$this->model_harga_patokan->edit_dikembalikan($file_name);
+				redirect('Tampilan_operator');
+			}
 
 			$this->template->load('template', 'harga_patokan/detail', $data);
 	}
@@ -50,11 +61,15 @@ class Data extends MY_OperatorController {
 	function edit () {
 			$data['user'] = $this->session->userdata();
 			
+			$data_user = $data['user'];
+			
 			$data["detail"] = $this->model_harga_patokan->detail();
 			$data["rincian"] = $this->model_harga_patokan->_detail();
 
+			$file_name = uniqid().'_'.$data_user['id_user'].$data_user['id_pbph'];
+
 			if (isset($_POST['submit'])) { 
-				$this->model_harga_patokan->edit_dikembalikan();
+				$this->model_harga_patokan->edit_dikembalikan($file_name);
 				redirect('harga_patokan/data');
 			}
 

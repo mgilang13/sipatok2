@@ -105,7 +105,7 @@
                                     <input required type="date" name="tgl_invoice" value="<?= $detail['tgl_invoice'] ? $detail['tgl_invoice'] : set_value('tgl_invoice') ; ?>" class="form-control" placeholder="Masukkan Tanggal Dokumen">
                                 </div>
                             </div>
-                            <!-- <div class="form-group col-xs-6 control-label">
+                            <div class="form-group col-xs-6 control-label">
                                 <div class="col-sm-3">
                                     <label class="control-label">File Dokumen*</label><br>
                                     <small>(Max 10 Mb)</small>
@@ -116,7 +116,7 @@
                                         <span class="text-danger text-bold"><?= $this->session->flashdata('error'); ?></span>
                                     <?php endif;?>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
 
                         <div class="row">
